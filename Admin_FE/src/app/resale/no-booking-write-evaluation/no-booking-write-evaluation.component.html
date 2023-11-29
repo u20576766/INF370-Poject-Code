@@ -1,0 +1,106 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/resale'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>
+    &nbsp;
+    WALK-IN EVALUATION
+  </h4>
+</div>
+
+<div class="container" style="padding:25px;">
+
+  <div style="text-align: center;">
+    <h2 style="font-weight: bold;padding: 25px;">Write Evaluation
+      <hr style="width: 50%;">
+    </h2>
+  </div>
+
+  <form style="display: flex; align-items: center;justify-content: center;text-align: center;">
+    <label style="font-weight: bold;">Search Student:</label>
+
+    <input type="text" style="margin-left: 15px;margin-right: 15px;width: 50%;" class="form-control"
+      placeholder="Search student by surname" name="student">
+
+    <button class="btn normButton"
+      style="width: fit-content; text-align: center;padding-left: 10px;padding-right: 10px;" type="submit"
+      (click)="SearchStudent()">
+      <i class="fa fa-search" style="font-size: 20px;"></i>
+    </button>
+
+  </form>
+
+  <h6 *ngIf="studentsection" style="font-weight: bold; color: green; text-align: center; margin-top: 20px;">
+    Student: {{ selectedStudent?.name }} {{ selectedStudent?.surname }}
+</h6>
+  <div style="padding:20px;" *ngIf="showTextArea">
+    <div class="container" style="padding:20px;">
+      <label for="myTextarea" style="display: block; margin-bottom: 15px;">Enter evaluation description</label>
+      <textarea id="myTextarea" name="myTextarea" rows="6" cols="40" placeholder="Type your description here..."
+        style="width: 100%;"></textarea>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <button class="btn normButton" style="margin-left:4px;width:fit-content;margin-top: 5px;" (click)="Capture()">
+        SUBMIT
+      </button>
+      <button class="btn normCancel" style="margin-left:4px;width:fit-content;margin-top: 5px;" (click)="cancelEvaluation()">
+        CANCEL
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="modal-dialog modal-sm" *ngIf="showAddErrorRetrievingStudentsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error</h4>
+        <button type="button" class="close" (click)="showAddErrorRetrievingStudentsModal = false">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p> Provide student surname.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn normCancel"
+          (click)="showAddErrorRetrievingStudentsModal = false">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-dialog modal-sm" *ngIf="showRetrievingStudentsModal" class="modal-top">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Retrieved students</h4>
+        <button type="button" class="close" (click)="showRetrievingStudentsModal = false">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p> Select Student:</p>
+        <table class="table">
+          <tr>
+            <th> Name & Surname</th>
+            <th></th>
+          </tr>
+          <tbody>
+            <tr *ngFor="let student of retrievedstudent">
+              <td>
+                {{ student.name }} {{ student.surname }}
+              </td>
+              <td>
+                <button type="button" class="btn normButton"
+                  (click)="selectStudent(student) ; showRetrievingStudentsModal = false">Select</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn normCancel" (click)="showRetrievingStudentsModal = false">CANCEL</button>
+      </div>
+    </div>
+  </div>
+</div>

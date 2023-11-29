@@ -1,0 +1,56 @@
+<div class="titlePage">
+  <h4></h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/employees'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp; EMPLOYEE TYPES
+  </h4>
+</div>
+
+<div class="row" style="padding-left: 15px; padding-right: 15px;">
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col">
+        <form (input)="searchEmployeeType()">
+          <input [(ngModel)]="searchInput" name="searchInput" type="search" placeholder="Search...">
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-4" style="justify-content: flex-end; text-align: right; padding-top: 10px;">
+    <a [routerLink]="'/add-employeetype'" class="normButton btn">
+      <i class="fas fa-plus fa-lg"></i>
+      &nbsp;
+      ADD TYPE
+    </a>
+  </div>
+</div>
+
+<div style="padding-left: 15px; padding-right: 15px; padding-top: 15px;">
+  <table class="table table-inverse">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="height: max-content;" *ngFor="let et of employeeTypes">
+        <td>{{ et.name }}</td>
+        <td>{{ et.description }}</td>
+        <td style="text-align: right;">
+          <button class="btn update" style="margin-left: 4px;margin-top: 5px;" (click)="updateEmployeeType(et.employee_Type_ID)">
+            <i class="fa fa-edit"></i>&nbsp;&nbsp;UPDATE
+          </button>
+          <button class="btn delete" style="margin-left: 4px;margin-top: 5px;" (click)="deleteEmployeeTypeConfirmation(et.employee_Type_ID)">
+            <i class="far fa-trash-alt"></i>&nbsp;&nbsp;DELETE
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

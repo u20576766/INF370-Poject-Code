@@ -1,0 +1,76 @@
+<div class="row" style="display: flex; justify-content: flex-end;padding-left: 15px;padding-bottom: 15px;padding-right: 15px;margin-right: 20px;padding-top: 5px;">
+    <button class="btn align-center" data-toggle="tooltip" title="Schedule Book Evaluation Tutorial"
+        style="width: fit-content; border-radius: 30%; padding-top: 5px;background-color: #4F2749;"
+        (click)="hintButton()">
+        <i class="fa fa-question fa-xs" style="color:white;"></i>
+    </button>
+</div>
+
+<div class="container" style="padding-bottom: 25px;">
+    <div style="text-align: center;">
+        <h2 style="font-weight: bold;padding-bottom: 50px;">Schedule Book Evaluation
+            <hr style="width: 50%;">
+        </h2>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <div
+                style="margin-top:10px;margin-bottom:10px; background-color: #d6d6d6;padding: 20px;border-radius: 5%;">
+                <div style="padding: 10px;">
+                    <div class="mb-3">
+                        <label class="form-label" style="font-weight: bold;">Select date for evaluation</label>
+                        <select class="select form-control" (change)="onOptionChange($event.target)">
+                          <option value="" disabled selected>Select Date</option> <!-- Placeholder option -->
+                          <option *ngFor="let m of datesToPick" value="{{m.scheduleId}}">{{m.date}}</option>
+                        </select>
+
+                    </div>
+
+                </div><br>
+                <div>
+                    <h6>Evaluation Date: <span id="selectedDate">{{ selectedDate }}</span></h6>
+                    <br>
+                    <h6>Number of Books: {{booksnumber}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <table class="table">
+                <thead>
+                    <tr style="font-weight: bold;">
+                        <td></td>
+                        <td>Title</td>
+                        <td>ISBN</td>
+                        <td>Estimated Price</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let booking of pendingBookings">
+                        <td> <input type="checkbox" name="booked"
+                                (change)="onCheckboxChange(booking?.reselller_Book_Id, $event)">
+                        </td>
+                        <td>{{ booking.title }}</td>
+                        <td>{{ booking.isbn }}</td>
+                        <td>{{ booking.estimatedPrice   | currency:'R':'symbol':'1.2-2'}}</td>
+                          <td><i class="fa fa-trash fa-lg" style="color: #4F2749;" (click)="deleteBook(booking.reselller_Book_Id)"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div style="text-align: center;">
+        <button class="btn"
+            style="width: 150px; color: white; background-color: #3AD165; margin-left: 20px;margin-right: 20px; margin-top: 20px;"
+            (click)="schedule()">
+            SUBMIT
+        </button>
+        <button type="button" class="btn"
+            style="width: 150px; color: white; background-color:black ; margin-left: 20px; margin-right: 20px; margin-top: 20px;"
+            (click)="AbortSchedule()">CANCEL</button>
+    </div>
+</div>

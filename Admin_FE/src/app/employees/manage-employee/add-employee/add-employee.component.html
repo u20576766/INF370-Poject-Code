@@ -1,0 +1,99 @@
+<div class="titlePage">
+    <h4></h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/manage-employee'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp;
+        <a [routerLink]="'/manage-employee'" style="color: black;">
+            MANAGE EMPLOYEE
+        </a>&nbsp;
+        <i class="fas fa-angle-right fa-lg"></i> ADD EMPLOYEE
+    </h4>
+</div>
+
+<div style="padding: 50px;">
+    <div class="row">
+        <div class="col-6 offset-1">
+            <form [formGroup]="addEmployeeForm" (ngSubmit)="addEmployee()">
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Name" formControlName="name">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Surname</label>
+                    <input type="text" class="form-control" placeholder="Enter Surname" formControlName="surname">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Cell Number</label>
+                    <input type="text" class="form-control" placeholder="Enter Cell Number" formControlName="cell_Number">
+                    <div *ngIf="addEmployeeForm.get('cell_Number')?.hasError('pattern')" class="text-danger">
+                        Cell Number must start with '0' and be 10 characters long.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Email</label>
+                    <input type="email" class="form-control" placeholder="Enter Email" formControlName="email">
+                    <div *ngIf="addEmployeeForm.get('email')?.hasError('email')" class="text-danger">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Physical Address</label>
+                    <textarea class="form-control" placeholder="Enter Physical Address" formControlName="physical_Address"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Date of Birth</label>
+                    <!-- Date picker for birthdate -->
+                    <input type="date" class="form-control" formControlName="birthDate">
+                    <div *ngIf="addEmployeeForm.get('birthDate')?.hasError('birthdateInvalid')" class="text-danger">
+                        Age must be 18 years or above.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Emergency Contact Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Emergency Contact Name" formControlName="emergency_Contact_Name">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Emergency Contact Cell Number</label>
+                    <input type="text" class="form-control" placeholder="Enter Emergency Contact Cell Number" formControlName="emergency_Contact_Cell">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Employee Type</label>
+                    <select class="form-select form-control" formControlName="employee_Type_ID">
+                        <option *ngFor="let type of employeeTypes" [ngValue]="type.employee_Type_ID">{{ type.name }}</option>
+                    </select>
+                </div>
+
+                <!-- Add an input field for image upload -->
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Image</label>
+                    <input type="file" name="image" accept=".jpg, .jpeg, .png" (change)="onImageFileChange($event)" />
+                </div>
+
+                <!-- Success message div -->
+                <div *ngIf="successMessage" class="alert alert-success">
+                    {{ successMessage }}
+                </div>
+
+                <!-- Error message div -->
+                <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                </div>
+
+                <button type="submit" class="btn normButton" style="margin-left:4px;width:fit-content;margin-top: 5px;">ADD EMPLOYEE</button>
+
+                <button type="button" class="btn normCancel" style="margin-left:4px;width:fit-content;margin-top: 5px;" (click)="cancelAddingEmployee()">CANCEL</button>
+
+            </form>
+        </div>
+    </div>
+</div>

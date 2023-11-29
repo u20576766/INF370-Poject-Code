@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title size="large">
+      <ion-text
+        style="background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent; text-transform: uppercase;">
+        WELCOME, {{firstName}}!
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">
+        <ion-text
+          style="background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+          Welcome, {{firstName}}!
+        </ion-text>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div class="row shadow" style="padding: 10px; margin: 10px; border-radius: 15px;">
+    <ion-list no-lines>
+      <ion-button routerLink="/account-info" fill="clear">
+        <ion-item lines="none" routerLink="/account-info">
+          <ion-icon name="person-outline" slot="start" style="color: #a8539cc5;"></ion-icon>
+          <ion-label style="font-size: small;font-weight: bold;">ACCOUNT DETAILS</ion-label>
+        </ion-item>
+      </ion-button><br>
+
+      <ion-button routerLink="/cart" fill="clear">
+        <ion-item lines="none" routerLink="/cart">
+          <ion-icon name="cart-outline" slot="start" style="color: #a8539cc5;"></ion-icon>
+          <ion-label style="font-size: small;font-weight: bold;">CART</ion-label>
+        </ion-item>
+      </ion-button><br>
+
+      <ion-button routerLink="/orders" fill="clear">
+        <ion-item lines="none" routerLink="/orders">
+          <ion-icon name="cube-outline" slot="start" style="color: #8d4482c5;"></ion-icon>
+          <ion-label style="font-size: small;font-weight: bold;">ORDERS</ion-label>
+        </ion-item>
+      </ion-button><br>
+
+      <ion-button routerLink="/resell" fill="clear">
+        <ion-item lines="none" routerLink="/resell">
+          <ion-icon name="book-outline" slot="start" style="color: #b155a3c5;"></ion-icon>
+          <ion-label style="font-size: small;font-weight: bold;">RESALES</ion-label>
+        </ion-item>
+      </ion-button>
+    </ion-list>
+  </div>
+
+  <div class="row shadow" style="padding: 10px; margin: 10px; border-radius: 15px;">
+    <ion-list no-lines>
+      <ion-button fill="clear" (click)="logout()">
+        <ion-item lines="none">
+          <ion-icon name="log-out-outline" slot="start" style="color: #251323c5;"></ion-icon>
+          <ion-label style="font-size: small;font-weight: bold;">LOG OUT</ion-label>
+        </ion-item>
+      </ion-button><br>
+
+      <ion-button routerLink="/delete-account" fill="clear">
+        <ion-item lines="none" routerLink="/delete-account">
+          <ion-icon name="trash-outline" slot="start" style="color: red;"></ion-icon>
+          <ion-label style="color: red; font-size: small;font-weight: bold;">DELETE ACCOUNT</ion-label>
+        </ion-item>
+      </ion-button>
+    </ion-list>
+  </div>
+</ion-content>

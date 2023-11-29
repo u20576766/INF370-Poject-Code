@@ -1,0 +1,109 @@
+<div class="row" style="display: flex; justify-content: flex-end;padding-left: 15px;padding-bottom: 15px;padding-right: 15px;margin-right: 20px;padding-top: 5px;">
+    <button class="btn align-center" data-toggle="tooltip" title="Check Book Estimate Tutorial"
+        style="width: fit-content; border-radius: 30%; padding-top: 5px;background-color: #4F2749;"
+        (click)="hintButton()">
+        <i class="fa fa-question fa-xs" style="color:white;"></i>
+    </button>
+</div>
+
+<div class="container" *ngIf="(data.shoppingCart$ | async ) as items">
+    <div class="row">
+        <h3 style="font-weight: bold;"><i class="far fa-arrow-alt-circle-left fa-md"
+                style="margin-right: 20px;cursor: pointer;" [routerLink]="'/Cart'"></i>CHECKOUT CART</h3>
+        <hr style="width:100%; color: grey;text-align: left;">
+    </div>
+
+    <div class="container"
+        style="padding:40px;margin-bottom: 20px;border-radius: 7px; background-color: #4F274A; color: white;font-weight:bolder;">
+        <div style="border:#AE7595 2px; border-radius: 10px;background-color: #f1dbe8;padding: 10px;">
+            <div *ngIf="(data.shoppingCart$) as shoppingCart">
+                <table class="table">
+                    <thead class="bg-light text-uppercase">
+                        <tr>
+                            <th class="py-2">Name</th>
+                            <th class="py-2">Price</th>
+                            <th class="py-2">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let spb of cartItemsBook">
+                            <td class="align-middle">
+                                {{spb.title}}
+                            </td>
+                            <td class="align-middle">
+                                {{spb.price | currency: 'R':'symbol':'1.2-2'}} <small>per item</small>
+                            </td>
+                            <td class="align-middle">
+                                {{spb.quantity}}
+                            </td>
+                        </tr>
+
+                        <tr *ngFor="let spbe of cartItemsEquipment">
+                            <td class="align-middle">
+                                {{spbe.name}}
+                            </td>
+                            <td class="align-middle">
+                                {{spbe.price | currency: 'R':'symbol':'1.2-2'}} <small>per item</small>
+                            </td>
+                            <td class="align-middle">
+                                {{spbe.quantity}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="padding: 20px; display: flex; justify-content: space-between;">
+            <h4 style="margin: 0;">SUBTOTAL</h4>
+            <h4 style="margin: 0;">{{items.subTotal | currency: 'R':'symbol':'1.2-2' }}</h4>
+        </div>
+        <hr style="color: #b9658e;background-color: #b9658e;">
+        <div class="row" style="padding: 20px;text-align: center;justify-content: center;">
+            <h5 style="padding: 20px;text-align: center;">
+                Enter in your voucher code to get a discount!<br> 
+                <p style="font-style: italic;text-align: center;font-size: small;">
+                    Please click 'APPLY' even when no voucher is being applied.
+                </p>
+            </h5>
+        </div>
+        <div class="row" style="padding: 20px;text-align: center;">
+            <div class="col-md-9">
+                <input type="text" class="form-control" [(ngModel)]="voucherCode" placeholder="Enter Voucher Code"
+                    style="border: 3px #AE7595;background-color: black;color: white;">
+            </div>
+            <div class="col-md-3">
+                <button class="btn" (click)="calculateDiscount()"
+                    style="border: 2px #b9658e;background-color: #AE7595;width:80%;font-weight: bold;">
+                    APPLY
+                </button>
+            </div>
+        </div>
+        <div class="row" style="padding: 20px; display: flex; justify-content: space-between;">
+            <h5 style="margin: 0;">SUBTOTAL</h5>
+            <h5 style="margin: 0;">{{items.subTotal | currency: 'R':'symbol':'1.2-2' }}</h5>
+        </div>
+        <div class="row" style="padding: 20px; display: flex; justify-content: space-between;">
+            <h5 style="margin: 0;">Discount Amount</h5>
+            <h5 style="margin: 0;">{{items.shoppingCart.discount | currency: 'R':'symbol':'1.2-2' }}</h5>
+        </div>
+        <hr style="color: #b9658e; background-color: #b9658e;">
+        <div class="row" style="padding: 20px; display: flex; justify-content: space-between;">
+            <h1 style="margin: 0;">TOTAL AMOUNT</h1>
+            <h1 style="margin: 0;">{{items.totalAmount | currency: 'R':'symbol':'1.2-2' }}</h1>
+        </div>
+    </div>
+    <div class="row" style="padding: 20px; display: flex; justify-content: space-between;">
+        <button class="btn"
+            style="padding: 20px; width:200px;text-align: center; color: white; background-color: BLACK;"
+            (click)="cancelOrder()">
+            CANCEL
+        </button>
+        <div>
+            <button class="btn"
+                style="padding: 20px; width:200px;text-align: center; color: white; background-color: rgb(104, 204, 104);"
+                (click)="calculateDiscount2()">
+                PAY NOW
+            </button>
+        </div>
+    </div>
+</div>

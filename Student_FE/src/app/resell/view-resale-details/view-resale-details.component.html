@@ -1,0 +1,120 @@
+<div class="container" style="padding: 25px;">
+    <div class="container" style="padding-bottom: 50px;">
+        <h2 style="font-weight: bold; padding-bottom: 10px;">View Resale Details</h2>
+        <p style="font-weight: bold; padding-bottom: 20px;">Explore the tabs to find Resale Books with your desired status.</p>
+
+        <mat-tab-group>
+
+
+            <mat-tab label="Waiting For Booking">
+                <div style="text-align: center;">
+
+                    <div class="container" style="padding-bottom: 50px;padding-top: 50px;">
+                        <div class="row">
+                            <h4 style="font-weight: bold;">Waiting
+                                For Booking</h4>
+                        </div>
+
+                        <div class="container">
+                            <table class="table">
+                                <thead>
+                                    <tr style="font-weight: bold;">
+                                        <td></td>
+                                        <td>Title</td>
+                                        <td>ISBN</td>
+                                        <td>Estimated Price</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let b of pendingBookings">
+                                        <td><i class="fa fa-trash fa-lg" style="color: #4F2749;" (click)="deleteBook(b.reselller_Book_Id)"></i></td>
+                                        <td>{{b.title}}</td>
+                                        <td>{{b.isbn}}</td>
+                                        <td>{{b.estimatedPrice   | currency:'R':'symbol':'1.2-2'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <button class="btn btn-update" style="width: 150px; color: white; background-color: #50294A; margin-left: 20px; margin-right: 20px; margin-top: 20px;" [routerLink]="'/Schedule'"
+                  >Schedule Book Evaluation</button>
+
+                </div>
+            </mat-tab>
+
+
+            <mat-tab label="Evaluation Scheduled">
+                <div style="text-align: center;">
+
+                    <div class="container" style="padding-bottom: 50px;padding-top: 50px;">
+                        <div class="row">
+                            <h4 style="font-weight: bold;">Evaluation Scheduled</h4>
+                        </div>
+
+                        <div class="container">
+                            <table class="table">
+                                <thead>
+                                    <tr style="font-weight: bold;">
+                                        <td>Ref #</td>
+                                        <td>Title</td>
+                                        <td>ISBN</td>
+                                        <td>Estiamted Price</td>
+                                        <td>Date Scheduled</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let b of booksScheduled">
+                                        <td>{{b.referenceNumber}}</td>
+                                        <td>{{b.title}}</td>
+                                        <td>{{b.isbn}}</td>
+                                        <td>{{b.estimatedPrice| currency:'R':'symbol':'1.2-2'}}</td>
+                                        <td>{{b.date }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </mat-tab>
+
+
+            <mat-tab label="Evaluation Completed">
+                <div style="text-align: center;">
+
+                    <div class="container" style="padding-bottom: 50px;padding-top: 50px;">
+                        <div class="row">
+                            <h4 style="font-weight: bold;">Evaluation Competed</h4>
+                        </div>
+
+                        <div class="container">
+                            <table class="table">
+                                <thead>
+                                    <tr style="font-weight: bold;">
+                                        <td>Ref #</td>
+                                        <td>Title</td>
+                                        <td>ISBN</td>
+                                        <td>Date of Evaluation</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let b of completedBooks">
+                                        <td>{{b.referenceNumber}}</td>
+                                        <td>{{b.title}}</td>
+                                        <td>{{b.isbn}}</td>
+                                        <td>{{b.date }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+
+        </mat-tab-group>
+    </div>
+
+</div>
+
+<hr style="width:40%; color: #4F2749;">

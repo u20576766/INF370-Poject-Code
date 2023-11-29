@@ -1,0 +1,91 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/login">
+        <ion-icon name="arrow-back-circle" style="color: pink;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="large">
+      <ion-text
+        style="background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+        REGISTER
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div style="padding: 10px; margin: 10px; border-radius: 15px;">
+    <form class="form" (ngSubmit)="registerUser()">
+      <div class="form-group">
+        <label style="font-size: small;">First Name</label><br>
+        <input type="text" [(ngModel)]="userData.firstName" style="border-radius: 3px;font-size: medium;" class="form-control" name="firstName"
+          placeholder="Enter your first name">
+        <div style="margin-top: 4px;margin-bottom: 4px;" *ngIf="formErrors['firstName']" class="alert alert-danger">{{
+          formErrors['firstName'] }}</div>
+      </div>
+      <div class="form-group">
+        <label style="font-size: small;">Last Name</label><br>
+        <input type="text" [(ngModel)]="userData.lastName" style="border-radius: 3px;font-size: medium;" class="form-control" name="lastName"
+          placeholder="Enter your last name">
+        <div style="margin-top: 4px;margin-bottom: 4px;" *ngIf="formErrors['lastName']" class="alert alert-danger">{{
+          formErrors['lastName'] }}</div>
+      </div>
+      <div class="form-group">
+        <label style="font-size: small;">Phone Number</label><br>
+        <input type="tel" [(ngModel)]="userData.cell_Number"  style="border-radius: 5px;font-size: medium;" placeholder="Enter your 10-digit phone number"
+          class="form-control" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');" name="cell_Number">
+        <div style="margin-top: 4px;margin-bottom: 4px;" *ngIf="formErrors['cell_Number']" class="alert alert-danger">{{
+          formErrors['cell_Number'] }}</div>
+      </div>
+      <div class="form-group">
+        <label style="font-size: small;">Email</label><br />
+        <input type="email" [(ngModel)]="userData.email" placeholder="Enter your valid email address" name="email"
+          style="border-radius: 5px;font-size: medium;" class="form-control" required />
+      </div>
+      <div class="form-group">
+        <label style="font-size: small;">Password</label><br>
+        <div class="row">
+          <div class="col-10">
+            <input [type]="hide ? 'password' : 'text'" [(ngModel)]="userData.password" style="border-radius: 3px; font-size: medium;"
+              class="form-control" name="password" placeholder="Enter your password" required>
+            <div style="margin-top: 4px;margin-bottom: 4px;" *ngIf="formErrors['password']" class="alert alert-danger">
+              {{ formErrors['password'] }}</div>
+          </div>
+          <div class="col-2">
+            <button type="button" (click)="togglePassword()" [attr.aria-label]="'Toggle password visibility'"
+              [attr.aria-pressed]="!hide">
+              <ion-icon [name]="hide ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+            </button>
+          </div>
+        </div>
+        <div style="font-size: small;">Password must meet the following requirements:</div>
+        <ul style="font-size: small;">
+          <li [ngClass]="{'completed': isPasswordValid('length')}">Minimum length of 8 characters</li>
+          <li [ngClass]="{'completed': isPasswordValid('uppercase')}">At least one uppercase letter</li>
+          <li [ngClass]="{'completed': isPasswordValid('lowercase')}">At least one lowercase letter</li>
+          <li [ngClass]="{'completed': isPasswordValid('special')}">At least one special character (@, #, $, %, ^,
+            &amp;, +, =, !)</li>
+          <li [ngClass]="{'completed': isPasswordValid('digit')}">At least one digit (0-9)</li>
+        </ul>
+      </div>
+
+      <div class="row" style="text-align: center;padding: 5px;margin: 5px;">
+        <div class="col" style="margin-top: 4px;">
+          <ion-buttons style="width: 100%;">
+            <ion-button class="btn normButton" type="submit">
+              REGISTER
+            </ion-button>
+          </ion-buttons>
+        </div>
+        <div class="col" style="margin-top: 4px;">
+          <ion-buttons style="width: 100%;">
+            <ion-button class="btn normCancel" routerLink="/login">
+              CANCEL
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>

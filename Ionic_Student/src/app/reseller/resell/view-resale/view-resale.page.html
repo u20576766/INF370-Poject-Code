@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title
+      style="display: flex; align-items: center;background: linear-gradient(45deg, rgb(185, 101, 115), purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/resell" style="color: rgb(185, 101, 115);"></ion-icon>
+      Resale Details
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div style="padding: 10px; margin: 10px; border-radius: 15px;text-align: center;">
+    <div class="row" style="margin: 10px;">
+      <div class="col" style="width: 100%;">
+        <ion-buttons routerLink="/waiting">
+          <ion-button class="normButton">
+            <ion-icon name="book-sharp"></ion-icon>&nbsp;&nbsp;
+            Waiting For Booking
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+    <div class="row" style="margin: 10px;">
+      <div class="col" style="width: 100%;">
+        <ion-buttons routerLink="/booked">
+          <ion-button class="normButton">
+            <ion-icon name="calendar-number-sharp"></ion-icon>&nbsp;&nbsp;
+            Evaluations Scheduled
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+    <div class="row" style="margin: 10px;">
+      <div class="col" style="width: 100%;">
+        <ion-buttons routerLink="/evaluated">
+          <ion-button class="normButton">
+            <ion-icon name="checkmark-done-circle-sharp"></ion-icon>&nbsp;&nbsp;
+            Evaluations Completed
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+  </div>
+</ion-content>

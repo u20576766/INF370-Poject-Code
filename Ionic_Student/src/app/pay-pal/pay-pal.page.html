@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title
+      style="display: flex; align-items: center;background: linear-gradient(45deg,  purple, black);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/checkout-cart" style="color: purple;"></ion-icon>
+      Payment
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div style="padding: 10px; margin: 10px; border-radius: 15px;background-color: #4F2749;color:white;">
+    <ion-row class="ion-justify-content-center ion-padding-bottom">
+      <ion-col size="12" class="ion-text-center">
+        <h2 style="font-weight: bold;">Total Amount To Pay: {{ (data.shoppingCart$ | async)?.totalAmount | currency: 'R':'symbol':'1.2-2' }}</h2>
+        <ion-note>Please do not refresh the browser while the transaction is processing</ion-note>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row class="ion-justify-content-center ion-padding-top">
+      <ion-col size="auto">
+        <div #paymentRef></div>
+      </ion-col>
+      <ion-col size="auto">
+        <div></div>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row class="ion-justify-content-center ion-padding-top">
+      <ion-col size="auto">
+        <ion-button expand="block" color="danger" (click)="cancelOrder()">CANCEL TRANSACTION</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -1,0 +1,121 @@
+.cart-no{
+    position: absolute;
+    min-height: 15px;
+    min-width: 25px;
+    padding-top: 3px;
+    border-radius: 50%;
+    background: #b9658e;
+    color: white;
+    text-align: center;
+    top:-28px;
+    right: 0px;
+}
+
+.dropdown-item:hover {
+    background-color: #AE7595;
+}
+/* CSS for the dropdown */
+
+/* Style for the popover content (hidden by default) */
+.popover-content {
+
+  position: absolute;
+  background-color: #fff;
+  width: 70%;
+
+
+ /* padding: 10px;*/
+  z-index: 1;
+  /* Add more styling as needed */
+}
+
+/* Show the popover content when hovering over the result item */
+
+.search-container {
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+
+}
+
+
+.product-list
+.book-list{
+  position: absolute;
+  display: none;
+  width: 70%;
+  margin: 40px auto;
+  top: 0;
+  left: 0;
+  z-index: 1; /* Ensures the list appears above the table */
+   gap:20px;
+   z-index: 1;
+
+}
+
+.product-item
+ {
+  display: flex;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  width: 70%; /* Ensure each product item spans the full width */
+
+}
+
+
+.book-item{
+  display: flex;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  width: 70%; /* Ensure each product item spans the full width */
+}
+
+.product-item:hover
+{
+  transform: scale(1.05); /* Add a slight zoom effect on hover */
+}
+.book-item:hover{
+  transform: scale(1.05);
+}
+
+.product-image-container
+{
+  flex-basis: 20%; /* Image column takes up 20% of the width */
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+
+.book-image-container
+{
+  flex-basis: 20%; /* Image column takes up 20% of the width */
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+
+
+.product-image
+ {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.book-image{
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+
+
+
+
+
+
+
+

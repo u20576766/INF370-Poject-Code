@@ -1,0 +1,179 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title
+      style="display: flex; align-items: center;background: linear-gradient(45deg, rgb(185, 101, 115), purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/resell" style="color: rgb(185, 101, 115);"></ion-icon>
+      Check Book Estimate
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row class="ion-padding-top">
+    <ion-col class="ion-text-center">
+      <h3 class="ion-text-bold">Check Book Estimate</h3>
+      <small>Enter the book ISBN you wish to sell to us.</small>
+      <hr style="width: 50%;">
+      <ion-row>
+        <ion-col>
+          <form [formGroup]="isbnForm" (ngSubmit)="CheckBook()"
+            style="display: flex; align-items: center;justify-content: center;text-align: center;">
+            <label style="font-weight: bold;">ISBN:</label>
+            <input id="isbnInput" type="text" class="form-control" name="isbn" formControlName="isbn"
+              (keypress)="onKeyPress($event)" maxlength="13" style="margin-left: 15px;margin-right: 15px;width: 50%;">
+            <ion-buttons style="width: 25%;">
+              <ion-button class="btn normButton" type="submit" >
+                CHECK
+              </ion-button>
+            </ion-buttons>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+
+  <div *ngIf="showBookAcceptOrReject === true">
+    <ion-row class="ion-padding">
+      <ion-col style="text-align: center;">
+        <ion-card class="shadow">
+          <ion-card-content>
+            <ion-card-title>Book Information</ion-card-title>
+            <ion-text style="font-size: small;">ISBN: {{ bookData.isbn }}</ion-text><br>
+            <ion-text style="font-size: small;">Title: {{ bookData.title }}</ion-text><br>
+            <ion-text style="font-size: small;">Author(s): {{ bookData.authorName }}</ion-text><br>
+            <ion-text style="font-size: small;">Publisher: {{ bookData.publisherName }}</ion-text><br>
+            <ion-text style="font-size: small;">Edition: {{ bookData.edition }}</ion-text><br>
+            <ion-text style="font-size: small;">Year: {{ bookData.year }}</ion-text>
+            <div>
+            <ion-text style="color: white;">Please confirm book information is correct , by clicking the accept button</ion-text>
+          </div>
+
+            <div>  <!-- Add Accept and Reject buttons -->
+            <ion-button  color="success" (click)="acceptBook()">Accept</ion-button>
+            <ion-button   color="danger" (click)="rejectBook()">Reject</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div *ngIf="showBookInformation === true">
+    <ion-row class="ion-padding">
+      <ion-col style="text-align: center;">
+        <ion-card class="shadow">
+          <ion-card-content>
+            <ion-card-title>Book Information</ion-card-title>
+            <ion-text style="font-size: small;">ISBN: {{ bookData.isbn }}</ion-text><br>
+            <ion-text style="font-size: small;">Title: {{ bookData.title }}</ion-text><br>
+            <ion-text style="font-size: small;">Author(s): {{ bookData.authorName }}</ion-text><br>
+            <ion-text style="font-size: small;">Publisher: {{ bookData.publisherName }}</ion-text><br>
+            <ion-text style="font-size: small;">Edition: {{ bookData.edition }}</ion-text><br>
+            <ion-text style="font-size: small;">Year: {{ bookData.year }}</ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <hr style="width: 40%;">
+        <!-- Your "Tell Us About Your Book" content -->
+        <div id="tell-us"
+          style="border-radius:15px;text-align: center;margin:10px; padding-top: 20px;padding-bottom: 20px;">
+          <h5 style="text-align: center;font-weight: bold;">Please Tell Us About Your Book</h5>
+          <div class="row" style="text-align: center;">
+            <div class="col-2"></div>
+            <div class="col-8" style="text-align: center;">
+              <input type="checkbox" name="folded" (change)="updateTickedCheckboxes($event)"> Are any pages
+              folded? <br>
+              <input type="checkbox" name="highlighted" (change)="updateTickedCheckboxes($event)"> Are any pages
+              highlighted? <br>
+              <input type="checkbox" name="written" (change)="updateTickedCheckboxes($event)"> Are any pages
+              written on? <br>
+              <input type="checkbox" name="torn" (change)="updateTickedCheckboxes($event)">Are any pages torn or
+              torn out?<br>
+              <input type="checkbox" name="stained" (change)="updateTickedCheckboxes($event)">Are any pages
+              stained?
+            </div>
+            <div class="co1-2"></div>
+          </div>
+        </div>
+
+        <hr style="width: 40%;">
+
+        <!-- Your "Let's See The Book" content -->
+        <div
+          style="border-radius:15px;text-align: center;margin:15px;padding-top: 20px;padding-bottom: 20px;">
+          <h5 style="text-align: center;font-weight: bold;">Let's See The Book</h5>
+          <p>Upload pictures of your book<br>
+            <hr style="width: 40%;">
+          <div style="display: flex; align-items: center; justify-content: center; text-align: center;padding:20px;">
+            <h5 style="margin-right: 10px;font-weight: bold;">Front: </h5>
+            <div style="border: dotted 1px #4F2749;padding-top: 10px;padding-bottom: 10px;">
+              <input type="file"
+                style="width: 80%; margin-left: 10px;margin-right: 10px; background-color: #4F2749;color:white"
+                (change)="uploadImage($event, 'front')" accept="image/*"> <!-- Accept only image files -->
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center; text-align: center;padding:20px;">
+            <h5 style="margin-right: 10px;font-weight: bold;">Back: </h5>
+            <div style="border: dotted 1px #4F2749;padding-top: 10px;padding-bottom: 10px;">
+              <input type="file"
+                style="width: 80%; margin-left: 10px;margin-right: 10px; background-color: #4F2749;color:white"
+                (change)="uploadImage($event, 'back')" accept="image/*"> <!-- Accept only image files -->
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center; text-align: center;padding:20px;">
+            <h5 style="margin-right: 10px;font-weight: bold;">Binder <br> Side: </h5>
+            <div style="border: dotted 1px #4F2749;padding-top: 10px;padding-bottom: 10px;">
+              <input type="file"
+                style="width: 80%; margin-left: 10px;margin-right: 10px; background-color: #4F2749;color:white"
+                (change)="uploadImage($event, 'binder')" accept="image/*"> <!-- Accept only image files -->
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center; text-align: center;padding:20px;">
+            <h5 style="margin-right: 10px;font-weight: bold;">Open<br> Book: </h5>
+            <div style="border: dotted 1px #4F2749;padding-top: 10px;padding-bottom: 10px;">
+              <input type="file"
+                style="width: 80%; margin-left: 10px;margin-right: 10px; background-color: #4F2749;color:white"
+                (change)="uploadImage($event, 'openBook')" accept="image/*"> <!-- Accept only image files -->
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="text-align: center;padding: 5px;margin: 5px;">
+          <div class="col" style="margin-top: 4px;">
+            <ion-buttons style="width: 100%;">
+              <ion-button class="btn normButton"  (click)="BookEstimate()">
+                SUBMIT
+              </ion-button>
+            </ion-buttons>
+          </div>
+          <div class="col" style="margin-top: 4px;">
+            <ion-buttons style="width: 100%;">
+              <ion-button class="btn normCancel"  (click)="AbortCheck()">
+                CANCEL
+              </ion-button>
+            </ion-buttons>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

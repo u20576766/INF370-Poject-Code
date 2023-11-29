@@ -1,0 +1,46 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;"> &nbsp;&nbsp;SCHEDULE</h4>
+</div>
+
+
+<div class="container-fluid" style="padding: 10px;">
+  <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+    <div class="col">
+      <a [routerLink]="'/Add-Slot'" class="normButton btn ">
+        <i class="fas fa-plus fa-lg"></i>
+        &nbsp;
+        ADD SCHEDULE SLOT
+      </a>
+    </div>
+  </div>
+</div>
+
+<div style="padding-left: 15px;padding-right: 15px;padding-top: 15px;width:100%">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Slots Available</th>
+        <th scope="col"></th>
+        <TH></TH>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let schedule of schedules; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ schedule.date }}</td>
+        <td>{{ schedule.slots_Available }}</td>
+        <td>
+          <button class="btn update" style="margin-left: 4px;margin-top: 5px;"
+            (click)="UpdateSlots(schedule.schedule_ID)"><i class="fa fa-edit"></i>&nbsp;&nbsp;UPDATE
+          </button>
+          <button class="btn delete" style="margin-left: 4px;margin-top: 5px;"
+            (click)="deletescheduleslot(schedule.schedule_ID, schedule.date)"> <i class="far fa-trash-alt"></i>&nbsp;&nbsp;DELETE
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

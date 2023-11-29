@@ -1,0 +1,47 @@
+.dropdown-item:hover {
+    background-color: #AE7595;
+  }
+  /* CSS for two-column layout */
+  .page-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightgray;
+  
+  }
+  
+  .column {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .equipment-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+    -ms-interpolation-mode: bicubic;
+  }
+  
+  /* Additional styling for the equipment information column */
+  .column:nth-child(2) {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  /* CSS for zoomable image */
+  #zoomable-image {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .zoomed {
+    transform: scale(1.2); /* Adjust the scale factor as needed for your desired zoom level */
+  }
+  
+  

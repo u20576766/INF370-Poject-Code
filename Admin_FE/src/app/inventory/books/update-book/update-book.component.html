@@ -1,0 +1,72 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/books'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp;&nbsp;
+        <a [routerLink]="'/books'" style="color: black;">
+            BOOKS
+        </a>
+        <i class="fas fa-angle-right fa-lg"></i> UPDATE BOOK
+    </h4>
+</div>
+
+<div style="padding:25px;">
+
+    <div class="row">
+        <div class="col-6 offset-1">
+              <!-- Form to edit book details -->
+  <form [formGroup]="updateform" (ngSubmit)="UpdateBook()">
+    <div class="form-group">
+      <label for="ISBN">ISBN:</label>
+      <input type="text" id="ISBN" formControlName="ISBN" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+      <label for="Title">Title:</label>
+      <input type="text" id="Title" formControlName="Title" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+      <label for="Publisher_Name">Publisher Name:</label>
+      <input type="text" id="Publisher_Name" formControlName="Publisher_Name" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+      <label for="Author_Name">Author Name:</label>
+      <input type="text" id="Author_Name" formControlName="Author_Name" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+      <label for="Based_Price">Price:</label>
+      <input type="number" id="Based_Price" formControlName="Based_Price" class="form-control" step="0.01">
+    </div>
+    <div class="form-group">
+      <label for="Edition">Edition:</label>
+      <input type="number" id="Edition" formControlName="Edition" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+      <label for="Year">Year:</label>
+      <input type="text" id="Year" formControlName="Year" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+      <label for="Module_Code">Module Code</label>
+      <select id="Module_Code" name="Module_Code" class="form-control" formControlName="Module_Code" readonly>
+        <option value="">Select Module Code</option>
+       <option *ngFor="let code of modules"  [value]="code.module_Code">{{code.module_Code}}
+
+       </option>
+      </select>
+    </div>
+   
+    <div class="form-group">
+      <label class="form-label" style="font-weight: bold;">Book Image</label>
+      <input id="Image"  type="file" class="form-control" (change)="onImageFileChange($event)" accept="image/*">
+      <span *ngIf="updateform.get('imageBase64')?.value">{{ updateform.get('imageBase64')?.value.name }}</span>
+    </div>
+    
+
+    <!-- Submit button to update the book -->
+    <button type="button" class="btn normButton" style="width: fit-content;margin-top: 5px;margin-left: 4px;" (click)="UpdateBook()">UPDATE BOOK</button>
+        <button type="button" class="btn normCancel" style="width: fit-content;margin-top: 5px;margin-left: 4px;" (click)="cancelUpBook()">CANCEL</button>
+  </form>
+        </div>
+    </div>
+</div>
+

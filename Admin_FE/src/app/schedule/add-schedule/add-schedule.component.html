@@ -1,0 +1,64 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/schedule'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp;&nbsp;
+    <a [routerLink]="'/schedule'" style="color: black;">
+      SCHEDULE
+    </a>
+    <i class="fas fa-angle-right fa-lg"></i> ADD SCHEDULE SLOT
+  </h4>
+</div>
+
+
+<div class="container" style="padding: 50px;">
+  <div class="calendar-and-picked-dates">
+    <div class="calendar-container">
+      <div class="calendar">
+        <div class="calendar-header" style="display: flex; align-items: center; justify-content: space-between;">
+          <i class="fa fa-chevron-left" style="cursor: pointer;" (click)="setMonth(-1)"></i>
+          <h2 style="margin: 0; text-align: center;">{{ date | date:'MMMM yyyy' }}</h2>
+          <i class="fa fa-chevron-right" style="cursor: pointer;" (click)="setMonth(1)"></i>
+        </div>
+
+        <!-- Day Labels -->
+        <div class="day-labels">
+          <div class="day-label" *ngFor="let day of days">{{ day }}</div>
+        </div>
+        <div class="calendar-dates">
+          <div class="date" *ngFor="let dateItem of dates" [ngClass]="{
+              'disabled': !isSameMonth(dateItem),
+              'picked': isDatePicked(dateItem)
+            }" (click)="onDateClicked(dateItem)">
+            {{ dateItem.getDate() }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="picked-dates">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Dates picked:</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pickedDate of pickedDates">
+            <td>{{ pickedDate }}</td>
+            <td>
+              <i class="fa-solid fa-trash" (click)="removePickedDate(pickedDate)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Button to trigger the confirmation modal -->
+      <button type="button" class="btn normButton" style="width: fit-content;" (click)="AddSlots()" >ADD
+        DATES TO EVALUATION SCHEDULE SLOTS
+      </button>
+
+
+</div>

@@ -1,0 +1,50 @@
+<div class="row"
+    style="display: flex; justify-content: flex-end;padding-left: 15px;padding-bottom: 15px;padding-right: 15px;margin-right: 20px;padding-top: 5px;">
+    <button class="btn align-center" data-toggle="tooltip" title="Payment & Order Tutorial"
+        style="width: fit-content; border-radius: 30%; padding-top: 5px;background-color: #4F2749;"
+        (click)="hintButton()">
+        <i class="fa fa-question fa-xs" style="color:white;"></i>
+    </button>
+</div>
+
+<div class="container" style="padding-top:25px;">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h3 style="font-weight: bold;">
+                <i class="far fa-arrow-alt-circle-left fa-md" style="margin-right: 20px; cursor: pointer;"
+                    [routerLink]="'/Check-Out'"></i>
+                Payment
+            </h3>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <button class="btn"
+                style="padding: 15px; width: fit-content; font-weight:bold; text-align: center; color: white; background-color: black;"
+                (click)="cancelOrder()">
+                CANCEL TRANSACTION
+            </button>
+        </div>
+        <div class="col-md-12">
+            <hr style="width: 100%; color: grey; text-align: left;">
+        </div>
+    </div>
+    <div class="container" style="text-align: center; padding: 40px; font-weight: bold;">
+        <div *ngIf="(data.shoppingCart$ | async) as items">
+            <h2 style="font-weight: bold;">Total Amount To pay: {{ items.totalAmount | currency: 'R':'symbol':'1.2-2' }}
+            </h2>
+        </div>
+        <small style="font-weight: bold;">Please do not refresh the browser while transaction is processing</small>
+
+        <div class="row" style="width:100%;text-align: center;">
+            <div class="col" style="width:100%;text-align: center;">
+                <div #paymentRef style="width:100%;text-align: center;"></div>
+            </div>
+            <div class="col" style="width:100%;text-align: center;">
+                <div style="width:100%;text-align: center;">
+                    <button (click)="payFastGate()" class="btn btn-success" style="width:100%;">
+                        PayFast
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

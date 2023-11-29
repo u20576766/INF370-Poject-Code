@@ -1,0 +1,117 @@
+<mat-toolbar
+    style="height: max-content; background-color: #F5DEE9; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+    <div style="padding: 10px;">
+        <a class="navbar-brand" href="#">
+            <img src="../assets/Logo.png" width="100%" height="180%" class="d-inline-block align-top" alt=""
+                data-toggle="tooltip" title="The Book Market">
+        </a>
+    </div>
+
+    <div class="search-container" style="width: 90%">
+        <input type="search" class="form-control search-container" style="width:100%;" [(ngModel)]="searchText" (ngModelChange)="Search()"
+            placeholder="Search for book or equipment">
+        <div class="popover-content" *ngIf="showResults" style="width: 100%;overflow-y: auto;overflow-x: hidden;">
+            <div class="product-list" *ngIf="ShowEquipment" style=" position: relative; z-index: 1;">
+                <div class="row" style="padding: 10px;"  *ngFor="let item of filteredEquipments">
+                    <div class="col-2" (click)="ViewItem(item.equipment_ID)">
+                        <img src="{{item.image}}" style="cursor: pointer;width: 60%;height: 100%;">
+                    </div>
+                    <div class="col-10" (click)="ViewItem(item.equipment_ID)">
+                        <small>{{ item.equipmentType_Name}}</small><br>
+                        {{ item.name }}<br>
+                        {{ item.description}}<br>
+                        {{ item.module_Code }}<br>
+                    </div>
+                </div>
+            </div>
+            <div class="book-list" *ngIf="showBooks" style=" position: relative; z-index: 1;">
+                <div class="row" style="padding: 10px;"  *ngFor="let item of filteredBooks">
+                    <div class="col-2" (click)="ViewBookItem(item.book_ID)">
+                        <img src="{{item.imageBase64}}" style="cursor: pointer;width: 60%;height: 100%;">
+                    </div>
+                    <div class="col-10" (click)=" ViewBookItem(item.book_ID)">
+                        <small>{{ item.isbn}}</small><br>
+                        {{ item.title }}<br>
+                        {{ item.authorName}}<br>
+                        {{ item.module_Code }}<br>
+                        {{ item.year }}<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-icon"
+        style="text-decoration: none; text-decoration-color: none; margin-left: 3px; margin-right: 3px;">
+        <button class="btn dropdown-toggle"
+            style="text-decoration: none; text-decoration-color: none; margin-left: 3px; margin-right: 3px; color: #F5DEE9;;background-color: #4F2749;"
+            type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user-circle" style="color:#F5DEE9" data-toggle="tooltip" title="User Info"></i>
+        </button>
+
+
+        <div class="dropdown-menu" aria-labelledby="userDropdown" style="background-color: #4F274A;color: #F5DEE9;">
+            <!-- Use *ngIf to conditionally render dropdown items -->
+            <ng-container *ngIf="showProfile; else loginRegister">
+                <a class="dropdown-item" [routerLink]="'/Profile'" style="color: white;">My Profile</a>
+                <a class="dropdown-item" href="#" style="color: white;" (click)="logout()">Log Out</a>
+            </ng-container>
+            <ng-template #loginRegister>
+                <a class="dropdown-item" [routerLink]="'/Login'" style="color:white;">Login</a>
+                <a class="dropdown-item" [routerLink]="'/Register'" style="color:white;">Register</a>
+            </ng-template>
+        </div>
+    </div>
+
+    <div>
+        <a class="position-relative" [routerLink]="'/Cart'">
+            <i class="fa fa-shopping-cart fa-2x" style="margin-left: 6px; margin-right: 3px;color: #4F274A;" data-toggle="tooltip" title="Your Cart"></i>
+            <div class="cart-no" *ngIf="(data.shoppingCart$ | async) as items">
+                {{items.count}}
+            </div>
+        </a>
+    </div>
+    <i class="far fa-question-circle" [routerLink]="'/Help'" style="margin-left: 10px; margin-right: 3px;"
+        type="button" data-toggle="tooltip" title="View Site Tutotials"></i>
+
+</mat-toolbar>
+
+
+<nav class="navbar navbar-expand-lg" style="background-color:#4F274A ;">
+    <button class="navbar-toggler" style="color: white;" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-navicon fa-lg" style="color: white;"></i>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" style="color: #F5DEE9;" [routerLink]="'/Home'" [routerLink]="'/'"
+                    [routerLinkActive]="'active'">HOME </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: #F5DEE9;" [routerLink]="'/Books'" [routerLinkActive]="'active'" >BOOKS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: #F5DEE9;" [routerLink]="'/Equipment'" [routerLinkActive]="'active'" >EQUIPMENT</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="color: #F5DEE9;" href="#" id="navbarDropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    RESELL
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"
+                    style="background-color: #4F274A;color: white;">
+                    <a class="dropdown-item" style="color: white;" [routerLink]="'/Check'" [routerLinkActive]="'active'" >Check Book Estimate</a>
+                    <a class="dropdown-item" style="color: white;" [routerLink]="'/Schedule'" [routerLinkActive]="'active'" >Schedule Book
+                        Evaluation</a>
+                    <a class="dropdown-item" style="color: white;" [routerLink]="'/View-Resale'" [routerLinkActive]="'active'" >View Resale Details</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: #F5DEE9;" [routerLink]="'/About'" [routerLinkActive]="'active'" >ABOUT US</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>

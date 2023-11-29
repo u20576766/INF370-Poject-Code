@@ -1,0 +1,87 @@
+<div class="titlePage">
+  <h4></h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/books'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp;&nbsp;
+    <a [routerLink]="'/books'" style="color: black;">
+      BOOKS
+    </a>
+    <i class="fas fa-angle-right fa-lg"></i> ADD BOOK
+  </h4>
+</div>
+
+<div style="padding: 25px;">
+  <div class="row">
+    <div class="col-6 offset-1">
+      <form [formGroup]="bookForm" class="form-group" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">ISBN</label>
+          <input type="text" class="form-control" formControlName="isbn">
+
+
+          <button type="button" class="btn normButton" style="width: fit-content;" (click)="toggleHiddenDiv()">
+            CHECK
+          </button>
+        </div>
+
+
+        <div class="container" [hidden]="isHidden" style="padding-bottom: 10px;">
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;">Title</label>
+            <input type="text" class="form-control" [value]="book.title" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;">Publisher Name</label>
+            <input type="text" class="form-control" [value]="book.publisherName" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;">Author Name</label>
+            <input type="text" class="form-control" [value]="book.authorName" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;">Edition</label>
+            <input type="number" class="form-control" [value]="book.edition" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;">Year</label>
+            <input type="text" class="form-control" [value]="book.year" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;">Module Code</label>
+            <input type="text" class="form-control" [value]="book.module_Code" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;">Price</label>
+            <input type="number" class="form-control" formControlName="price" min="0" max="25" step=".01">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;">Quantity</label>
+            <input type="number" class="form-control" formControlName="quantity">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;">Book Image</label>
+            <input type="file" class="form-control" (change)="onImageFileChange($event)" accept="image/*">
+            <span *ngIf="bookForm.get('imageBase64')?.value">{{ bookForm.get('imageBase64')?.value.name }}</span>
+          </div>
+          
+          
+          
+          
+          
+          </div>
+        <button type="button" class="btn normButton" style="width: fit-content;margin-top: 5px;margin-left: 4px;" (click)="confirmAddBook()">ADD BOOK</button>
+        <button type="button" class="btn normCancel" style="width: fit-content;margin-top: 5px;margin-left: 4px;" (click)="cancelAddBook()">CANCEL</button>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title
+      style="display: flex; align-items: center;background: linear-gradient(45deg,  purple, black);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/cart" style="color: purple;"></ion-icon>
+      Checkout Cart
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div style="padding: 10px; margin: 10px; border-radius: 15px;background-color: #4F2749;color:white;"
+    *ngIf="(data.shoppingCart$ | async ) as items">
+    <div class="row" style="margin: 10px;">
+      <div class="col-7">
+        <ion-text style="font-weight:xx-large;font-weight: bold;">SUBTOTAL</ion-text>
+      </div>
+      <div class="col-5" style="text-align: right;">
+        <ion-text style="font-weight:xx-large;font-weight: bold;text-align: right;" slot="end">{{ items.subTotal |
+          currency: 'R':'symbol':'1.2-2'
+          }}</ion-text>
+      </div>
+    </div>
+
+
+
+    <form class="form">
+      <div class="form-group">
+        <input type="text" style="border-radius: 3px;border: 3px #AE7595;background-color: black;color: white;"
+          [(ngModel)]="voucherCode" placeholder="Enter Voucher Code" class="form-control">
+      </div>
+      <div class="form-group" style="text-align: center;width: 100%;">
+        <ion-buttons style="width: 100%;">
+          <ion-button class="btn normGet" (click)="calculateDiscount()">
+            APPLY
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </form>
+
+
+    <ion-row class="total-rows">
+      <ion-col>
+        <ion-label>Subtotal</ion-label>
+      </ion-col>
+      <ion-col style="text-align: right;">
+        <ion-label style="text-align: right;">{{ items.subTotal | currency: 'R':'symbol':'1.2-2' }}</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="total-rows">
+      <ion-col>
+        <ion-label>Discount Amount</ion-label>
+      </ion-col>
+      <ion-col style="text-align: right;">
+        <ion-label style="text-align: right;">{{ items.shoppingCart.discount | currency: 'R':'symbol':'1.2-2'
+          }}</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="total-rows">
+      <ion-col>
+        <ion-label style="font-size:larger;font-weight: bold;">TOTAL AMOUNT</ion-label>
+      </ion-col>
+      <ion-col style="text-align: right;">
+        <ion-label style="text-align: right;font-size:larger;font-weight: bold;">{{ items.totalAmount | currency:
+          'R':'symbol':'1.2-2' }}</ion-label>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div style="padding: 10px; margin: 10px; border-radius: 15px;" *ngIf="(data.shoppingCart$ | async ) as items">
+    <ion-row class="button-row">
+      <ion-col>
+        <ion-button expand="full" color="dark" style="padding: 5px;border-radius: 5px;" (click)="cancelOrder()">CANCEL</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" color="success" style="padding: 5px;border-radius: 5px;" (click)="calculateDiscount2()">PAY NOW</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

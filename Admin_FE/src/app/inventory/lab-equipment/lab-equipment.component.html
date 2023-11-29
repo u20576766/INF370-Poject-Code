@@ -1,0 +1,85 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/inventory'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>
+    &nbsp;
+    LAB EQUIPMENT
+  </h4>
+</div>
+
+<div class="container-fluid" style="padding: 20px;">
+  <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+    <div class="col">
+      <form>
+        <input [(ngModel)]="searchText" name="searchText" type="search" (ngModelChange)="searchEquipments()"
+          placeholder="Search for name or description or module code">&nbsp;&nbsp;
+      </form>
+    </div>
+  </div>
+  <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+    <div class="col">
+      <a [routerLink]="'/add_equipment'" class="normButton btn" style="margin-bottom: 5px;">
+        <i class="fas fa-plus fa-lg"></i>
+        &nbsp;
+        ADD EQUIPMENT
+      </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a [routerLink]="'/equipment_type'" class="normButton btn" style="margin-bottom: 5px;">
+        <i class="fas fa-cog fa-lg"></i>
+        &nbsp;
+        MANAGE EQUIPMENT TYPES
+      </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a [routerLink]="'/capture-order'" class="normButton btn" style="margin-bottom: 5px;">
+        <i class="fa fa-plus-square fa-lg"></i>
+        &nbsp;
+        CAPTURE EQUIPMENT
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="padding-left: 25px;">
+  <div class="card-container">
+    <!-- Loop through equipments array and generate equipment cards -->
+    <div class="card mb-3 col" style="max-width: 540px;" *ngFor="let equipment of getEqui">
+      <div class="row no-gutters">
+        <div class="card-img col-md-5">
+          <img style="width: 50%;height: 50%;" src="{{equipment.image}}" class="card-img" alt="Equipment Image">
+        </div>
+        <div class="col-md-7">
+          <div class="card-body">
+            <p class="card-title" style="font-weight: bold;">{{ equipment.name }}</p>
+            <small class="card-title">{{ equipment.equipmentType_Name }}</small>
+            <hr style="width: 95%;text-align: center;">
+            <h4 class="card-title" style="font-weight: bold;"> {{ equipment.amountWithVAT| currency:'R':'symbol':'2.2-2'}} <small
+                style="font-size: x-small;">per item</small><br></h4>
+            <p style="font-size: x-small;"><strong> VAT included:</strong>{{ equipment.vatAmount| currency:'R':'symbol':'2.2-2'}}</p>
+              <p  style="font-size: x-small;"><strong>Price without VAT:</strong> {{ equipment.amountWithoutVAT| currency:'R':'symbol':'2.2-2'}}</p>
+            <div class="row">
+              <div class="col" style="text-align: left;">
+                <i class="fa fa-archive "
+                  style="color: rgb(111, 111, 204);font-size:12px;cursor: pointer;margin-bottom: 5px;"
+                  (click)="StockTake(equipment.equipment_ID)"> STOCK
+                </i>
+                <p class="card-text" style="font-size: x-small; cursor: pointer;" (click)="WriteOff(equipment.equipment_ID)"><i
+                    class="fas fa-times-circle fa-lg" style="color: goldenrod;"></i> Qty: {{equipment.quantity_On_Hand}}</p>
+              </div>
+              <div class="col" style="text-align: right;">
+                <i class="far fa-edit fa-lg" style="margin-right:10px; cursor: pointer;"
+                 (click)="updateEquipment(equipment.equipment_ID)"></i>
+                  <i class="fas fa-trash fa-lg" style="color: red; cursor: pointer;" (click)="DeleteEquipment(equipment.equipment_ID, equipment.name)"></i>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+

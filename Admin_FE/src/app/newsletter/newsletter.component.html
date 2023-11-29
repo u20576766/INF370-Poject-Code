@@ -1,0 +1,71 @@
+<!-- TITLE OF PAGE BAR -->
+<div class="titlePage">
+    <h4 style="font-weight: bold; padding-top: 5px;"> &nbsp;&nbsp;
+        NEWSLETTERS
+    </h4>
+</div>
+
+<div class="row" style="padding-left: 15px;padding-right: 15px;">
+    <div class="col-md-9">
+        <form>
+            <input type="search" placeholder="Search for a newsletter" name="searchQuery" (input)="searchNewsletter()"
+                [(ngModel)]="searchQuery">
+        </form>
+    </div>
+    <div class="col-md-3" style="justify-content: flex-end;text-align: right;padding-top: 10px;">
+        <a [routerLink]="'/send-newsletter'" class="normButton btn">
+            <i class='fas fa-share-square'></i>
+            &nbsp;
+            SEND NEWSLETTER
+        </a>
+    </div>
+</div>
+
+<div div style="padding-left: 15px;padding-right: 15px;padding-top: 15px;width:100%">
+    <div class="row" style="padding: 15px; width:100%; display: flex; align-items: center;">
+        <label for="dateOrderBy" style="margin-right: 10px;">Order By Date In:</label>
+        <select class="form-control" id="dateOrderBy" name="dateOrderBy" (change)="handleChange()">
+            <option value="ascending">Ascending Order</option>
+            <option value="descending">Descending Order</option>
+        </select>
+    </div>
+
+    
+    <table class="table table-inverse datatable-table" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Recipients</th>
+                <th>Subject</th>
+                <th>Email Text</th>
+                <th>File Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: max-content;" *ngFor="let item of arrNewsletters">
+                <td >
+                    {{item.date}}
+                </td>
+                <td >
+                    {{item.recipients}}
+                </td>
+                <td>
+                    {{item.subject}}
+                </td>
+                <td style="width: 25%;">
+                    {{item.description}}
+                </td>
+                <td>
+                    {{item.fileName}}
+                </td>
+                <td style="text-align: right;">
+                    <button download class="btn normButton" style="background-color:#3AD165;padding-right: 15px;padding-left: 15px;"
+                        (click)="downloadNewsletterFile(item.fileName)">
+                        <i class="fa fa-download"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

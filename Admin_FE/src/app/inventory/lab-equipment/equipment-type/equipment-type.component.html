@@ -1,0 +1,59 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/lab_equipment'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp;&nbsp;
+        <a [routerLink]="'/lab_equipment'" style="color: black;">
+            LAB EQUIPMENT
+        </a>
+        <i class="fas fa-angle-right fa-lg"></i> EQUIPMENT TYPES
+    </h4>
+</div>
+
+<div class="row" style="padding-left: 15px;padding-right: 15px;">
+    <div class="col-md-8">
+        <form (input)="searchEquipmentType()">
+            <input [(ngModel)]="searchInput" name="searchInput" type="search" placeholder="Search...">&nbsp;
+        </form>
+    </div>
+    <div class="col-md-4" style="justify-content: flex-end;text-align: right;padding-top: 10px;">
+        <a [routerLink]="'/add-equipment-type'" class="normButton btn">
+            <i class="fas fa-plus fa-lg"></i>
+            &nbsp;
+            ADD TYPE
+        </a>
+    </div>
+</div>
+
+<div style="padding-left: 15px;padding-right: 15px;padding-top: 15px;">
+    <table class="table table-inverse">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: max-content;" *ngFor="let et of equipment_type">
+                <td>
+                    {{et.name}}
+                </td>
+                <td>
+                    {{et.description}}
+                </td>
+                <td style="text-align: right;">
+                    <button class="btn update" style="margin-left: 4px;margin-top: 5px;"
+                        (click)="updateEquipmentType(et.equipmentType_ID)">
+                        <i class="fa fa-edit"></i>&nbsp;&nbsp;UPDATE
+                    </button>
+                    <button class="btn delete" style="margin-left: 4px;margin-top: 5px;"
+                        (click)="deleteEquipmentType(et.equipmentType_ID)">
+                        <i class="far fa-trash-alt"></i>&nbsp;&nbsp;DELETE
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

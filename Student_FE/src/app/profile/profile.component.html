@@ -1,0 +1,65 @@
+<div class="container" style="text-align: center; padding: 40px;">
+    <div class=" bg-light shadow"
+        style="display: flex;border-radius:10px; flex-direction: column; align-items: center; justify-content: center; padding: 30px;background: linear-gradient(to bottom, rgba(255, 255, 255, 0.966) 30%, #4F2749 70%); overflow: hidden;">
+        
+        <div class="row" style="color: black; font-weight: bolder; text-align: center; padding: 30px;">
+            <div class="col" style="text-align: center;">
+                <h1 style="padding: 30px; font-size: xxx-large;">Welcome {{ firstName }}!</h1>
+                <small>Hope You're Having A Great Day</small>
+            </div>
+        </div>
+        
+
+        <div class="container row" style="padding: 50px;">
+            <div class="col" style="cursor: pointer;" [routerLink]="'/Account-Info'">
+                <div style="background-color: #AE7595;border-radius: 10px;">
+                    <div
+                        style="background-color: #AE7595;border-radius: 500px;padding-top: 20px;padding-bottom: 20px;height: fit-content;">
+                        <img src="../assets/Account.png" style="width: 100px;height: inherit;">
+                    </div>
+                </div>
+                <h6 style="color:white; font-weight:100;padding: 25px;">
+                    View Account Information
+                </h6>
+            </div>
+            <div class="col" style="cursor: pointer;" [routerLink]="'/Order'">
+                <div style="background-color: #AE7595;border-radius: 10px;">
+                    <div
+                        style="background-color: #AE7595;border-radius: 500px;padding-top: 20px;padding-bottom: 20px;height: fit-content;">
+                        <img src="../assets/Sent.png" style="width: 100px;height: inherit;">
+                    </div>
+                </div>
+                <h6 style="color:white; font-weight:100;padding: 25px;">
+                    Orders
+                </h6>
+            </div>
+            <div class="col" [routerLink]="'/View-Resale'" style="cursor: pointer;">
+                <div style="background-color: #AE7595;border-radius: 10px;">
+                    <div
+                        style="background-color: #AE7595;border-radius: 500px;padding-top: 20px;padding-bottom: 20px;;height: fit-content;">
+                        <img src="../assets/Resell.png" style="width: 100px;height: inherit;">
+                    </div>
+                </div>
+                <h6 style="color:white; font-weight:100;padding: 25px;">
+                    Resale
+                </h6>
+            </div>
+        </div>
+        <div class="container row">
+            <div class="col">
+                <div class="col">
+                    <button class="btn" style="margin-left: 10px;margin-top: 10px;background-color: rgb(235, 224, 224);color: red;font-weight: bolder;text-align: center;padding: 20px;" [routerLink]="'/Delete-Account'">
+                        DELETE ACCOUNT
+                    </button>
+                  </div>
+            </div>
+            <div class="col">
+                <button class="btn"
+                style="margin-left: 10px;margin-top: 10px;background-color: rgb(235, 224, 224); color: rgb(100, 100, 214); margin-left: 10px; font-weight: bolder; padding: 20px;"
+                (click)="logout()">
+                LOG OUT
+            </button>
+            </div>
+        </div>
+    </div>
+</div>

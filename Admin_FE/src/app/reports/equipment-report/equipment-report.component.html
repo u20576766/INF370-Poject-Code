@@ -1,0 +1,42 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/reports'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>
+    &nbsp;
+    LAB EQUIPMENT REPORT
+  </h4>
+</div>
+
+<div class="container" style="padding: 30px;">
+  <div class="row" style="text-align: right;margin: 10px;">
+    <div class="col">
+      <button data-toggle="tooltip" data-placement="top" title="Download Lab Equipment Report" class="btn normButton" (click)="generatePDF()"><i class="fa fa-file-pdf fa-lg"></i> </button>
+    </div>
+  </div>
+  <div class="row" style="text-align: center;">
+    <div class="col">
+      <div class="report-container" *ngIf="equipmentReport.length > 0">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Equipment Type</th>
+              <th>Quantity On Hand</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let equipment of equipmentReport">
+              <td>{{ equipment.name }}</td>
+              <td>{{ equipment.equipmentType }}</td>
+              <td>{{ equipment.quantityOnHand }}</td>
+             
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

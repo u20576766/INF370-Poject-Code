@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title
+      style="display: flex; align-items: center;background: linear-gradient(45deg, rgb(185, 101, 115), purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/resell" style="color: rgb(185, 101, 115);"></ion-icon>
+      Schedule Evaluation
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div style="padding: 10px; margin: 10px; text-align: center;">
+    <div>
+      <ion-title>Resale Books</ion-title>
+      <small>Please select the books you want to evaluate.</small>
+      <div *ngFor="let booking of pendingBookings" class="row align-items-center" style="padding-top:3px;padding-bottom:3px;background-color: #e7a8de75;margin-top: 2px;margin-bottom: 2px;">
+        <div class="col-2">
+          <input type="checkbox" name="booked"
+          (change)="onCheckboxChange(booking?.reselller_Book_Id, $event)">
+        </div>
+        <div class="col-8" style="width: 100%;text-align: center;font-weight: bold;">
+          <small>{{ booking.isbn }}</small><br>
+          <small>{{ booking.title }}</small><br>
+          <small>{{ booking.estimatedPrice }}</small>
+        </div>
+        <div class="col-2" style="text-align: end;" >
+          <ion-icon name="trash" style="color: #4F2749;" (click)="deleteBook(booking.reselller_Book_Id)"></ion-icon>
+        </div>
+        <hr>
+      </div>
+
+    </div>
+
+    <ion-row style="text-align: center;" style="margin-top: 5px;margin-bottom: 5px;">
+      <ion-card style="margin-top: 2px; margin-bottom: 2px; border-radius: 5%;width: 100%;">
+        <ion-card-header>
+          <form>
+            <label style="font-weight: bold;">Select date for evaluation</label>
+            <select class="select form-control" (change)="onOptionChange($event.target)" style="width:100%;text-align: center;">
+              <option value="">Select date</option> <!-- This is the placeholder option -->
+              <option *ngFor="let m of datesToPick" [value]="m.scheduleId">{{ m.date }}</option>
+            </select>
+          </form>
+        </ion-card-header>
+        <ion-card-content>
+          <h6>Evaluation Date: <span style="color: #2ba04c;" id="selectedDate">{{ selectedDate }}</span></h6>
+          <br>
+          <h6>Number of Books:  {{booksnumber}}</h6>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+
+
+    <div class="row" style="text-align: center;padding: 5px;margin: 5px;">
+      <div class="col" style="margin-top: 4px;">
+        <ion-buttons style="width: 100%;">
+          <ion-button class="btn normButton" (click)="schedule()">
+            SUBMIT
+          </ion-button>
+        </ion-buttons>
+      </div>
+      <div class="col" style="margin-top: 4px;">
+        <ion-buttons style="width: 100%;">
+          <ion-button class="btn normCancel" (click)="AbortSchedule()">
+            CANCEL
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

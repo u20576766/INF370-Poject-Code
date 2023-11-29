@@ -1,0 +1,87 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/employees'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp; MANAGE EMPLOYEE
+    </h4>
+</div>
+
+<div class="row" style="padding-left: 15px; padding-right: 15px;">
+    <div class="col-md-8">
+        <div class="row">
+          <div class="col">
+            <form>
+              <!-- Update the input field to bind to the searchQuery property -->
+              <input name="searchInput" type="search" placeholder="Search..." [(ngModel)]="searchQuery">&nbsp;
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    <div class="col-md-4" style="justify-content: flex-end; text-align: right; padding-top: 10px;">
+        <a [routerLink]="'/add-employee'" class="normButton btn">
+            <i class="fas fa-plus fa-lg"></i>
+            &nbsp;
+            ADD EMPLOYEE
+        </a>
+    </div>
+</div>
+
+<div style="padding:25px;">
+    <div class="row">
+        <!-- Update the ngFor loop to iterate over the filtered employees -->
+        <div *ngFor="let employee of filterEmployees()" class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 style="font-weight: bold; text-transform: uppercase;">{{ employee.surname }}, {{ employee.name }}</h4>
+                    <small>
+                        <i class="fa fa-birthday-cake" style="color: deeppink;" aria-hidden="true"></i>
+                        {{employee.birthDate}}
+                    </small>
+                </div>
+
+                <div class="card-img-top" *ngIf="employee.image">
+                    <img [src]="'data:image/jpeg;base64,' + employee.image" class="card-img-top" alt="Employee Image" style="max-height: 175px; object-fit: contain; padding: 6px;" />
+                </div>
+                <div class="card-img-top" *ngIf="!employee.image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/560/560236.png" class="card-img-top" alt="Default Image" style="max-height: 175px; object-fit: contain; padding: 6px;" />
+                </div>
+                
+                <div class="card-body">
+                    <h6 style="text-align: center; font-weight: bold; text-transform: uppercase;">
+                        {{ getEmployeeTypeName(employee.employee_Type_ID) }} #{{employee.employee_ID}}
+                    </h6>
+                    <br>
+                    <div class="row" style="padding-bottom: 10px;" >
+                        <div class="col-md-7" style="margin-top: 10px;">
+                            <h6 style="font-weight: bold;">
+                                Contact Information
+                            </h6>
+                            <small>Email: {{ employee.email }}</small><br>
+                            <small>Cell Number: {{ employee.cell_Number }}</small>
+                        </div>
+                        <div class="col-md-5" style="margin-top:10px;">
+                            <h6 style="font-weight: bold;">
+                                Emergency Contact
+                            </h6>
+                            <small>Emergency Contact Name: {{ employee.emergency_Contact_Name }}</small><br>
+                            <small>Cell Number: {{ employee.emergency_Contact_Cell }}</small>
+                        </div>
+                    </div>
+
+                    <div class="card-footer" style="text-align: center;">
+                        <button class="btn update" style="margin-left: 4px; margin-top: 5px;margin-right: 4px;"
+                                (click)="updateEmployee(employee.employee_ID)">
+                            <i class="fa fa-edit"></i>&nbsp;&nbsp;UPDATE
+                        </button>
+                        <button class="btn delete" style="margin-right: 4px; margin-top: 5px;margin-right: 4px;"
+                                (click)="deleteEmployee(employee.employee_ID)">
+                            <i class="far fa-trash-alt"></i>&nbsp;&nbsp;DELETE
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

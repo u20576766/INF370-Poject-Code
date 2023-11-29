@@ -1,0 +1,66 @@
+<div class="titlePage">
+    <h4 style="font-weight: bold; padding-top: 5px;"> &nbsp;&nbsp;
+        POINT OF SALE
+    </h4>
+</div>
+
+<div class="container-fluid" style="padding: 20px;">
+    <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+        <div class="col">
+            <form>
+                <input type="search" placeholder="Search for a sale" [(ngModel)]="searchQuery" name="searchQuery"
+                    (input)="applySearchFilter()">
+            </form>
+        </div>
+    </div>
+    <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+        <div class="col">
+            <a [routerLink]="'/add-sale'" class="normButton btn " style="margin-left: 4px;margin-top: 5px;">
+                <i class="fas fa-plus fa-lg"></i>
+                &nbsp;
+                MAKE SALE
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="normButton btn" style="margin-left: 4px;margin-top: 5px;" (click)="generateExcel()"> <i
+                    class="fa-solid fa-print"></i>
+                &nbsp;Generate summary </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="normButton btn" style="margin-left: 4px;margin-top: 5px;" (click)="showPieChart()"><i
+                    class='fa fa-pie-chart'></i>
+                &nbsp;Generate pie chart </button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="padding:25px;">
+    <table class="table table-inverse datatable-table" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Total Sales Amount</th>
+                <th>Employee</th>
+                <th>Students</th>
+                <th>Payment type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: max-content;" *ngFor="let s of filteredSales">
+                <td>
+                    {{s.date}}
+                </td>
+                <td>
+                    {{s.totalAmount}}
+                </td>
+                <td>
+                    {{s.employee}}
+                </td>
+                <td>
+                    {{s.students}}
+                </td>
+                <td>
+                    {{s.paymentType}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

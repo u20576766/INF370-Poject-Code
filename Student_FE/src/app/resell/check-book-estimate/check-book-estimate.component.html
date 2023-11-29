@@ -1,0 +1,138 @@
+<div class="row" style="display: flex; justify-content: flex-end;padding-left: 15px;padding-bottom: 15px;padding-right: 15px;margin-right: 20px;padding-top: 5px;">
+    <button class="btn align-center" data-toggle="tooltip" title="Check Book Estimate Tutorial"
+        style="width: fit-content; border-radius: 30%; padding-top: 5px;background-color: #4F2749;"
+        (click)="hintButton()">
+        <i class="fa fa-question fa-xs" style="color:white;"></i>
+    </button>
+</div>
+
+<div class="container" style="padding-bottom: 50px;">
+    <div style="text-align: center;">
+        <h2 style="font-weight: bold;padding-bottom: 50px;">Check Book Estimate
+            <hr style="width: 50%;">
+        </h2>
+    </div>
+
+    <div class="container">
+        <form style="display: flex; align-items: center;justify-content: center;text-align: center;"
+            [formGroup]="isbnForm" (ngSubmit)="CheckBook()">
+            <label style="font-weight: bold;">ISBN:</label>
+            <input id="isbnInput" type="text" class="form-control" name="isbn" formControlName="isbn"
+                (keypress)="onKeyPress($event)" maxlength="13" style="margin-left: 15px;margin-right: 15px;width: 50%;">
+
+            <button class="btn" style=" width: 150px; text-align: center; color: white; background-color: #3AD165;"
+                type="submit">
+                CHECK
+            </button>
+        </form>
+    </div>
+
+    <div class="container" style="padding: 50px;text-align: center;" *ngIf="showBookInformation">
+
+        <!-- Slide 1: Book Information -->
+        <div *ngIf="currentSlide === 1">
+            <div style="text-align: center;margin-top:25px; background-color: #F5F4F4;padding-top: 40px;padding-bottom: 40px;">
+                <h5 style="text-align: center;font-weight: bold;">Book Information</h5>
+                <div style="text-align: center;" *ngIf="bookData">
+                    <p>ISBN: {{bookData.isbn}} </p>
+                    <p>Title:{{bookData.title}} </p>
+                    <p>Author(s):{{bookData.authorName}} </p>
+                    <p>Publisher:{{bookData.publisherName}} </p>
+                    <p>Edition:{{bookData.edition }} </p>
+                    <p>Year: {{ bookData.year }}</p>
+
+                </div>
+            </div>
+            <button class="btn" style="width: 150px; color: white; background-color: #50294A;margin-top:5px ;"
+                (click)="nextSlide()">Next</button>
+        </div>
+
+        <div *ngIf="currentSlide === 2">
+            <div id="tell-us"
+                style="text-align: center;margin-top:50px;margin-bottom:50px; background-color: #F5F4F4;padding-top: 80px;padding-bottom: 80px;">
+                <h5 style="text-align: center;font-weight: bold;">Please Tell Us About Your Book</h5>
+                <div class="row" style="text-align: center;">
+                    <div class="col"></div>
+                    <div class="col" style="text-align: left;">
+                        <input type="checkbox" name="folded" (change)="updateTickedCheckboxes($event)"> Are any pages
+                        folded? <br>
+                        <input type="checkbox" name="highlighted" (change)="updateTickedCheckboxes($event)"> Are any
+                        pages
+                        highlighted? <br>
+                        <input type="checkbox" name="written" (change)="updateTickedCheckboxes($event)"> Are any pages
+                        written on? <br>
+                        <input type="checkbox" name="torn" (change)="updateTickedCheckboxes($event)">Are any pages torn
+                        or
+                        torn out?<br>
+                        <input type="checkbox" name="stained" (change)="updateTickedCheckboxes($event)">Are any pages
+                        stained?
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+            <button class="btn btn-update"
+                style="width: 150px; color: white; background-color: #50294A; margin-left: 20px; margin-right: 20px; margin-top: 20px;"
+                (click)="nextSlideBack()">Back</button>
+            <button class="btn btn-update"
+                style="width: 150px; color: white; background-color: #50294A;  margin-left: 20px; margin-right: 20px; margin-top: 20px;"
+                (click)="nextSlide()">Next</button>
+        </div>
+
+        <div *ngIf="currentSlide === 3">
+            <div
+                style="text-align: center;margin-top:50px; background-color: #F5F4F4;padding-top: 80px;padding-bottom: 80px;">
+                <h5 style="text-align: center;font-weight: bold;">Let's See The Book</h5>
+                <p>Upload pictures of your book<br>
+                    <hr style="width: 40%;">
+                <div
+                    style="display: flex; align-items: center; justify-content: center; text-align: center;padding:20px;">
+                    <h5 style="margin-right: 10px;font-weight: bold;">Front: </h5>
+                    <div style="border: dotted 1px #4F2749;padding-top: 10px;padding-bottom: 10px;">
+                        <input type="file"
+                            style="width: 80%; margin-left: 10px;margin-right: 10px; background-color: #4F2749;color:white"
+                            (change)="uploadImage($event, 'front')">
+                    </div>
+                </div>
+                <div
+                    style="display: flex; align-items: center; justify-content: center; text-align: center;padding:20px;">
+                    <h5 style="margin-right: 10px;font-weight: bold;">Back: </h5>
+                    <div style="border: dotted 1px #4F2749;padding-top: 10px;padding-bottom: 10px;">
+                        <input type="file"
+                            style="width: 80%; margin-left: 10px;margin-right: 10px; background-color: #4F2749;color:white"
+                            (change)="uploadImage($event, 'back')">
+                    </div>
+                </div>
+                <div
+                    style="display: flex; align-items: center; justify-content: center; text-align: center;padding:20px;">
+                    <h5 style="margin-right: 10px;font-weight: bold;">Binder <br> Side: </h5>
+                    <div style="border: dotted 1px #4F2749;padding-top: 10px;padding-bottom: 10px;">
+                        <input type="file"
+                            style="width: 80%; margin-left: 10px;margin-right: 10px; background-color: #4F2749;color:white"
+                            (change)="uploadImage($event, 'binder')">
+                    </div>
+                </div>
+                <div
+                    style="display: flex; align-items: center; justify-content: center; text-align: center;padding:20px;">
+                    <h5 style="margin-right: 10px;font-weight: bold;">Open<br> Book: </h5>
+                    <div style="border: dotted 1px #4F2749;padding-top: 10px;padding-bottom: 10px;">
+                        <input type="file"
+                            style="width: 80%; margin-left: 10px;margin-right: 10px; background-color: #4F2749;color:white"
+                            (change)="uploadImage($event, 'openBook')">
+                    </div>
+                </div>
+
+            </div>
+            <button class="btn"
+                style="width: 150px; color: white; background-color: #50294A;  margin-left: 20px; margin-right: 20px; margin-top: 20px;"
+                (click)="nextSlideBack()">Back</button>
+            <button class="btn"
+                style="width: 150px; color: white; background-color: #3AD165; margin-left: 20px; margin-right: 20px; margin-top: 20px;"
+                [disabled]="isSubmitDisabled" (click)="BookEstimate()">
+                SUBMIT
+            </button>
+            <button type="button" class="btn"
+                style="width: 150px; color: white; background-color:black ; margin-left: 20px; margin-right: 20px; margin-top: 20px;"
+                (click)="AbortCheck()">CANCEL</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+      <a [routerLink]="'/vouchers'" style="text-decoration: black;">
+        <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+      </a>&nbsp;&nbsp;
+      <a [routerLink]="'/vouchers'" style="color: black;">
+        VOUCHER
+      </a>
+      <i class="fas fa-angle-right fa-lg"></i> UPDATE VOUCHER
+    </h4>
+  </div>
+  
+  <div style="padding: 50px;">
+    <div class="row">
+      <div class="col-6 offset-1">
+        <form class="form-group" [formGroup]="formEditVoucher" (ngSubmit)="editAVoucher()">
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;"> Expiry Date </label><br/>
+            <small> CURRENT EXPIRY DATE : {{ originalVoucher.expiry_Date }} </small>
+            <input type="date" class="form-control" placeholder="" name="expiry_Date"
+              formControlName="expiry_Date" min={{minimumDate}}>
+          </div>
+          <button type="button" class="btn normButton" style="width: fit-content;margin-top: 5px;margin-left: 4px;" (click)="ConfirmEditVoucher()"> 
+            UPDATE VOUCHER 
+          </button>
+          <button type="button" class="btn normCancel" style="width: fit-content;margin-top: 5px;margin-left: 4px;" (click)="AbortEditVoucher()"> 
+            CANCEL 
+          </button>
+  
+        </form>
+      </div>
+    </div>
+  </div>

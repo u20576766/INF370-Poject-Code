@@ -1,0 +1,68 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/books'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp;&nbsp;
+        <a [routerLink]="'/books'" style="color: black;">
+            BOOKS
+        </a>
+        <i class="fas fa-angle-right fa-lg"></i> PRESCRIBED BOOKS
+    </h4>
+</div>
+
+<div class="container-fluid" style="padding: 20px;">
+    <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+        <div class="col">
+            <form (input)="searchPre()">
+                <input [(ngModel)]="searchInput" name="searchInput" type="search" placeholder="Search...">&nbsp;
+            </form>
+        </div>
+    </div>
+    <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+        <div class="col">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a [routerLink]="'/prescribed-book-list'" style="margin-left: 4px;margin-top: 5px;" class="normButton btn">
+                <i class="fas fa-plus fa-lg"></i>
+                &nbsp;
+                UPLOAD LIST
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a [routerLink]="'/add-pres-book'" class="normButton btn" style="margin-left: 4px;margin-top: 5px;">
+                <i class="fas fa-plus fa-lg"></i>
+                &nbsp;
+                ADD PRESCRIBED BOOK
+            </a>
+        </div>
+    </div>
+</div>
+
+  
+  <div style="padding-left: 15px; padding-right: 15px; padding-top: 15px; width: 100%">
+    <table class="table table-inverse datatable-table" style="width: 100%;">
+        <thead>
+            <tr>
+              <th>ISBN</th>
+              <th>Title</th>
+              <th>Publisher Name</th>
+              <th>Base Price</th>
+              <th>Edition</th>
+              <th>Year</th>
+              <th>Module Code</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prescribedBook of prescribedBooks">
+              <td>{{ prescribedBook.isbn }}</td>
+              <td>{{ prescribedBook.title }}</td>
+              <td>{{ prescribedBook.publisherName }}</td>
+              <td>{{ prescribedBook.basePrice }}</td>
+              <td>{{ prescribedBook.edition }}</td>
+              <td>{{ prescribedBook.year }}</td>
+              <td>{{ getModuleCode(prescribedBook.module_ID) }}</td>
+          </tbody>
+          
+    </table>
+  </div>
+  
+  

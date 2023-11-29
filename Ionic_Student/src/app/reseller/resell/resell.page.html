@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title size="large">
+      <ion-text
+      style="padding-top: 10px;background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+        RESELL
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Resell</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div style="padding: 10px; margin: 10px; border-radius: 15px;text-align: center;">
+    <div class="row" style="text-align: center;padding: 5px;">
+      <ion-buttons style="width: 100%;">
+        <ion-button class="btn normButton" routerLink="/check-book" >
+          CHECK BOOK ESTIMATE
+        </ion-button>
+      </ion-buttons>
+    </div>
+    <div class="row" style="text-align: center;padding: 5px;">
+      <ion-buttons style="width: 100%;">
+        <ion-button class="btn normButton" routerLink="/schedule">
+          SCHEDULE EVALUATION
+        </ion-button>
+      </ion-buttons>
+    </div>
+    <div class="row" style="text-align: center;padding: 5px;">
+      <ion-buttons style="width: 100%;">
+        <ion-button class="btn normButton" routerLink="/view-resale">
+          RESALE DETAILS
+        </ion-button>
+      </ion-buttons>
+    </div>
+  </div>
+</ion-content>

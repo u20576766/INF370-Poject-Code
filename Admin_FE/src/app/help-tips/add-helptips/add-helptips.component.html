@@ -1,0 +1,125 @@
+<!-- TITLE OF PAGE BAR -->
+<div class="titlePage">
+  <h4 style="font-weight: bold; padding-top: 10px;">
+    <a [routerLink]="'/help-tips'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp;&nbsp;
+    <a [routerLink]="'/help-tips'" style="color: black;">HELP TIPS</a>&nbsp;
+    <i class="fas fa-angle-right fa-lg"></i> ADD HELP TIP
+  </h4>
+</div>
+
+
+<div style="padding: 50px;">
+  <div class="row">
+    <div class="col-md-5">
+      <form class="form-group" [formGroup]="formAddHelpTip" (ngSubmit)="addNewHelpTip()">
+        <!-- NAME TEXT BOX -->
+        <div>
+          <label class="form-label" style="font-weight: bold;"> Name </label>
+          <input type="text" class="form-control" name="name" formControlName="name">
+        </div>
+        <div *ngIf="formAddHelpTip.controls['name']?.invalid" class="text-danger">
+          Name is required.
+        </div>
+        <br>
+
+        <!-- DESCRIPTION TEXTBOX -->
+        <div>
+          <label class="form-label" style="font-weight: bold;"> Description </label>
+          <textarea type="textarea" class="form-control" name="description" formControlName="description"></textarea>
+        </div>
+        <div *ngIf="formAddHelpTip.controls['description']?.invalid" class="text-danger">
+          Description is required.
+        </div>
+        <br>
+
+        <!------------------------------------------------- VIDEO UPLOAD ------------------------------------------------------------------------------>
+        <div>
+          <label class="form-label" style="font-weight: bold;"> Video </label>
+          <input class="upload" id='videoInput' type="file" class="form-control" name="video" formControlName="video"
+            accept="video/mp4" (change)="handleVideoUpload($event)">
+        </div>
+        <div *ngIf="formAddHelpTip.controls['video']?.invalid" class="text-danger">
+          Video is required.
+        </div>
+        <br>
+
+        <div [hidden]="verifyButtons">
+          <button type="button" class="btn normButton" style="width: fit-content;margin-top: 5px;margin-left: 4px;" (click)="VerifyVideo()">
+            VERIFY VIDEO
+          </button>
+          <button type="button" class="btn normCancel" style="width: fit-content;margin-top: 5px;margin-left: 4px;"
+            (click)="AbortAddHelp()">
+            CANCEL
+          </button>
+        </div>
+        <!-- if the right video is uploaded then show add help tip options -->
+        <div *ngIf="isTheRightVideoUploaded">
+          <br>
+          <button type="button" class="btn normButton" style="width: fit-content;margin-top: 5px;margin-left: 4px;"
+            [disabled]="formAddHelpTip.invalid" (click)="ConfirmAddHelp()">
+            ADD HELP TIP
+          </button>
+          <button type="button" class="btn normCancel" style="width: fit-content;margin-top: 5px;margin-left: 4px;"
+            (click)="AbortAddHelp()">
+            CANCEL
+          </button>
+        </div>
+
+
+      </form>
+
+    </div>
+
+    <div class="col-md-7">
+      <!-- if video is uploaded then show video for user to confirm -->
+      <div *ngIf="showVideo">
+        <h4>Uploaded File</h4>
+        <h6>Is this the video you wish to upload?</h6>
+        <br>
+        <div class="video-card">
+          <video controls width="100%" height="100%" frameborder="0" allowfullscreen>
+            <source [src]="videoUrl" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <div id="confirmButtons" class="confirmButtons" [hidden]="ConfirmButtonsHidden">
+            <button type="button" class="btn btnYes" style="width: fit-content;" (click)="YesVideo()">
+              YES
+            </button>
+            <button type="button" class="btn btnNo" style="margin-left:20px;width: fit-content;" (click)="NoVideo()">
+              NO
+            </button>
+          </div>
+        </div>
+        <br>
+      </div>
+
+      <!-- if the right video is not uploaded then show this message -->
+      <div *ngIf="isWrongVideoUploaded">
+        <br>
+        <mat-card class="video-card">
+          <mat-card-content>
+            {{fileUploadMessage}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!-- if no video is uploaded and verify is clicked then show this error message -->
+      <div *ngIf="showNoVideoMessage">
+        <br>
+        <mat-card class="error-card">
+          <mat-card-header>
+            ERROR
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              <strong> {{fileUploadMessage}}</strong>
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+</div>

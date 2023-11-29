@@ -1,0 +1,98 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/reports'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>
+    &nbsp;
+    ONLINE ORDERS REPORT
+  </h4>
+</div>
+
+<div class="row" style="margin: 10px;text-align: right;">
+  <div class="col">
+    <button data-toggle="tooltip" data-placement="top" title="Download Online Orders Report" class="btn normButton" (click)="downloadOrdersReport()"><i
+        class="fa fa-file-pdf fa-lg"></i> </button>
+  </div>
+</div>
+
+
+<div style="padding: 35px;" *ngIf="orderReport" #reportContainer>
+  <div class="report-section">
+    <h2>Overall Summary</h2>
+    <div>
+      Total Orders: {{ orderReport.totalOrders }}<br>
+      Total Revenue: {{ orderReport.totalRevenue | currency:'R':'symbol':'2.2-2' }}<br>
+      Total Items Sold: {{ orderReport.totalItemsSold }}<br>
+      
+    </div>
+  </div>
+
+  
+
+  <div class="report-section">
+    <h2>Date Breakdowns</h2>
+    <ul class="date-list">
+      <ng-container *ngFor="let dateBreakdown of orderReport.orderDateBreakdowns.$values">
+        <li>
+          <details>
+            <summary (click)="toggleDetails(dateBreakdown)">
+              <p>Date: {{ dateBreakdown.date }}</p>
+              <p>Total Orders on Date: {{ dateBreakdown.totalOrdersOnDate }}</p>
+              <p>Total Revenue on Date: {{ dateBreakdown.totalRevenueOnDate | currency:'R':'symbol':'2.2-2'}}</p>
+            </summary>
+            <table class="report-table" *ngIf="dateBreakdown.ordersOnDateDetails">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Order Date</th>
+                  <th>Order Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let orderDetails of dateBreakdown.ordersOnDateDetails.$values">
+                  <td>{{ orderDetails.orderID }}</td>
+                  <td>{{ orderDetails.orderDate }}</td>
+                  <td>{{ orderDetails.orderTotal | currency:'R':'symbol':'2.2-2' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </details>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+
+  <div class="report-section">
+    <h2>Voucher Breakdowns</h2>
+    <ul class="voucher-list">
+      <ng-container *ngFor="let voucher of orderReport.orderVoucherBreakdowns.$values">
+        <li>
+          <details>
+            <summary (click)="toggleDetails(voucher)">
+              <p>Voucher Code: {{ voucher.voucherCode }}</p>
+              <p>Total Orders with Voucher: {{ voucher.totalOrdersWithVoucher }}</p>
+              <p>Total Discount Amount from Voucher: {{ voucher.totalDiscountAmountFromVoucher }}%</p>
+            </summary>
+            <table class="report-table" *ngIf="voucher.ordersWithVoucherDetails">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Order Date</th>
+                  <th>Order Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let orderDetails of voucher.ordersWithVoucherDetails.$values">
+                  <td>{{ orderDetails.orderID }}</td>
+                  <td>{{ orderDetails.orderDate }}</td>
+                  <td>{{ orderDetails.orderTotal | currency:'R':'symbol':'2.2-2' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </details>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>

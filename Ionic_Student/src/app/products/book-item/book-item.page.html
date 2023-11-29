@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar *ngIf="selectedBook">
+    <ion-title
+      style="display: flex; align-items: center;background: linear-gradient(45deg,  purple, black);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/products" style="color: purple;"></ion-icon>
+      {{selectedBook.title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="selectedBook">
+  <div style="padding: 10px; margin: 10px; border-radius: 15px;text-align: center;">
+    <div style="text-align: right;margin: 15px;">
+      <ion-img src="{{selectedBook.imageBase64}}" style="padding: 10px;text-align: center;" class="ion-padding"></ion-img>
+    </div>
+    <div style="text-align: left;margin: 15px;">
+      <ion-card-title>{{selectedBook.title}}</ion-card-title>
+      <small>{{selectedBook.isbn}}</small>
+      <ion-card-subtitle>{{selectedBook.authorName}}</ion-card-subtitle>
+      <ion-card-subtitle>{{selectedBook.edition}}</ion-card-subtitle>
+      <ion-card-subtitle>{{selectedBook.year}}</ion-card-subtitle>
+      <ion-card-subtitle>{{selectedBook.module_Code}}</ion-card-subtitle>
+      <hr>
+      <ion-text size="large" style="font-weight: bold;font-size: x-large;">{{ selectedBook.price | currency: 'R':'symbol':'1.2-2' }}</ion-text>
+    </div>
+    <ion-button class="normButton" style="width: 100%;" color="#4F2749" (click)="AddToBCart(selectedBook.book_ID)">
+      <ion-icon name="cart-outline"></ion-icon>
+        Add To Cart
+    </ion-button>
+  </div>
+</ion-content>

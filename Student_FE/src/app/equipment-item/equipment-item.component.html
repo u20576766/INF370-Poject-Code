@@ -1,0 +1,46 @@
+<div class="container">
+  <button class="btn btn-update" [routerLink]="'/Equipment'">
+    <i class="fas fa-arrow-left"></i> Go Back To Equipment Page
+  </button>
+
+  <div class="container" *ngIf="selectedEquip">
+    <div class="row" style="border-radius: 20px;background-color: #F5F4F4;padding: 20px;">
+      <div class="col-md-5" style="text-align: center;margin-top: 5px;margin-bottom: 5px;">
+        <img src="{{ selectedEquip.image }}" style="width: 70%;height: 100%;text-align: center;border-radius: 20px;" alt="Equipment Image"
+          id="zoomable-image" class="equipment-image">
+      </div>
+      <div class="col-md-7" style="border-radius: 20px;background-color: #d8d8d8e8;padding: 30px;margin-top: 5px;margin-bottom: 5px;">
+        <h3>{{ selectedEquip.name }}</h3>
+        <small>{{ selectedEquip.equipmentType_Name }}</small>
+        <p>{{ selectedEquip.description }}</p>
+        <p><strong>Module Code: </strong> {{ selectedEquip.module_Code }}</p>
+        <hr>
+        <div class="row">
+          <div class="col-md-5" style="text-align: left;">
+            <h1 style="font-weight: bold;">{{ selectedEquip.amountWithVAT| currency: 'R':'symbol':'1.2-2' }}</h1>
+            <small style="font-weight: bold;">{{ selectedEquip.amountWithoutVAT| currency: 'R':'symbol':'1.2-2' }} (vat exclusive)</small>
+          </div>
+          <div class="col-md-7" style="text-align: right;">
+            <div *ngIf="selectedEquip.quantity_On_Hand == 0">
+              <button class="btn btn-primary" disabled (click)="AddToCart(selectedEquip.$id)">
+                <small style="color: red;text-align: center;font-weight: bold;">ITEM IS OUT OF STOCK</small><br>
+                <small style="font-weight: lighter;">
+                  <i class="fa fa-shopping-cart fa-lg"></i> Add to Cart
+                </small>
+              </button>
+            </div>
+            <div *ngIf="selectedEquip.quantity_On_Hand > 0">
+              <button class="btn btn-primary" (click)="AddToCart(selectedEquip.$id)">
+                <small style="font-weight: lighter;">
+                  <i class="fa fa-shopping-cart fa-lg"></i> Add to Cart
+                </small>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="height: 2cm;"></div>
+

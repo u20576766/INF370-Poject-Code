@@ -1,0 +1,245 @@
+<div #firstDiv style="background-color: #AE7595;text-align: center;padding: 80px;" *ngIf="isLoggedIn == false">
+    <div>
+        <img src="../assets/BlackLogo-NoBG 2.png" style="width: 20%;height: 20%;">
+    </div>
+    <div class="container">
+        <form class="form mb-3" [formGroup]="formLogIn">
+            <div class="mb-3" style="padding: 30px;">
+                <label class="form-label" style="font-weight: bold;font-size: 20pt;">USERNAME</label>
+                <input class="form-control" type="text" name="userName" formControlName="userName"
+                    placeholder="Username" required="" style="height: 50px;">
+            </div>
+
+            <div class="mb-6" style="padding: 30px;">
+                <label class="form-label" style="font-weight: bold;font-size: 20pt;">PASSWORD</label>
+                <div class="row">
+                    <div class="col-11">
+                        <input [type]="hide ? 'password' : 'text'" class="form-control" type="password" name="password"
+                            formControlName="password" placeholder="Password" required="" style="height: 50px;" />
+                    </div>
+                    <div class="col-1" style="text-align: center;">
+                        <button mat-icon-button matSuffix (click)="togglePassword($event)"
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;margin-top: 5px;margin-bottom: 5px; padding: 30px;">
+                <button type="button" class="btn normButton"
+                    style="margin-left:20px;width: 140px; background-color: #50294A;font-size: 20px;color: white;"
+                    (click)="LogIn()"> LOG IN </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="isLoggedIn == true && empType == 1">
+    <!-- Content for administrator -->
+    <mat-toolbar class="navbar-expand-sm" style="height: max-content;background-color: #AE7595;width: 90%;">
+        <mat-toolbar-row style="padding-top: 10px;padding-bottom:10px;height: fit-content;background-color: #AE7595;">
+            <button mat-button (click)="sidenav.toggle()"><i class="fa fa-bars"></i></button>
+            <img src="../assets/BlackLogo-NoBG 2.png" style="width: 100;height: 70px;text-align:right;padding-left:5px;"
+                onmouseover="this.style.cursor = 'pointer'" [routerLink]="'/dashboard'" data-toggle="tooltip"
+                data-placement="bottom" title="UniBooks" />
+            <div style="width:100px;"></div>
+
+            <button mat-button [matMenuTriggerFor]="menu"
+                style="font-weight: bold;padding: 10px;width: fit-content; height: fit-content;float: inline-end ;">
+                <div style="float: inline-start;">
+                    <img [src]="image" 
+                        style="width: 70px;height: 70px;border: 2px solid black;border-radius:40px;border-spacing: 5px;padding: 3px;">
+                </div>
+            </button>
+
+            <div>
+                <h6 style="font-weight: bolder;">
+                    <br>
+                    {{LoggedInName}}
+                    <br>
+                    <span style="font-size:smaller;font-weight: bolder;text-align: left;" *ngFor="let ety of employeeTypes">
+                        <span *ngIf="empType === ety.employee_Type_ID">
+                            {{ety.name}}
+                        </span>
+                    </span>
+                </h6>
+            </div>
+
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </mat-menu>
+
+            <div style="right: 0;position: absolute;padding-right: 35px;">
+                <img src="../assets/Logo.png" />
+            </div>
+
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+
+    <mat-sidenav-container autosize>
+        <mat-sidenav #sidenav mode="side" opened="true" class="side-container" style="background-color: #AE7595;">
+            <mat-nav-list style="float:inline-start;">
+                <div mat-list-item [routerLink]="'/dashboard'"
+                    style="float:inline-start;font-weight: bolder;vertical-align: middle;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fa fa-th-large fa-lg"></i>&nbsp;&nbsp; DASHBOARD
+                </div>
+                <div mat-list-item [routerLink]="'/sale'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-cash-register fa-lg"></i>&nbsp;&nbsp; POINT OF SALE
+                </div>
+                <div mat-list-item [routerLink]="'/inventory'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-boxes fa-lg"></i>&nbsp;&nbsp; INVENTORY
+                </div>
+                <div mat-list-item [routerLink]="'/orders'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-box-open fa-lg"></i>&nbsp;&nbsp; ORDERS
+                </div>
+                <div mat-list-item [routerLink]="'/vouchers'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-ticket-alt fa-lg"></i>&nbsp;&nbsp; VOUCHERS
+                </div>
+                <div mat-list-item [routerLink]="'/resale'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-book-open fa-lg"></i>&nbsp;&nbsp; RESALE
+                </div>
+                <div mat-list-item [routerLink]="'/employees'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-user-friends fa-lg"></i>&nbsp;&nbsp; EMPLOYEES
+                </div>
+                <div mat-list-item [routerLink]="'/schedule'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-calendar-alt fa-lg"></i>&nbsp;&nbsp; SCHEDULE
+                </div>
+                <div mat-list-item [routerLink]="'/students'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-user-graduate fa-lg"></i>&nbsp;&nbsp; STUDENTS
+                </div>
+                <div mat-list-item [routerLink]="'/newsletter'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="far fa-newspaper fa-lg"></i>&nbsp;&nbsp; NEWSLETTER
+                </div>
+                <div mat-list-item [routerLink]="'/help-tips'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp; HELP TIPS
+                </div>
+                <div mat-list-item [routerLink]="'/reports'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-clipboard-list fa-lg"></i>&nbsp;&nbsp; REPORTS
+                </div>
+                <div mat-list-item [routerLink]="'/supplier'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-dolly fa-lg"></i>&nbsp;&nbsp; SUPPLIER
+                </div>
+                <div mat-list-item [routerLink]="'/change-request'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fa fa-comments fa-lg"></i>&nbsp;&nbsp; CHANGE REQUESTS
+                </div>
+                <div mat-list-item [routerLink]="'/cloud'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-cloud fa-lg"></i>&nbsp;&nbsp; DATA MANAGEMENT
+                </div>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content class="content-container" autosize>
+            <div style="height: 88vh;">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+
+<div *ngIf="isLoggedIn == true && empType !== 1">
+    <mat-toolbar class="navbar-expand-sm" style="height: max-content;background-color: #AE7595;width: 90%;">
+        <mat-toolbar-row style="padding-top: 10px;padding-bottom:10px;height: fit-content;background-color: #AE7595;">
+            <button mat-button (click)="sidenav.toggle()"><i class="fa fa-bars"></i></button>
+            <img src="../assets/BlackLogo-NoBG 2.png" style="width: 100;height: 70px;text-align:right;padding-left:5px;"
+                onmouseover="this.style.cursor = 'pointer'" [routerLink]="'/dashboard'" data-toggle="tooltip"
+                data-placement="bottom" title="UniBooks" />
+            <div style="width:100px;"></div>
+
+            <button mat-button [matMenuTriggerFor]="menu"
+                style="font-weight: bold;padding: 10px;width: fit-content; height: fit-content;float: inline-end ;">
+                <div style="float: inline-start;">
+                    <img [src]="'data:image/jpeg;base64,' + image" 
+                        style="width: 70px;height: 70px;border: 2px solid black;border-radius:40px;border-spacing: 5px;padding: 3px;">
+                </div>
+            </button>
+
+            <div>
+                <h6 style="font-weight: bolder;">
+                    <br>
+                    {{LoggedInName}}
+                    <br>
+                    <span style="font-size:smaller;font-weight: bolder;text-align: left;" *ngFor="let ety of employeeTypes">
+                        <span *ngIf="empType === ety.employee_Type_ID">
+                            {{ety.name}}
+                        </span>
+                    </span>
+                </h6>
+            </div>
+
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </mat-menu>
+
+            <div style="right: 0;position: absolute;padding-right: 35px;">
+                <img src="../assets/Logo.png" />
+            </div>
+
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+
+    <mat-sidenav-container autosize>
+        <mat-sidenav #sidenav mode="side" opened="true" class="side-container" style="background-color: #AE7595;">
+            <mat-nav-list style="float:inline-start;">
+                <div mat-list-item [routerLink]="'/dashboard'"
+                    style="float:inline-start;font-weight: bolder;vertical-align: middle;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fa fa-th-large fa-lg"></i>&nbsp;&nbsp; DASHBOARD
+                </div>
+                <div mat-list-item [routerLink]="'/sale'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-cash-register fa-lg"></i>&nbsp;&nbsp; POINT OF SALE
+                </div>
+                <div mat-list-item [routerLink]="'/inventory'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-boxes fa-lg"></i>&nbsp;&nbsp; INVENTORY
+                </div>
+                <div mat-list-item [routerLink]="'/orders'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-box-open fa-lg"></i>&nbsp;&nbsp; ORDERS
+                </div>
+                <div mat-list-item [routerLink]="'/vouchers'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-ticket-alt fa-lg"></i>&nbsp;&nbsp; VOUCHERS
+                </div>
+                <div mat-list-item [routerLink]="'/resale'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-book-open fa-lg"></i>&nbsp;&nbsp; RESALE
+                </div>
+                <div mat-list-item [routerLink]="'/schedule'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-calendar-alt fa-lg"></i>&nbsp;&nbsp; SCHEDULE
+                </div>
+                <div mat-list-item [routerLink]="'/students'"
+                    style="font-weight: bolder;padding:10px;font-size:large;cursor: pointer;">
+                    <i class="fas fa-user-graduate fa-lg"></i>&nbsp;&nbsp; STUDENTS
+                </div>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content class="content-container" autosize>
+            <div style="height: 88vh;">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

@@ -1,0 +1,124 @@
+<!-- TITLE OF PAGE BAR -->
+<div class="titlePage">
+    <h4 style="font-weight: bold; padding-top: 5px;"> &nbsp;&nbsp;
+        STUDENTS
+    </h4>
+</div>
+
+<!-- SEARCH BAR AND ADD NEW STUDENT BUTTON -->
+<div class="row" style="padding-left: 15px;padding-right: 15px;">
+    <div class="col-md-9">
+        <form (input)="searchStudent()">
+            <input [(ngModel)]="searchQuery" type="search" placeholder="Search for a student" name="searchQuery">
+        </form>
+    </div>
+    <div class="col-md-3" style="justify-content: flex-end;text-align: right;padding-top: 10px;">
+        <a [routerLink]="'/add-student'" class="normButton btn">
+            <i class="fas fa-user-plus fa-lg"></i>
+            &nbsp;
+            ADD NEW STUDENT
+        </a>
+    </div>
+</div>
+
+<!-- TABLE OF STUDENTS -->
+<div style="padding-left: 15px;padding-right: 15px;padding-top: 15px;width:100%">
+    <table class="table table-inverse datatable-table" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Cell Number</th>
+                <th>Email</th>
+                <th>Subscribed</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: max-content;" *ngFor="let item of arrStudents">
+                <td>
+                    {{item.name}}
+                </td>
+                <td>
+                    {{item.surname}}
+                </td>
+                <td>
+                    {{item.cell_Number}}
+                </td>
+                <td>
+                    {{item.email}}
+                </td>
+                <td>
+                    {{ item.subscribed ? 'Yes' : 'No' }}
+                </td>
+                <td style="text-align: right;">
+                    <button class="btn update" style="margin-left: 4px;margin-top: 5px;"
+                        (click)="goToEditStudent(item.student_ID)"><i class="fa fa-edit"></i>&nbsp;&nbsp;UPDATE
+                    </button>
+                    <button class="btn delete" style="margin-left: 4px;margin-top: 5px;"
+                        (click)="deleteStudent(item.student_ID)"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;DELETE
+                    </button>
+                </td>
+
+                <!-- MODAL FOR DELETE STUDENT-->
+                <div class="modal fade" [id]="'removeModal-'+ item.student_ID" role="dialog" data-backdrop="false">
+                    <div class="modal-dialog modal-md">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div style="background-color: #D9D9D9;height: fit-content;">
+                                <i type="button" class="close modalLabel fa fa-times-circle" data-dismiss="modal"></i>
+                            </div>
+                            <div class="modal-body">
+                                <div style="text-align: center;margin-top: 20px;margin-bottom: 20px;">
+                                    <h5>
+                                        <i class="fa fa-exclamation-triangle fa-2x"
+                                            style="color: #FFDB58;"></i>&nbsp;&nbsp;
+                                        Are you sure you want to delete this student?
+                                    </h5>
+                                </div>
+                                <div style="text-align: center;margin-top: 5px;margin-bottom: 5px;">
+                                    <button type="button" class="btn update" style="width: 140px;" data-dismiss="modal"
+                                        data-toggle="modal" data-target="#successModal"
+                                        (click)="deleteStudent(item.student_ID)">
+                                        CONFIRM
+                                    </button>
+                                    <button type="button" class="btn normCancel" data-dismiss="modal"
+                                        data-toggle="modal" data-target="#abortModal"
+                                        style="margin-left:20px;width: 140px;"> CANCEL </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal FOR ABORT-->
+<div class="modal fade" id="abortModal" role="dialog" data-backdrop="false">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div style="background-color: #D9D9D9;height: fit-content;">
+                <i type="button" class="close modalLabel fa fa-times-circle" data-dismiss="modal"></i>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center;margin-top: 20px;margin-bottom: 20px;">
+                    <h5>
+                        <i class="fa fa-exclamation-triangle fa-2x" style="color: red;"></i>&nbsp;&nbsp; Delete Student
+                        has been aborted.
+                    </h5>
+                </div>
+                <div style="text-align: center;margin-top: 5px;margin-bottom: 5px;">
+                    <a type="button" class="btn update" style="width: 140px;" data-dismiss="modal"
+                        [routerLink]="'/supplier'"> OKAY
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

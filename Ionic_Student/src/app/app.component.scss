@@ -1,0 +1,60 @@
+.loading-background {
+    display: flex;
+    align-items: center;
+    /* Center the content vertically */
+    justify-content: center;
+    /* Center the content horizontally */
+    height: 100vh;
+    /* Make the background cover the entire viewport */
+    background-color: rgba(245, 222, 179, 0);
+    /* Pink background */
+    animation: moveUp 2s ease-in-out 1s;
+    /* 1-second delay before animation starts */
+}
+
+.loading-background img {
+    max-width: 100%;
+    /* Ensure the image doesn't exceed the container width */
+    animation: fadeOut 3s ease-in-out 1s;
+    /* 1-second delay before animation starts */
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0);
+        /* Start from the current position */
+        opacity: 1;
+        /* Start with full opacity */
+    }
+
+    100% {
+        transform: translateY(-300px);
+        /* Move the image upward by 100px */
+        opacity: 0;
+        /* Fade out completely */
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        /* Start with full opacity */
+    }
+
+    100% {
+        opacity: 0;
+        /* Fade out completely */
+    }
+}
+
+ion-tab-button.tab-selected {
+    --color-selected: rgb(165, 21, 165);
+  }
+
+  /* In your styles.css or a custom CSS file */
+.custom-badge-color {
+    background-color: #4F2749;
+    color: white; /* You can adjust the text color as needed */
+    padding-left: 3px;
+    padding-right: 3px;
+  }

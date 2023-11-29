@@ -1,0 +1,83 @@
+.buttons {
+    background-color: #50294A;
+    border-radius: 100px;
+    color: white;
+    font-weight: bold;
+    padding: 20px;
+    width: 600px;
+  }
+  
+  .titlePage {
+    background-color: #D9D9D9;
+    border: 2px, solid, black;
+    padding: 5px;
+    font-weight: bold;
+  }
+  
+  .normButton {
+    background-color: #50294A;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    width: fit-content;
+  }
+  
+  form {
+    justify-content: flex-start;
+    width: 100%;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  input[type="search"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .delete {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    width: fit-content;
+  }
+  
+  .update {
+    background-color: #50294A;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    width: fit-content;
+  }
+  
+  .normCancel {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    width: fit-content;
+  }
+  
+
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px; /* Adjust the gap between cards as needed */
+  }
+  
+  .card {
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  

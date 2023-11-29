@@ -1,0 +1,61 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/resale'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>
+    &nbsp;
+    Evaluate Book
+  </h4>
+</div>
+
+<div class="container" style="padding: 50px;">
+
+  <div style="text-align: center;">
+    <h2 style="font-weight: bold;padding: 25px;">Evaluate Books
+      <hr style="width: 50%;">
+    </h2>
+  </div>
+
+  <div class="container">
+    <form style="display: flex; align-items: center;justify-content: center;text-align: center;"
+      (ngSubmit)="onFormSubmit()">
+      <label style="font-weight: bold;">Booking Reference Number:</label>
+      <input type="text" style="margin-left: 15px;margin-right: 15px;width: 50%;" class="form-control" name="ref"
+        ngModel #bookingRef="ngModel" required>
+      <button data-dismiss="modal" data-toggle="modal" data-target="#bookModal" class="btn normButton"
+        style="width: fit-content; text-align: center;padding-left: 10px;padding-right: 10px;" type="submit">
+        CHECK
+      </button>
+    </form>
+  </div>
+  <div class="container" *ngIf="showBookInformation">
+    <table class="table">
+      <thead>
+        <tr style="font-weight: bold;">
+          <td>Reference Number</td>
+          <td>Title</td>
+          <td>ISBN</td>
+          <td>Estimated Price</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books"> <!-- Iterate over the 'books' array -->
+          <td>{{ book.referenceNum}}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.isbn }}</td>
+          <td>{{ book.estimatedPrice   | currency:'R':'symbol':'1.2-2'}}</td>
+          <td>
+            <button class="btn normButton" style="width: 150px; text-align: center;"
+              (click)="openImageModal(book.resellerBookId)">
+              VIEW IMAGES
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn normButton" style="width: 150px; text-align: center;" (click)="Confirm()">
+      SUBMIT
+    </button>
+  </div>

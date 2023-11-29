@@ -1,0 +1,66 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/reports'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>
+    &nbsp;
+    BOOK INVENTORY REPORT
+  </h4>
+</div>
+
+<div class="container" style="padding-left: 15px;padding-right: 15px;padding-top: 15px;width:100%">
+  <div style="padding-left: 20px; padding-top: 20px;padding-right: 20px;">
+    <div class="row">
+      <div class="col-md-7">
+        <small>Select Base Price Range:</small><br>
+        <div class="form-group">
+          <small for="minBasePrice">Min Base Price:</small>
+          <input class="form-control" type="number" id="minBasePrice" [(ngModel)]="minBasePrice">
+        </div>
+
+        <div class="form-group">
+          <small for="maxBasePrice">Max Base Price:</small>
+          <input class="form-control" type="number" id="maxBasePrice" [(ngModel)]="maxBasePrice">
+        </div>
+
+        <button class="btn normButton" (click)="applyFilters()">Apply Filters</button>
+
+      </div>
+      <div class="col-md-5" >
+        <small>Sort By Ascending order or Descending order using Title</small><br><br>
+        <button class="btn normButton" (click)="toggleSortOrder()">Sort Order</button>
+      </div>
+
+    </div>
+
+
+
+    <div class="row" style="margin: 10px;text-align: right;">
+      <div class="col">
+        <button data-toggle="tooltip" data-placement="top" title="Download Book Report" class="btn normButton" (click)="downloadBookReport()"><i class="fa fa-file-pdf fa-lg"></i> </button>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ISBN</th>
+          <th>Quantity On Hand</th>
+          <th>Title</th>
+          <th>Base Price</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of filteredBookReportData">
+          <td>{{ book.isbn }}</td>
+          <td>{{ book.quantity_On_Hand }}</td>
+          <td>{{ book.title }}</td>
+          <td> {{ book.basePrice  | currency:'R':'symbol':'2.2-2'}}</td>
+          <td>{{ book.price  | currency:'R':'symbol':'2.2-2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

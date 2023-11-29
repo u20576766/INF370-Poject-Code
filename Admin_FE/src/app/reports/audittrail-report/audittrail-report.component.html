@@ -1,0 +1,109 @@
+<!-- TITLE OF PAGE BAR -->
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/reports'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>
+        &nbsp;
+        AUDIT TRAIL REPORT
+    </h4>
+</div>
+
+<div class="row" style="padding-left: 15px;padding-right: 15px;">
+    <div class="col" style="padding:10px;">
+        <div class="container" style="padding: 10px;">
+            <div class="d-flex align-items-center">
+                <select class="form-control"
+                    style="width: max-content;margin: 2px;background-color: #50294A;color: white;" name="categories"
+                    id="categories" [(ngModel)]="selectedCategory">
+                    <option value="All Categories">All Categories</option>
+                    <option value="Action Type">Action Type</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Comment">Comment</option>
+                </select>
+                <input style="margin: 2px;" class="form-control" type="search" placeholder="Search In All Categories"
+                    [(ngModel)]="searchQuery">
+                <button style="margin: 2px;padding-left: 15px;padding-right: 15px;" class="normButton btn"
+                    (click)="searchByCategory()">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="padding-left: 25px;padding-right: 25px;">
+    <div class="col" style="padding:10px;">
+        <div class="row">
+            <div class="col">
+                <form class="form-group" [formGroup]="formDateFilter">
+                    <mat-form-field style="width: max-content">
+                        <mat-label>Start Date</mat-label>
+                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="startDate"
+                            (dateChange)="addEvent($event)" name="startDate" formControlName="startDate">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="startDate"></mat-datepicker-toggle>
+                        <mat-datepicker #startDate></mat-datepicker>
+                    </mat-form-field>
+                    &nbsp; to &nbsp;
+                    <mat-form-field style="width: max-content">
+                        <mat-label>End Date</mat-label>
+                        <input matInput [min]="endDateMin" [max]="maxDate" [matDatepicker]="endDate" name="endDate"
+                            formControlName="endDate">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="endDate"></mat-datepicker-toggle>
+                        <mat-datepicker #endDate></mat-datepicker>
+                    </mat-form-field><br>
+                    <div style="margin-top: 10px;margin-bottom: 10px;">
+                        <button class="normButton btn" (click)="applyDateFilter()"
+                        style="justify-content: flex-end;text-align: right;padding-top: 10px;text-align: center;">
+                        APPLY FILTER
+                    </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="text-align: right; margin: 10px;">
+    <div class="col">
+        <button data-toggle="tooltip" data-placement="top" title="Download Audit Trail Report" class="btn normButton" (click)="downloadAuditTrailReport()"><i class="fa fa-file-pdf fa-lg"></i> </button>
+    </div>
+</div>
+
+<div class="container" style="margin: 10px;padding-left: 30px;padding-right: 30px;padding-bottom: 10px;">
+    <div class="row">
+        <div class="col">
+            <table id="report-table" class="report-table">
+                <thead>
+                    <tr>
+                        <th>TimeStamp</th>
+                        <th>Action Type</th>
+                        <th>Employee</th>
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of arrAuditTrails">
+                        <tr>
+                            <td>
+                                {{item.dateTimeStamp}}
+                            </td>
+                            <td>
+                                {{item.audit_Entry_Type}}
+                            </td>
+                            <td>
+                                {{item.name}} {{item.surname}}
+                            </td>
+                            <td>
+                                {{item.comment}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

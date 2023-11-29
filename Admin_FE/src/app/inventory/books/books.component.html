@@ -1,0 +1,78 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/inventory'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>
+        &nbsp;
+        BOOKS
+    </h4>
+</div>
+<div class="container-fluid" style="padding: 20px;">
+    <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+        <div class="col">
+            <form (input)="searchBook()">
+                <input type="text" placeholder="Search..." [(ngModel)]="searchQuery" name="searchQuery" type="search">
+            </form>
+        </div>
+    </div>
+    <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+        <div class="col">
+            <a [routerLink]="'/add-book'" class="normButton btn " style="margin-top:5px;">
+                <i class="fas fa-plus fa-lg"></i>
+                &nbsp;
+                ADD BOOK
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a [routerLink]="'/faculty'" class="normButton btn" style="margin-top:5px;">
+                <i class="fas fa-cog fa-lg"></i>
+                &nbsp;
+                FACULTY
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a [routerLink]="'/prescribed-book'" class="normButton btn" style="margin-top:5px;">
+                <i class="fas fa-cog fa-lg"></i>
+                &nbsp;
+                PRESCRIBED BOOKS
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="padding-left: 25px;">
+    <div class="card-container">
+        <div class="card mb-3 col" style="max-width: 540px;height: max-content;" *ngFor="let book of bookList">
+            <div class="row no-gutters">
+                <div class="card-img col-md-5">
+                    <img [src]="book.imageBase64" class="card-img" alt="..."
+                    style="width: 100%;height: 300px;">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: bold;">{{ book.title }}</h5>
+                        <p class="card-title">{{ book.authorName }}</p>
+                        <small class="card-title">{{ book.isbn }}</small><br>
+                        <small class="card-title" style="font-weight: bold;">{{ book.module_Code }} E-{{book.edition}}</small><br>
+                        <small class="card-title">{{ book.year }}</small><br>
+                        <hr style="width: 95%;text-align: center;">
+                        <h5 class="card-title" style="font-weight: bold;"> {{ book.price  | currency:'R':'symbol':'2.2-2'}}
+                            <small style="font-size: x-small;">per item</small>
+                        </h5>
+                        <div class="row">
+                            <div class="col" style="text-align: left;">
+                                <i class="fa fa-archive " style="color: rgb(111, 111, 204);font-size:12px;cursor: pointer;margin-bottom: 5px;" (click)="StockTakeBook(book.isbn)"> STOCK </i>
+                                <p class="card-text" style="font-size: x-small; cursor: pointer;" (click)=" WriteOffBook(book.isbn)"><i class="fas fa-times-circle fa-lg" style="color: goldenrod;"></i> Qty: {{ book.quantity }}</p>
+                            </div>
+                            <div class="col" style="text-align: right;">
+                                <i class="far fa-edit fa-lg" style="margin-right:10px; cursor: pointer;"
+                                    (click)="goToEditBook(book.isbn)" title="Update this Book"></i>
+                                <i class="fas fa-trash fa-lg" style="color: red; cursor: pointer;" data-toggle="modal"
+                                    (click)="deleteBook(book.isbn)" title="Delete this Book"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

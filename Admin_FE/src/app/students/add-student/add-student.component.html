@@ -1,0 +1,71 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+      <a [routerLink]="'/students'" style="text-decoration: black;">
+        <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+      </a>&nbsp;&nbsp;
+      <a [routerLink]="'/students'" style="color: black;">
+        STUDENT
+      </a>
+      <i class="fas fa-angle-right fa-lg"></i> ADD NEW STUDENT
+    </h4>
+  </div>
+  
+  <div style="padding: 50px;">
+    <div class="row">
+      <div class="col-6 offset-1">
+        <form class="form-group" [formGroup]="formAddStudent" (ngSubmit)="addNewStudent()">
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;"> Name </label>
+            <input maxlength="100" type="text" class="form-control" placeholder="" name="name" formControlName="name">
+          </div>
+          <div *ngIf="formAddStudent.controls['name']?.invalid" class="text-danger">
+            Name is required.
+          </div>
+          <br>  
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;"> Surname </label>
+            <input maxlength="100" type="text" class="form-control" placeholder="" name="surname"
+              formControlName="surname">
+          </div>
+          <div *ngIf="formAddStudent.controls['surname']?.invalid" class="text-danger">
+            Surname is required.
+          </div>
+          <br>  
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;"> Cell Number</label>
+            <input maxlength="10" type="text" class="form-control" placeholder="" maxlength="10" name="cell_Number" formControlName="cell_Number">
+          </div>
+          <div *ngIf="formAddStudent.controls['cell_Number']?.invalid" class="text-danger">
+            Cell Number is required.
+          </div>
+          <br>  
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold;"> Email</label>
+            <input type="email" class="form-control" placeholder=""  name="email" formControlName="email">
+          </div>
+          <div *ngIf="formAddStudent.controls['email']?.invalid" class="text-danger">
+            Email is required.
+          </div>
+          <br>  
+          <div class="mb-3">
+            <label class="form-label" for="subscription">Subscribe to Newsletter: &nbsp;</label>
+            <select class="form-control" name="subscription" formControlName="subscription" id="subscription" (change)="assignSubscription()">
+              <option value="" disabled selected>Select an option</option>
+              <option value="true">YES</option>
+              <option value="false">NO</option>
+            </select>
+          </div>
+          <div *ngIf="formAddStudent.controls['subscription']?.invalid" class="text-danger">
+            Subscription is required.
+          </div>
+          
+          <br>  
+
+          <button type="button" class="btn normButton" style="margin-left:4px;width:fit-content;margin-top: 5px;" (click)="confirmAddStudent()"> ADD STUDENT </button>
+          <button type="button" class="btn normCancel" style="margin-left:4px;width:fit-content;margin-top: 5px;" (click)="abortAddStudent()"> CANCEL </button>  
+        </form>
+      </div>
+    </div>
+  </div>
+  

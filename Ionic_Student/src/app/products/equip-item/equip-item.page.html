@@ -1,0 +1,28 @@
+<ion-header [translucent]="true"*ngIf="selectedEquip">
+  <ion-toolbar>
+    <ion-title
+      style="display: flex; align-items: center;background: linear-gradient(45deg,  purple, black);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/products" style="color: purple;"></ion-icon>
+      Industrial Welding Goggles
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="selectedEquip">
+  <div style="padding: 10px; margin: 10px; border-radius: 15px;text-align: center;">
+    <div style="text-align: right;margin: 15px;">
+      <ion-img src="{{selectedEquip.image}}" style="padding: 10px;text-align: center;" class="ion-padding"></ion-img>
+    </div>
+    <div style="text-align: left;margin: 15px;">
+      <ion-card-title>{{selectedEquip.name}}</ion-card-title>
+      <small>{{selectedEquip.equipmentType_Name}}</small>
+      <ion-card-subtitle>{{selectedEquip.description}}</ion-card-subtitle>
+      <hr>
+      <ion-text size="large" style="font-weight: bold;font-size: x-large;">{{ selectedEquip.amountWithVAT| currency: 'R':'symbol':'1.2-2' }}</ion-text>
+    </div>
+    <ion-button class="normButton" style="width: 100%;" color="#4F2749" (click)="ViewItem(selectedEquip.equipment_ID)">
+      <ion-icon name="cart-outline"></ion-icon>  
+        Add To Cart
+    </ion-button>
+  </div>
+</ion-content>

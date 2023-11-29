@@ -1,0 +1,64 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/books'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp;&nbsp;
+    <a [routerLink]="'/books'" style="color: black;">
+         Book
+    </a>
+    <i class="fas fa-angle-right fa-lg"></i> STOCK TAKE
+  </h4>
+</div>
+
+<div style="padding: 30px;">
+  <div class="row">
+    <div  class="col-4 offset-1">
+      <div class="card-body">
+        <p class="card-title" style="font-size: large;"><strong>ISBN:</strong> {{ StockBook.isbn }}</p>
+        <p  style=" font-size: medium;"><strong>Title: </strong> {{ StockBook.title }}</p>
+        <div class="card-img">
+          <img style="width: 90%;height: 90%;" src="{{StockBook.imageBase64}}" class="card-img" alt="Equipment Image">
+        </div>
+     </div>
+     </div>
+      <div class="col-6 offset-1">
+          <form [formGroup]="stockTakeForm" (ngSubmit)="updateStock()" class="form-group"
+              enctype="multipart/form-data">
+
+                <!--Description of the equipment-->
+        <div class="mb-3">
+
+          <div style="height:0.5cm"></div>
+          <label class="form-label" style="font-weight: bold;">Notes of stock Take</label>
+          <textarea type="text" class="form-control" placeholder="Type notes here" name="notes"
+            formControlName="notes"></textarea>
+            <div *ngIf="stockTakeForm.get('notes')?.hasError('required')" class="text-danger">
+              Notes of stock take is required.
+             </div>
+        </div>
+
+
+              <div class="mb-3">
+                  <label class="form-label" style="font-weight: bold;">Current Quantity</label>
+                  <input type="number" class="form-control" placeholder="12" name="cqua" formControlName="cqua"  [required]="true">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" style="font-weight: bold;">New Quantity</label>
+                <input type="number" class="form-control" placeholder="0" name="nqua" [formControlName]="'nqua'" min="1" max="100"  [required]="true">
+                <div *ngIf="stockTakeForm.get('nqua')?.hasError('required')" class="text-danger">
+                  New quantity is required.
+                </div>
+              </div>
+
+
+
+              <!--The buttons-->
+              <button type="submit" class="btn normButton" style="margin-left:4px;width:fit-content;margin-top: 5px;" (click)="updateStock()">UPDATE
+                  QUANTITY</button>
+              <button type="button" class="btn normCancel" style="margin-left:4px;width:fit-content;margin-top: 5px;"  (click)="cancelStockTake()">CANCEL</button>
+          </form>
+      </div>
+  </div>
+</div>

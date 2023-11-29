@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title
+      style="display: flex; align-items: center;background: linear-gradient(45deg, rgb(185, 101, 115), purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/view-resale" style="color: rgb(185, 101, 115);"></ion-icon>
+      Evaulations Scheduled
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ <div>
+    <ion-row>
+      <ion-searchbar animated="true" style="width:100%"  [(ngModel)]="searchQuery" name="searchQuery"
+        placeholder="Search scheduled evaluations"  (input)="applySearchFilter()"></ion-searchbar>
+    </ion-row>
+  </div>
+
+  <!--<div *ngIf="isLoading; else content" class="ion-text-center" style="padding: 100px;">
+    Show loading spinner while data is loading
+    <ion-spinner name="dots" size="large"></ion-spinner>
+  </div>-->
+
+  <!--<ng-template #content>-->
+    <div style="padding: 10px; margin: 10px;">
+      <div clas="row" style="background-color: rgb(233, 233, 233);padding: 15px;border-radius: 5px;margin-bottom: 5px;" *ngFor="let b of filteredBooks" >
+        <ion-text >Evaluation Ref: {{b.referenceNumber}}</ion-text><br>
+        <ion-text>Evaluation Date: {{b.date}}</ion-text><br>
+        <div class="row"style="background-color: white;padding: 10px;border-radius: 5px;margin: 5px;">
+          <ion-text style="font-size: small;">ISBN: {{b.isbn}}<br>Title: {{b.title}}</ion-text>
+          <ion-text style="font-size: small;">Estimated Price: {{b.estimatedPrice | currency: 'R':'symbol':'1.2-2'}}</ion-text>
+        </div>
+      </div>
+    </div>
+  <!--</ng-template/>-->
+</ion-content>

@@ -1,0 +1,76 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/faculty'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp;&nbsp;
+        <a [routerLink]="'/books'" style="color: black;">
+            BOOKS
+        </a>
+        <a [routerLink]="'/faculty'" style="color: black;">
+            <i class="fas fa-angle-right fa-lg"></i> FACULTY
+        </a>
+        <i class="fas fa-angle-right fa-lg"></i> DEPARTMENT
+    </h4>
+</div>
+
+<div class="container-fluid" style="padding: 20px;">
+    <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+        <div class="col">
+            <form (input)="searchDepartment()">
+                <input [(ngModel)]="searchInput" name="searchInput" type="search" placeholder="Search...">&nbsp;
+            </form>
+        </div>
+    </div>
+    <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+        <div class="col">
+            <a [routerLink]="'/add-department'" class="normButton btn " style="margin-top: 5px;">
+                <i class="fas fa-plus fa-lg"></i>
+                &nbsp;
+                ADD DEPARTMENT
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a [routerLink]="'/module'" class="normButton btn" style="margin-top: 5px;">
+                <i class="fas fa-cog fa-lg"></i>
+                &nbsp;
+                MODULE
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a [routerLink]="'/faculty'" class="normButton btn" style="margin-top: 5px;">
+                <i class="fas fa-cog fa-lg"></i>
+                &nbsp;
+                FACULTY
+            </a>
+        </div>
+    </div>
+</div>
+
+<div style="padding-left: 15px; padding-right: 15px; padding-top: 15px;">
+    <table class="table table-inverse">
+        <thead>
+            <tr>
+                <th>Department Name</th>
+                <th>Faculty</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: max-content;" *ngFor="let dep of dep">
+                <td style="width: 25%;">{{ dep.department_Name }}</td>
+                <td>
+                    <div *ngFor="let fac of fac">
+                        <p *ngIf="dep.faculty_ID == fac.faculty_ID">{{ fac.faculty_Name }}</p>
+                    </div>
+                </td>
+                <td style="text-align: right;">
+                    <button class="btn update" (click)="updateDepartment(dep.department_ID)" style="margin-top: 5px;margin-left: 4px;">
+                        <i class="fa fa-edit"></i>&nbsp;&nbsp;UPDATE
+                    </button>
+                    <button class="btn delete" style="margin-top: 5px;margin-left: 4px;" (click)="deleteDepartment(dep.department_ID)">
+                        <i class="far fa-trash-alt"></i>&nbsp;&nbsp;DELETE
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

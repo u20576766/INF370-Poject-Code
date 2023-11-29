@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title style="display: flex; align-items: center;background: linear-gradient(45deg,  purple, black);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/profile" style="color: purple;"></ion-icon>
+      Delete Account
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="12" size-md="6" class="ion-text-center">
+          <ion-icon name="close-circle-outline" style="color: red; font-size: 6rem;"></ion-icon>
+          <h6>
+            We will permanently delete all personal information as well as your profile, after you have confirmed your request.
+          </h6>
+          <form class="form" style="padding: 10px;">
+            <div class="form-group" style="text-align: center;">
+              <label position="floating" style="text-align: center;">Type "Delete" then press Confirm Deletion</label>
+              <input type="text" style="border-radius: 3px;font-size: medium;" class="form-control" name="delete" placeholder="Enter in request word">
+            </div>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="row" style="text-align: center;padding: 5px;margin: 5px;">
+      <div class="col" style="margin-top: 4px;">
+        <ion-buttons style="width: 100%;">
+          <ion-button class="btn normButton">
+            CONFIRM DELETION
+          </ion-button>
+        </ion-buttons>
+      </div>
+      <div class="col" style="margin-top: 4px;">
+        <ion-buttons style="width: 100%;">
+          <ion-button class="btn normCancel" routerLink="/profile">
+            CANCEL
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+</ion-content>

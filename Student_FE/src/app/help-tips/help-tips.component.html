@@ -1,0 +1,29 @@
+<div class="container" style="text-align: center;padding: 30px;">
+    <h2 style="font-weight: bold;">Help Videos</h2>
+    <div class="input-group" style="width:100%; text-align: left;padding-bottom: 20px;">
+        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-icon" [(ngModel)]="searchQuery" (input)="searchHelpTip()">
+        <div class="input-group-append">
+            <span class="input-group-text" style="background-color: #4F274A;" id="search-icon">
+                <i class="fa fa-search" style="color: white;"></i>
+            </span>
+        </div>
+    </div>
+
+        <mat-expansion-panel *ngFor="let item of arrHelpTips">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{item.name}}
+              </mat-panel-title>
+              <mat-panel-description>
+                <p>Last Updated: {{item.date}}</p>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p> {{item.description}} </p>
+            <video #videoPlayer controls width="100%" height="100%" frameborder="0" allowfullscreen>
+              <source [src]="item.filePath" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </mat-expansion-panel>
+          
+
+    </div>

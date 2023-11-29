@@ -1,0 +1,48 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/equipment_type'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp;&nbsp;
+        <a [routerLink]="'/lab_equipment'" style="color: black;">
+            LAB EQUIPMENT
+        </a>
+        <a [routerLink]="'/equipment_type'" style="color: black;">
+            <i class="fas fa-angle-right fa-lg"></i> EQUIPMENT TYPES
+        </a>
+        <i class="fas fa-angle-right fa-lg"></i> UPDATE TYPE
+    </h4>
+</div>
+
+<div style="padding: 50px;">
+    <div class="row">
+        <div class="col-6 offset-1">
+            <form class="form-group" [formGroup]="formUpdate" (ngSubmit)="UpdateEquipmentType()">
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Name</label>
+                    <input type="text" class="form-control" placeholder="Test Tube" name="name" formControlName="name">
+                </div>
+                <div *ngIf="formUpdate.controls['name']?.invalid && formUpdate.controls['name']?.touched"
+                    class="text-danger">
+                    Name is required.
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Description</label>
+                    <textarea type="text" class="form-control" style="height:100px" placeholder="Type in description of new equipment type" formControlName="description" name="description"></textarea>
+                </div>
+                <div *ngIf="formUpdate.controls['description']?.invalid && formUpdate.controls['description']?.touched"
+                    class="text-danger">
+                    Description is required.
+                </div>
+
+                <button type="button" class="btn normButton" style="width: fit-content;margin-top: 5px;margin-left: 4px;" 
+                        (click)="showUpdateConfirmation()" [disabled]="formUpdate.invalid">UPDATE TYPE</button>
+                <button type="button" class="btn normCancel" 
+                        (click)="showCancelConfirmation()"
+                        style="width: fit-content;margin-top: 5px;margin-left: 4px;" >CANCEL</button>
+            </form>
+        </div>
+    </div>
+</div>

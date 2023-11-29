@@ -1,0 +1,94 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/orders'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>
+        &nbsp;
+        COLLECTED ORDERS
+    </h4>
+</div>
+<div class="container-fluid" style="padding: 20px;">
+    <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+        <div class="col">
+            <form (input)="searchOrder()">
+                <input [(ngModel)]="searchInput" name="searchInput" type="search" placeholder="Search...">&nbsp;
+            </form>
+        </div>
+    </div>
+    <div class="row" style="display: flex; justify-content: flex-end;padding-left: 30px;padding-right: 30px;">
+        <small [routerLink]="'/order-placed'" style="cursor: pointer;">Placed Orders</small> &nbsp; / &nbsp;
+        <small [routerLink]="'/order-ready'" style="cursor: pointer;">Orders Ready For Collection</small>
+    </div> 
+</div>
+
+<div class="container-fluid" style="padding-left: 25px;">
+    <div class="card-container">
+        <div class="card mb-3" style="max-width: 540px;" *ngFor="let o of orders">
+            <div class="card-header">
+                <div class="row" style="font-weight: bolder;">
+                    <div class="col" style="font-weight: bold;">
+                        <h5>ORDER #{{o.order_Reference_Number}}</h5>
+                    </div>
+
+                    <div class="col" style="text-align: right;font-weight: bold;">
+                        <h5>{{o.order_Total | currency:'R':'symbol':'2.2-2'}}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col" style="font-weight: bold;">
+                        <h6>CLIENT:</h6>
+                        <h6>DATE:</h6>
+                    </div>
+
+                    <div class="col" style="text-align: right;">
+                        <div *ngFor="let s of arrStudents">
+                            <h6 *ngIf="o.student_ID == s.student_ID">{{s.name}} {{s.surname}}</h6>
+                        </div>
+                        <h6>{{o.order_Date}}</h6>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="row" style="padding: 10px;">
+                    <h6 style="font-weight: bold;">ITEMS:</h6>
+                </div>
+                <div class="row" *ngFor="let ol of lines">
+                    <div class="col-8" style="font-weight: bold;">
+                        <small *ngIf="o.order_ID == ol.order_ID">{{ol.itemName}}</small>
+                    </div>
+                    <div class="col-1" style="text-align: right;">
+                        <small *ngIf="o.order_ID == ol.order_ID">{{ol.quantity}}</small>
+                    </div>
+                    <div class="col-3" style="text-align: right;">
+                        <small *ngIf="o.order_ID == ol.order_ID">{{ol.price | currency:'R':'symbol':'2.2-2'}}</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="row" style="font-weight: bold;">
+                    <div class="col" style="align-items: center; ">
+                        <i class="fas fa-inbox fa-2x"
+                            style="color: #3AD165; background-color: #D9D9D9; padding: 10px;border-radius: 20px;"></i>
+                    </div>
+
+                    <div class="col" style="text-align: right;align-items: center;" [routerLink]="'/order-collect'">
+                        <div class="btn update" style="background-color: #3AD165;" [routerLink]="'/order-collect'" >
+                            <i class="fa fa-check"></i>&nbsp;&nbsp;
+                            COLLECTED
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="orders.length === 0" style="text-align: center;">
+        <img style="width: 30%;height: 30%;" src="../assets/3609071.jpg"/>
+        <h4 style="font-weight: bold;">No orders here</h4>
+    </div>
+</div>

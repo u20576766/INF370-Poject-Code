@@ -1,0 +1,30 @@
+
+
+<div class="container" style="padding: 50px;">
+    <div style="text-align: center;">
+        <h2 style="font-weight: bold;padding-bottom: 50px;">RESALE</h2>
+        <div class="row">
+            <div class="col">
+                <div style="background-color:rgb(218, 215, 215);border-radius: 7px;padding: 50px;margin-bottom: 25px;"
+                    [routerLink]="'/EvaluateBooks'">
+                    <i class="fa fa-book fa-6x" style="color: #4F274A;"></i>
+                    <h6 style="font-weight: bold;padding-top: 20px;">Evaluate Books</h6>
+                </div>
+            </div>
+            <div class="col">
+                <div style="background-color:rgb(218, 215, 215);border-radius: 7px;padding: 50px;margin-bottom: 25px;"
+                    [routerLink]="'/WalkInEvaluation'">
+                    <i class="fa fa-handshake fa-6x" style="color: #4F274A;"></i>
+                    <h6 style="font-weight: bold;padding-top: 20px;">Walk-In Evaluations</h6>
+                </div>
+            </div>
+            <div class="col">
+              <div style="background-color:rgb(218, 215, 215);border-radius: 7px;padding: 50px;margin-bottom: 25px;"
+                  (click)=" ViewResalePercent()">
+                  <i class="fa fa-percent fa-6x"   style="color: #4F274A;"></i>
+                  <h6 style="font-weight: bold;padding-top: 20px;">Resale Percent</h6>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>

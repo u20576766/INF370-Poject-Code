@@ -1,0 +1,59 @@
+<div class="titlePage">
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/supplier'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp;&nbsp;
+    <a [routerLink]="'/supplier'" style="color: black;">SUPPLIER</a>&nbsp;
+    <i class="fas fa-angle-right fa-lg"></i> ADD SUPPLIER
+  </h4>
+</div>
+
+<div style="padding: 50px;">
+  <div class="row">
+    <div class="col-6 offset-1">
+      <form class="form-group" [formGroup]="formAdd" (ngSubmit)="addSupplier()">
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Name</label>
+          <input type="email" class="form-control" placeholder="Game" name="name" formControlName="name">
+        </div>
+        <div *ngIf="formAdd.controls['name']?.invalid && formAdd.controls['name']?.touched"
+             class="text-danger">Name is required.
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Address</label>
+          <textarea type="text" class="form-control" placeholder="1104 Foxtros Avenue, Arcadia, Pretoria"
+                    name="address" formControlName="address"></textarea>
+        </div>
+        <div *ngIf="formAdd.controls['address']?.invalid && formAdd.controls['address']?.touched"
+             class="text-danger">Address is required.
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Email</label>
+          <input type="email" class="form-control" placeholder="email@mail.com" name="email" formControlName="email">
+        </div>
+        <div *ngIf="formAdd.controls['email']?.invalid && formAdd.controls['email']?.touched"
+             class="text-danger">Email is required.
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Cell</label>
+          <input type="tel" class="form-control" placeholder="0000000000" maxlength="10" name="cell"
+                 formControlName="cell">
+        </div>
+        <div *ngIf="formAdd.controls['cell']?.invalid && formAdd.controls['cell']?.touched"
+             class="text-danger">Cell is required.
+        </div>
+
+        <button type="button" class="btn normButton" style="margin-left:4px;width:fit-content;margin-top: 5px;"
+                (click)="confirmAddSupplier()" [disabled]="formAdd.invalid">ADD SUPPLIER</button>
+        <button type="button" class="btn normCancel" style="margin-left:4px;width:fit-content;margin-top: 5px;"
+                (click)="cancelAddSupplier()">CANCEL</button>
+
+      </form>
+    </div>
+  </div>
+</div>
+

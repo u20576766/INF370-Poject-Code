@@ -1,0 +1,183 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/sale'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp;&nbsp;
+        <a [routerLink]="'/sale'" style="color: black;">
+            POINT OF SALE
+        </a>
+        <i class="fas fa-angle-right fa-lg"></i> ADD SALE
+    </h4>
+</div>
+
+<div class="container" style="padding: 20px;">
+    <div class="row" style="text-align: center;">
+        <div class="col" style="text-align: center;">
+            <h2 style="font-weight: bold;padding-bottom: 0px;">Capture Sale
+                <hr style="width: 50%;">
+            </h2>
+        </div>
+    </div>
+    <div class="row" style="text-align: center;padding-bottom: 10px;">
+        <div class="col">
+            <p>Choose the Book and Equipment items you wish to add to the sale.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="sale-container">
+                <div class="books-equipment">
+                    <div class="row" style="padding-left: 10px;padding-right: 10px;justify-content: center;">
+                        <div class="col">
+                          <form>
+                            <input
+                                type="search"
+                                placeholder="Search books and equipments..."
+                                [(ngModel)]="searchQuery"
+                                name="searchQuery"
+                                type="search"
+                                (input)="SearchBooksEquipment()">
+                        </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div *ngFor="let book of filteredBooks; let i = index" class="col-lg-6 mb-4">
+                            <div class="card">
+                                <img [src]="book.imageBase64" class="card-img-top" alt="Book Cover"
+                                    style="max-height: 200px; object-fit: contain;padding-top: 2px;" />
+                                <div class="card-body">
+                                    <p class="card-title"
+                                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        {{book.title }}</p>
+                                    <small class="card-text">   <strong>ISBN:</strong> {{ book.isbn }}</small><br>
+                                    <small class="card-text" >  <strong>  Price:</strong> {{ book.price |
+                                        number:'1.2-2' | currency:'R':'symbol':'2.2-2'}}</small><br>
+                                    <small for="quantity">
+                                      <strong>  Quantity In Stock: </strong>
+
+                                        <span *ngIf="book.quantity > 0">{{ book.quantity }}</span>
+                                        <span *ngIf="book.quantity < 1" class="text-danger">Out of stock</span>
+                                    </small>
+                                    <input type="number" id="quantity" name="quantity" [(ngModel)]="quantityBought[i]"
+                                        [disabled]="book.quantity < 1" class="form-control" min="0"
+                                        max="{{ book.quantity }}" />
+
+                                    <button (click)="addToCart(book, quantityBought[i])" class="btn btn-primary mt-2"
+                                        [disabled]="book.quantity < 1 || quantityBought[i] < 1">
+                                        Add to Sale
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div *ngFor="let item of filteredEquipments; let i = index" class="col-lg-6 mb-4"  >
+                            <div class="card">
+                                <img [src]="item.image" class="card-img-top" alt="Equipment Image"
+                                    style="max-height: 200px; object-fit: contain;">
+                                <div class="card-body">
+                                    <p class="card-title">{{ item.name }}</p>
+                                    <small class="card-text"><strong>Description:</strong> {{ item.description }}</small>
+                                    <!--  <p class="card-text">Module Code: {{ item.module_Code }}</p>-->
+
+                                    <br>
+                                    <small class="card-text"> <strong> Price: </strong>{{ item.amountWithVAT |
+                                      number:'1.2-2' | currency:'R':'symbol':'2.2-2'}}</small><br>
+
+
+                                    <small for="equipment-quantity"> <strong> Quantity In Stock:</strong>
+                                        <span *ngIf="item.quantity_On_Hand > 0">{{ item.quantity_On_Hand }}</span>
+                                        <span *ngIf="item.quantity_On_Hand < 1" class="text-danger">Out of stock</span>
+                                    </small>
+
+                                    <input type="number" id="equipment-quantity" name="equipment-quantity"
+                                        [(ngModel)]="quantityBoughtEquipment[i]" [disabled]="item.quantity_On_Hand < 1"
+                                        class="form-control" min="0" max="{{ item.quantity_On_Hand }}" />
+
+                                    <button (click)="addToCartEquipment(item, quantityBoughtEquipment[i])"
+                                        class="btn btn-primary mt-2" [disabled]="quantityBoughtEquipment[i] < 1">
+
+                                        Add to Sale
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="student-section" style="padding: 20px;background-color: #D9D9D9;border-radius: 10px;">
+                <label for="voucher-code" style="font-weight: bold;">Search for student</label>
+                <div class="input-group">
+                    <input type="text" id="student" class="form-control"
+                        placeholder="student surname/name/email address" name="student">
+                    <div class="input-group-append">
+                        <button class="btn normButton" (click)="SearchStudent()">Search</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div style="padding: 20px;background-color: #D9D9D9;border-radius: 10px;">
+                <h4 style="font-weight: bold;">SALE</h4>
+                <h6 *ngIf="studentsection">
+                    <strong>Student:</strong> {{ selectedStudent?.name }} {{ selectedStudent?.surname }}
+                </h6>
+                <div class="voucher-section">
+                    <label for="voucher-code">Enter Voucher Code:</label>
+                    <div class="input-group">
+                        <input type="text" id="voucher-code" class="form-control" name="voucher-code">
+                        <div class="input-group-append">
+                            <button class="btn normButton" (click)="getVoucher()">Apply</button>
+                        </div>
+                    </div>
+                    <p *ngIf="voucherExists" class="text-success">Voucher applied successfully!</p>
+                </div>
+
+                <br>
+                <div class="cart-items">
+                    <!-- Display Cart Items for Books -->
+                    <h6>Books in Sale:</h6>
+                    <div *ngFor="let item of cartBook" class="cart-item">
+                        <p><strong>Title:</strong> {{ item.title }}</p>
+                        <p><strong>Quantity:</strong> {{ item.QuantityBought }}</p>
+                        <p><strong>Price:</strong> R{{ item.AmountTotal }}</p>
+                        <button class="btn btn-danger" (click)="removeFromCartBook(item)">
+                            <i class="fa-solid fa-trash"></i> Remove from sale
+                        </button>
+                        <hr />
+                    </div>
+                    <br>
+                    <!-- Display Cart Items for Equipment -->
+                    <h6>Equipment in Sale:</h6>
+                    <div *ngFor="let item of cartEquipment" class="cart-item">
+                        <p><strong>Name:</strong> {{ item.name }}</p>
+                        <p><strong>Quantity:</strong> {{ item.QuantityBought }}</p>
+                        <p><strong>Price:</strong> R{{ item.TotalAmount }}</p>
+
+                        <button class="btn btn-danger" (click)="removeFromCartEquipment(item)"> <i
+                                class="fa-solid fa-trash"></i> Remove from sale</button>
+                        <hr />
+                    </div>
+                    <br>
+                    <p><strong style="color: red;">Total :</strong> R {{TotalPayment}}</p>
+                </div>
+                <div *ngIf="paymentTypes.length > 0" class="payment-dropdown">
+                    <label for="paymentType">Select Payment Type:</label>
+                    <select id="paymentType" [(ngModel)]="selectedPaymentType" class="form-control">
+                        <option *ngFor="let paymentType of paymentTypes" [value]="paymentType.paymentType_ID">{{
+                            paymentType.paymentType_Name }}</option>
+                    </select>
+                </div>
+                <button class="btn normButton"
+                    style="width: 150px; color: white; background-color: #3AD165;margin-top: 10px;"
+                    (click)="CheckOutCart()">
+                    Save Sale
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

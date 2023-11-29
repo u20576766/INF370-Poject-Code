@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h3 style="font-weight: bold;">
+            <i class="far fa-arrow-alt-circle-left fa-md" style="margin-right: 20px; cursor: pointer;" [routerLink]="'/Profile'"></i>
+            View Account Information
+          </h3>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+          <button class="btn" style="padding: 15px; width: fit-content; font-weight:bold; text-align: center; color: white; background-color: #4F274A;" [routerLink]="'/Change-Password'">
+            UPDATE PASSWORD
+          </button>
+        </div>
+        <div class="col-md-12">
+          <hr style="width: 100%; color: grey; text-align: left;">
+        </div>
+      </div>
+  
+      <div class="container" style="justify-content: center;">
+        <div class="row">
+          <div class="col">
+            <div style="padding: 10px;">
+              <h6 style="font-weight: 900;">NAME</h6>
+              <p>{{ userDetails.firstName }}</p> <!-- Display the user's first name -->
+            </div>
+            <div style="padding: 10px;">
+              <h6 style="font-weight: 900;">SURNAME</h6>
+              <p>{{ userDetails.lastName }}</p> <!-- Display the user's last name -->
+            </div>
+            <div style="padding: 10px;">
+              <h6 style="font-weight: 900;">CELL NUMBER</h6>
+              <p>{{ userDetails.cell_Number }}</p> <!-- Display the user's cell number -->
+            </div>
+            <div style="padding: 10px;">
+              <h6 style="font-weight: 900;">EMAIL</h6>
+              <p>{{ userDetails.email }}</p> <!-- Display the user's email -->
+            </div>
+            <div style="padding: 10px;">
+              <h6 style="font-weight: 900;">SUBSCRIBED</h6>
+              <p>{{ userDetails.subscribed }}</p> <!-- Display the user's cell number -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-align:center;" style="padding: 20px;">
+        <button class="btn" style="padding: 15px; width: fit-content; font-weight:bold; text-align: center; color: white; background-color: #4F274A;" [routerLink]="'/Update-Account'">
+          UPDATE ACCOUNT INFORMATION
+        </button>
+      </div>
+    </div>
+  </div>
+  

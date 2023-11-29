@@ -1,0 +1,118 @@
+<div class="row" style="text-align: center;">
+    <div class="col" style="text-align: center;">
+        <small style="text-align: center;">
+            ALL BOOKS {{trailText}}
+        </small>
+    </div>
+</div>
+<div class="row" style="padding: 15px; margin-right: 20px; text-align: center;">
+    <div class="col" style="display: flex; justify-content: flex-end;">
+        <button class="btn align-center"
+            style="display: flex; justify-content: flex-end;padding: 15px;margin-right: 20px;" data-toggle="tooltip"
+            title="Filter Books Tutorial"
+            style="width: fit-content; border-radius: 30%; padding-top: 5px;background-color: #4F2749;"
+            (click)="hintButton()">
+            <i class="fa fa-question fa-xs" style="color:white;"></i>
+        </button>
+    </div>
+</div>
+
+
+
+<div class="container-fluid" style="padding: 20px;">
+    <div class="row">
+        <div class="col-md-3" style="background-color: #F5F4F4;border-radius: 10px;padding: 20px;margin-bottom: 20px;">
+            <div style="width: 100%; padding-bottom: 20px;padding-top: 20px;">
+                <label style="font-weight:bold;width: 100%;background: linear-gradient(45deg, #4F2749, purple);-webkit-background-clip: text; background-clip: text; color: transparent;" for="facultyDropdown">SELECT A FACULTY:</label>
+                <select style="width: 100%;" class="form-control" id="facultyDropdown" [(ngModel)]="faculty_ID"
+                    (change)="onFacultyChange(); updateTrailText()">
+                    <option value="" disabled>Select Faculty</option>
+                    <option *ngFor="let faculty of facultylist" [value]="faculty.faculty_ID">{{ faculty.faculty_Name }}
+                    </option>
+                </select>
+            </div>
+            <div *ngIf="faculty_ID" style="width: 100%; padding-bottom: 20px;padding-top: 20px;">
+                <label style="font-weight:bold;width: 100%;background: linear-gradient(45deg, #4F2749, purple);-webkit-background-clip: text; background-clip: text; color: transparent;" for="departmentDropdown">SELECT A DEPARTMENT:</label>
+                <select class="form-control" id="departmentDropdown" [(ngModel)]="dep_ID"
+                    (change)="onDepartmentChange(); updateTrailText()">
+                    <option value="" disabled>Select Department</option>
+                    <option *ngFor="let department of departmentlist" [value]="department.department_ID">
+                        {{ department.department_Name }}
+                    </option>
+
+                </select>
+            </div>
+
+            <div *ngIf="dep_ID" style="width: 100%;padding-bottom: 20px;padding-top: 20px;">
+                <label style="font-weight:bold;width: 100%;background: linear-gradient(45deg, #4F2749, purple);-webkit-background-clip: text; background-clip: text; color: transparent;" for="moduleDropdown">SELECT A MODULE:</label>
+                <select class="form-control" id="moduleDropdown" [(ngModel)]="mod_ID"
+                    (change)="onModuleChange(); updateTrailText()">
+                    <option value="" disabled>Select Module</option>
+                    <option *ngFor="let module of modulelist" [value]="module.module_Code">{{ module.module_Code }}
+                    </option>
+                </select>
+            </div>
+
+            <div style="width: 100%;padding: 10px;">
+                <button class="btn"
+                style="background-color: #4F274A; color: white;text-align: center;width:100%;" (click)="clearDropdowns()">
+                    CLEAR
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <!--fILTERED BOOKS-->
+            <!--UNFILTERED BOOKS-->
+            <div class="row g-3 mb-4" style="margin-bottom: 10px;">
+                <div class="col-sm-4" *ngFor="let b of bookList" style="margin-bottom: 10px;">
+                    <div class="card h-100 shadow bg-light "
+                        style="text-align: center;margin-bottom: 5px;padding-top: 5px;cursor: pointer;">
+
+                        <div class="card-img" (click)="ViewBookItem(b.book_ID)">
+                            <img src="{{b.imageBase64}}" alt="{{b.title}}" style="width:50%">
+                        </div>
+
+
+                        <div class="card-body d-flex flex-column">
+                            <small class="card-title" (click)="ViewBookItem(b.book_ID)">{{b.isbn}}</small><br>
+                            <h6 class="card-title" style="font-weight: bold;" (click)="ViewBookItem(b.book_ID)">
+                                {{b.title}}
+                            </h6>
+                            <small class="card-subtitle" (click)="ViewBookItem(b.book_ID)">{{b.authorName}}</small>
+                            <small class="card-subtitle" style="font-weight: bold;padding-top: 10px;">{{b.module_Code}}
+                                - E{{b.edition}}</small>
+                            <hr style="width:70%;">
+                            <div class="card-text">
+                                <h5 style="font-weight: bold;" (click)="ViewBookItem(b.book_ID)">{{ b.price| currency:
+                                    'R':'symbol':'1.2-2' }}</h5>
+                                <div *ngIf="b.quantity == 0">
+                                    <small style="color: red;text-align: center;font-weight: bold;">ITEM IS OUT OF
+                                        STOCK</small><br>
+                                    <button class="btn btn-primary" disabled (click)="AddToCart(b.book_ID)">
+                                        <small style="font-weight: lighter;">
+                                            <i class="fa fa-shopping-cart fa-lg"></i> Add to Cart
+                                        </small>
+                                    </button>
+                                </div>
+                                <div *ngIf="b.quantity > 0">
+                                    <button class="btn btn-primary" (click)="AddToCart(b.book_ID)">
+                                        <small style="font-weight: lighter;">
+                                            <i class="fa fa-shopping-cart fa-lg"></i> Add to Cart
+                                        </small>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div style="text-align: center;width: 80%;justify-content: center;">
+    <hr style="text-align: center;width: 80%;justify-content: center;">
+</div>

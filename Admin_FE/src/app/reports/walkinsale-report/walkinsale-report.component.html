@@ -1,0 +1,127 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/reports'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>
+    &nbsp;
+    SALES REPORT
+  </h4>
+</div>
+
+<div class="row" style="margin: 10px;text-align: right;">
+  <div class="col">
+    <button data-toggle="tooltip" data-placement="top" title="Download WalkIn Sales Report" class="btn normButton" (click)="downloadResaleReport()"><i class="fa fa-file-pdf fa-lg"></i> </button>
+  </div>
+</div>
+
+
+<div class="container" style="margin: 25px;" *ngIf="saleReport" #reportContainer>
+  <div class="report-section">
+    <h2>Overall Summary</h2>
+    <div class="summary-details">
+      <p>Total Sales:   {{ saleReport.totalSales }}</p>
+      <p>Total Revenue: {{ saleReport.totalRevenue  | currency:'R':'symbol':'2.2-2'}}</p>
+      <p>Total Items Sold: {{ saleReport.totalItemsSold  }}</p>
+    </div>
+  </div>
+
+  <div class="report-section">
+    <h2>Faculty Breakdowns</h2>
+    <ul class="faculty-list">
+      <ng-container *ngFor="let faculty of saleReport.facultyBreakdowns.$values">
+        <li>
+          <details>
+            <summary (click)="toggleDetails(faculty)">
+              <p>Faculty Name: {{ faculty.facultyName }}</p>
+              <p>Total Books Sold:   {{ faculty.totalBooksSold }}</p>
+              <p>Total Revenue from Books:  {{ faculty.totalRevenueFromBooks | currency:'R':'symbol':'2.2-2'}}</p>
+            </summary>
+            <table class="report-table" *ngIf="faculty.showDetails">
+              <thead>
+                <tr>
+                  <th>Book Title</th>
+                  <th>Quantity Sold</th>
+                  <th>Revenue Generated</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let book of faculty.booksSoldDetails.$values">
+                  <td>{{ book.bookTitle }}</td>
+                  <td>{{ book.quantitySold }}</td>
+                  <td>{{ book.revenueGenerated | currency:'R':'symbol':'2.2-2' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </details>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+
+  <div class="report-section">
+    <h2>Date Breakdowns</h2>
+    <ul class="date-list">
+      <ng-container *ngFor="let dateBreakdown of saleReport.dateBreakdowns.$values">
+        <li>
+          <details>
+            <summary (click)="toggleDetails(dateBreakdown)">
+              <p>Date: {{ dateBreakdown.date }}</p>
+              <p>Total Orders on Date: {{ dateBreakdown.totalOrdersOnDate }}</p>
+              <p>Total Revenue on Date: {{ dateBreakdown.totalRevenueOnDate  | currency:'R':'symbol':'2.2-2'}}</p>
+            </summary>
+            <table class="report-table" *ngIf="dateBreakdown.showDetails">
+              <thead>
+                <tr>
+                  <th>Sale ID</th>
+                  <th>Sale Date</th>
+                  <th>Sale Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let saleDetails of dateBreakdown.ordersOnDateDetails.$values">
+                  <td>{{ saleDetails.saleID }}</td>
+                  <td>{{ saleDetails.saleDate }}</td>
+                  <td>{{ saleDetails.saleTotal | currency:'R':'symbol':'2.2-2' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </details>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+
+  <div class="report-section">
+    <h2>Voucher Breakdowns</h2>
+    <ul class="voucher-list">
+      <ng-container *ngFor="let voucher of saleReport.voucherBreakdowns.$values">
+        <li>
+          <details>
+            <summary (click)="toggleDetails(voucher)">
+              <p>Voucher Code: {{ voucher.voucherCode }}</p>
+              <p>Total Orders with Voucher: {{ voucher.totalOrdersWithVoucher }}</p>
+              <p>Total Discount Amount from Voucher: {{ voucher.totalDiscountAmountFromVoucher | currency:'R':'symbol':'2.2-2' }}</p>
+            </summary>
+            <table class="report-table" *ngIf="voucher.showDetails">
+              <thead>
+                <tr>
+                  <th>Sale ID</th>
+                  <th>Sale Date</th>
+                  <th>Sale Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let saleDetails of voucher.ordersWithVoucherDetails.$values">
+                  <td>{{ saleDetails.saleID }}</td>
+                  <td>{{ saleDetails.saleDate }}</td>
+                  <td>{{ saleDetails.saleTotal  | currency:'R':'symbol':'2.2-2' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </details>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>

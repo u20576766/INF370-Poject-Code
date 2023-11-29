@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title
+      style="display: flex; align-items: center;background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/orders" style="color: pink;"></ion-icon>
+      Placed Orders
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <ion-row (input)="searchOrder()">
+      <ion-searchbar [(ngModel)]="searchInput" name="searchInput" animated="true" style="width:100%"
+        placeholder="Search by reference"></ion-searchbar>
+    </ion-row>
+  </div>
+
+  <div *ngIf="isLoading; else content" class="ion-text-center" style="padding: 100px;">
+    <!-- Show loading spinner while data is loading -->
+    <ion-spinner name="dots" size="large"></ion-spinner>
+  </div>
+
+  <ng-template #content>
+    <div style="padding: 10px; margin: 10px;">
+      <div clas="row" style="background-color: rgb(233, 233, 233);padding: 15px;border-radius: 5px;margin-bottom: 5px;"
+        *ngFor="let o of orders">
+        <ion-text>ORDER: #{{o.order_Reference_Number}}</ion-text><br>
+        <ion-text>{{o.order_Date}}</ion-text><br>
+        <ion-text style="font-size: small;">{{getOrderLineCount(o.order_ID)}} Item(s)</ion-text>
+        <ng-container *ngFor="let ol of lines">
+          <div class="row" style="padding: 7px;border-radius: 5px;background-color: white;margin:10px"
+            *ngIf="o.order_ID == ol.order_ID && ol.quantity > 0">
+            <p>
+              <span style="font-weight: bold;font-style: italic;">{{ ol.itemName }}</span> <br>
+              <small>{{ ol.quantity }} X {{ol.price | currency:
+                'R':'symbol':'1.2-2'}}</small>
+            </p>
+          </div>
+        </ng-container>        
+        <div class="row" style="margin: 10px;padding: 10px;">
+          <div class="col">
+            <ion-title style="font-weight: bold;">{{o.order_Total | currency:
+              'R':'symbol':'1.2-2'}}</ion-title>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-content>

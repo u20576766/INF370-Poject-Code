@@ -1,0 +1,7 @@
+{
+  "name": "TheBookMarket",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

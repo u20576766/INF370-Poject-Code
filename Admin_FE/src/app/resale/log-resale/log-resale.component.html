@@ -1,0 +1,52 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/resale'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>
+    &nbsp;
+    LOG RESALE EXCHANGE
+  </h4>
+</div>
+
+<div class="container" style="padding: 50px;">
+  <div style="text-align: center;">
+    <h2 style="font-weight: bold;padding: 25px;">Exchange information
+      <hr style="width: 50%;">
+    </h2>
+  </div>
+
+  <div class="row align-middle">
+    <div class="col-md-8">
+      <div class="form-group">
+        <h5 style="margin-bottom: 5px;font-weight: bold;">Enter exchange information</h5>
+        <textarea id="myTextarea" class="form-control" name="myTextarea" rows="6" cols="40"
+          placeholder="Type your information here..." style="width: 100%;"></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <h5 style="font-weight: bold;margin-bottom: 5px;" for="AmountExchanged">Amount exchanged:</h5>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">R</span>
+          </div>
+          <input type="number" class="form-control" name="AmountExchanged" id="AmountExchanged" placeholder="600.00" style="width: 90px;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div style="text-align: center; margin-top: 20px;">
+    <button class="btn normButton" style="margin-left:4px;width:fit-content;margin-top: 5px;" (click)="logResale()">
+      SUBMIT
+    </button>
+    <button class="btn normCancel" style="margin-left:4px;width:fit-content;margin-top: 5px;"
+      (click)="cancelExchange()">
+      CANCEL
+    </button>
+  </div>
+</div>

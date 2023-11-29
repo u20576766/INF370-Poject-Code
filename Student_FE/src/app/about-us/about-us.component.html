@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="row" style="text-align: center;margin: 70px;">
+        <h1 style="text-align: center;font-size: 70pt;font-weight: bold;background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">The Book Market</h1>
+        <small style="text-align: center;background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">&nbsp;&nbsp;ABOUT US</small>
+    </div>
+    <div class="row" style="margin-bottom: 20px;margin-top: 20px;">
+        <div class="col-md-5" style="text-align: center;">
+            <img src="../assets/history-book.png" style="border-radius: 15%;width: 40%;margin: 10px;">
+        </div>
+        <div class="col-md-7">
+            <h3 style="font-weight: bold;">Our History</h3>
+            <p>
+                Mireille, a driven student at the University of Pretoria, embarked on her academic journey with high
+                hopes, only to encounter the challenge of outdated textbooks during her first year. Frustrated by the
+                lack of a reliable platform for students to buy and sell their books, she envisioned a solution where
+                the exchange of knowledge could be seamless. Fuelled by her determination, Mireille started connecting
+                fellow students by facilitating textbook sales through bulletin boards and online groups. Recognizing
+                her knack for this, she transformed her efforts into a thriving venture called The Book Market.
+            </p>
+            <br>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 20px;margin-top: 20px;">
+        <div class="col-md-5" style="text-align: center;">
+            <img src="../assets/arrows.png" style="border-radius: 15%;width: 50%;margin: 10px;">
+        </div>
+        <div class="col-md-7">
+            <h3 style="font-weight: bold;">Our Progression</h3>
+            <p>
+                What began as a small initiative blossomed into a comprehensive hub, catering not only to the academic
+                needs of students but also offering essential lab equipment and stationery. The Book Market became a
+                go-to destination, ensuring juniors had access to the right materials while providing seniors with an
+                effortless way to sell their textbooks. As the business grew, Mireille expanded her offerings,
+                introducing personalized lab coats adorned with students' embroidered names and the school emblem. This
+                thoughtful touch not only elevated the student experience but also reflected Mireille's commitment to
+                enhancing education at the university.
+            </p>
+            <br>
+            <p>
+                The Book Market's journey, born out of a student's passion and perseverance, stands as a testament to
+                the power of bridging gaps within the academic community.
+            </p>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 20px;margin-top: 20px;">
+        <div class="col-md-5" style="text-align: center;">
+            <img src="../assets/idea.png" style="border-radius: 15%;width: 50%;margin: 10px;">
+        </div>
+        <div class="col-md-7">
+            <h3 style="font-weight: bold;">Our Future Hopes</h3>
+            <p>
+                In the future, The Book Market envisions a mobile application designed to enhance user experience. The
+                app will offer a straightforward interface, allowing students to easily browse textbooks, lab equipment,
+                and stationery. With a few taps, users can find the editions they need and receive personalized
+                recommendations based on their courses and preferences. Alongside this, a streamlined delivery system is
+                in development, ensuring prompt delivery of orders to students' doorsteps. The Book Market also plans to
+                introduce a tracking feature, enabling real-time monitoring of orders from packing to delivery. These
+                developments aim to simplify the process of accessing academic materials, making it more convenient for
+                students. Stay tuned for updates on these enhancements to your educational journey.
+            </p>
+        </div>
+    </div>
+    <hr style="width:40%; color: #4F2749;">
+    <div style="margin: 50px;">
+        <div class="row" style="text-align: center;">
+            <div class="col" style="text-align: center;">
+                <h1 style="font-weight: bold;text-align: center;padding: 20px;">Our Employees</h1>
+            </div>
+        </div>
+        <div class="row g-3 mb-4" style="margin-bottom: 10px;">
+            <div class="col-sm-4" style="margin-bottom: 10px;" *ngFor="let e of employees">
+                <div class="card h-100 shadow bg-light "
+                    style="text-align: center;margin-bottom: 5px;padding-top: 5px;cursor: pointer;">
+                    <img [src]="'data:image/jpeg;base64,' + e.image" alt=""
+                        style="width:100%">
+    
+                    <div class="card-body d-flex flex-column">
+                        <h2>{{e.name}} {{e.surname}}</h2>
+                        <p class="title" *ngFor="let et of employeeTypes">
+                            <span *ngIf="et.employee_Type_ID == e.employee_Type_ID">
+                                {{et.name}}
+                            </span>
+                        </p>
+                        <a href="https://localhost:4200/" target="_blank" style="color: white;">
+                            <button class="btn btn-success">
+                                Visit Our Store
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

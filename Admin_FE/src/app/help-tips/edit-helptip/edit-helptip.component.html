@@ -1,0 +1,105 @@
+<!-- TITLE OF PAGE BAR -->
+<div class="titlePage">
+  <h4 style="font-weight: bold; padding-top: 10px;">
+    <a [routerLink]="'/help-tips'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp;&nbsp;
+    <a [routerLink]="'/help-tips'" style="color: black;">HELP TIPS</a>&nbsp;
+    <i class="fas fa-angle-right fa-lg"></i> UPDATE HELP TIP
+  </h4>
+</div>
+
+<div style="padding: 50px;">
+  <div class="row">
+    <form class="form-group" [formGroup]="formEditHelpTip" (ngSubmit)="editAHelpTip()">
+      <div class="col-md-5">
+
+        <!-- ------------------------NAME--------------------------------------------- -->
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;"> Name </label>
+          <input type="text" class="form-control" name="name" formControlName="name">
+        </div>
+        <!-- ------------------------DESCRIPTION--------------------------------------------- -->
+        <div class="mb-6">
+          <label class="form-label" style="font-weight: bold;"> Description </label>
+          <textarea class="form-control" name="description" formControlName="description"></textarea>
+        </div>
+        <br>
+        <!-------------------------VIDEO--------------------------------------------- -->
+        <div *ngIf="linkGenerated" class="mb-6">
+          <mat-card class="video-card">
+            <mat-card-content>
+              <video controls width="100%" height="150" frameborder="0" allowfullscreen>
+                <source src={{videoUrl}} type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div id="confirmButtons" class="confirmButtons" [hidden]="ConfirmButtonsHidden">
+                <p>
+                  <strong> Click below if you would like to change the video</strong>
+                </p>
+                <button type="button" class="btn btnYes" style="width: 200px;" (click)="YesChangeVideo()">
+                  CHANGE VIDEO
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <!------------------------------------------------- VIDEO UPLOAD ------------------------------------------------------------------------------>
+        <div *ngIf="!linkGenerated" class="mb-3">
+          <label class="form-label" style="font-weight: bold;"> Video </label>
+          <input class="upload" id='videoInput' type="file" class="form-control" name="video" formControlName="video"
+            accept="video/mp4" (change)="handleVideoUpload($event)">
+          <div *ngIf="formEditHelpTip.controls['video']?.invalid && !linkGenerated" class="text-danger">
+            Video is required.
+          </div>
+          <br>
+        </div>
+
+        <!-- if there are any video error show this message -->
+        <div *ngIf="showErrorMessage">
+          <br>
+          <mat-card class="error-card">
+            <mat-card-header>
+              ERROR
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                <strong> {{fileUploadMessage}}</strong>
+              </p>
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+
+        <!-- if the right video is uploaded then show add help tip options -->
+        <div>
+          <br>
+          <button type="button" class="btn normButton" style="width: fit-content;margin-top: 5px;margin-left: 4px;" (click)="ConfirmEditHelp()">
+            EDIT HELP TIP
+          </button>
+          <button type="button" class="btn normCancel" style="width: fit-content;margin-top: 5px;margin-left: 4px;" (click)="AbortEditHelp()">
+            CANCEL
+          </button>
+
+        </div>
+
+        <!-- if no video is uploaded and verify is clicked then show this error message -->
+        <div *ngIf="showNoVideoMessage">
+          <br>
+          <mat-card class="error-card">
+            <mat-card-header>
+              ERROR
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                <strong> {{fileUploadMessage}}</strong>
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

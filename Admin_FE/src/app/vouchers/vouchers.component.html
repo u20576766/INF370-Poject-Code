@@ -1,0 +1,59 @@
+<!-- TITLE OF PAGE BAR -->
+<div class="titlePage">
+    <h4 style="font-weight: bold; padding-top: 5px;"> &nbsp;&nbsp;
+        VOUCHERS
+    </h4>
+</div>
+
+<!-- SEARCH BAR AND ADD NEW VOCUHER BUTTON -->
+<div class="row" style="padding-left: 15px;padding-right: 15px;">
+    <div class="col-md-9">
+        <form (input)="searchVoucher()">
+            <input [(ngModel)]="searchQuery" type="search" placeholder="Search for a voucher by discount " name="searchQuery" >
+        </form>     
+    </div>
+    <div class="col-md-3" style="justify-content: flex-end;text-align: right;padding-top: 10px;">
+        <a [routerLink]="'/add-voucher'" class="normButton btn">
+            <i class="fas fa-user-plus fa-lg"></i>
+            &nbsp;
+            GENERATE NEW VOUCHER
+        </a>
+    </div>
+</div>
+
+<!-- TABLE OF STUDENTS -->
+<div style="padding-left: 15px;padding-right: 15px;padding-top: 15px;width:100%">
+    <table class="table table-inverse datatable-table" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>VOUCHER CODE</th>
+                <th>PERCENT</th>
+                <th>EXPIRY DATE</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: max-content;" *ngFor="let item of arrVouchers">
+                <td>
+                    {{item.voucher_Code}}
+                </td>
+                <td>
+                    {{item.percent}}
+                </td>
+                <td>
+                    {{item.expiry_Date}}
+                </td>
+                <td style="text-align: right;">
+                    <button class="btn update" style="margin-left: 4px;margin-top: 5px;" (click)="goToEditVoucher(item.voucher_ID)">
+                        <i class="fa fa-edit"></i>&nbsp;&nbsp; 
+                            UPDATE 
+                    </button>
+                    <button class="btn delete" style="margin-left: 4px;margin-top: 5px;" (click)="deleteVoucher(item.voucher_ID)"><i class="far fa-trash-alt"></i>&nbsp;&nbsp; 
+                        DELETE 
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table> 
+</div>
+

@@ -1,0 +1,65 @@
+<!-- TITLE OF PAGE BAR -->
+<div class="titlePage">
+    <h4 style="font-weight: bold; padding-top: 5px;"> &nbsp;&nbsp;
+        HELP TIPS
+    </h4>
+</div>
+
+<!-- SEARCH BAR AND ADD NEW HELP VIDEO BUTTON -->
+<div class="row" style="padding-left: 15px;padding-right: 15px;">
+    <div class="col-md-9">
+        <form>
+            <input type="search" placeholder="Search for a help tip" name="searchQuery" (input)="searchHelpTip()"
+                [(ngModel)]="searchQuery">
+        </form>
+    </div>
+    <div class="col-md-3" style="justify-content: flex-end;text-align: right;padding-top: 10px;">
+        <a [routerLink]="'/add-helptips'" class="normButton btn">
+            <i class="fas fa-plus fa-lg"></i>
+            &nbsp;
+            ADD NEW HELP VIDEO
+        </a>
+    </div>
+</div>
+
+<!-- TABLE OF HELP TIPS -->
+<div style="padding-left: 15px; padding-right: 15px; padding-top: 15px;">
+    <table class="table table-inverse datatable-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of arrHelpTips">
+                <td>
+                    <button class="btn" style="margin-left: 4px; margin-top: 5px; border-radius: 50%; background-color: #AE7595;"
+                        (click)="videoView(item)">
+                        <i class="fa fa-eye" style="color:white;"></i>
+                    </button> &nbsp;
+                </td>
+                <td>
+                    {{item.name}}
+                </td>
+                <td>
+                    {{item.description}}
+                </td>
+                <td>
+                    {{item.date}}
+                </td>
+                <td style="text-align: right;">
+                    <button class="btn update" style="margin-left: 4px;margin-top: 5px;" (click)="goToEditHelpTip(item.help_ID)"><i
+                            class="fa fa-edit"></i>&nbsp;&nbsp;UPDATE</button>
+                    <button class="btn delete" style="margin-left: 4px;margin-top: 5px;" (click)="deleteHelpTip(item.help_ID)">
+                        <i class="far fa-trash-alt"></i>&nbsp;&nbsp;DELETE
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,140 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Home
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" >
+    <div class="row" style="margin: 10px; border-radius: 15px;text-align: center;">
+        <ion-row>
+            <ion-row style="text-align: center;margin-left: 10px;margin-right: 10px;margin-bottom: 10px;">
+                <ion-col size="12">
+                    <h1
+                        style="font-size:30pt;text-align:center;font-weight:bold;font-family: 'Gill Sans', 'Gill Sans MT', Calibri,  sans-serif;background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+                        {{ greeting }}, {{ firstName }}!
+                    </h1>
+                </ion-col>
+
+                <ion-col size="12" style="text-align: center;">
+                    <h5
+                        style="font-weight: bold; background: linear-gradient(45deg, red, orange); -webkit-background-clip: text; background-clip: text; color: transparent;">
+                        <ion-icon name="flame" style="margin-right: 5px;color:red;"></ion-icon>
+                        NEWEST EDITION
+                    </h5>
+                    <ion-row style="text-align: center;">
+                        <ion-col style="text-align: center;" size="12" *ngFor="let b of bookList; let i = index">
+                            <div style="text-align: center;justify-content: center;width: 100%;" *ngIf="i < 1">
+                                <ion-card (click)="ViewBookItem(b.book_ID)">
+                                    <ion-img src="{{b.imageBase64}}" [alt]="b.title"></ion-img>
+                                    <ion-card-content>
+                                        <h6 style="font-weight: bold;">{{ b.title }}</h6>
+                                        <div *ngIf="b.quantity === 0">
+                                            <small style="color: red;">ITEM IS OUT OF STOCK</small>
+                                        </div>
+                                    </ion-card-content>
+                                </ion-card>
+                                <ion-button expand="full" style="width: 100%;text-align: center;" routerLink="/products"
+                                    *ngIf="bookList.length > 0">
+                                    SEE MORE
+                                </ion-button>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" style="text-align: center;">
+                <h2
+                    style="font-weight: bold; background: linear-gradient(45deg, #AE7595, #4F274A); -webkit-background-clip: text; background-clip: text; color: transparent;">
+                    <ion-icon name="megaphone" style="margin-right: 5px;color:#AE7595;"></ion-icon>
+                    PROMOTIONS & SERVICES
+                </h2>
+                <ion-row>
+                    <ion-col size="9">
+                        <ion-row style="justify-content: flex-end;margin: 5px;">
+                            <ion-img src="../assets/books.png" style="width: 100%; height: auto;"></ion-img>
+                        </ion-row>
+                        <ion-row style="justify-content: center;margin: 5px;">
+                            <ion-img src="../assets/discount.png" style="width: 100%; height: auto;"></ion-img>
+                        </ion-row>
+                        <ion-row style="justify-content: flex-end;margin: 5px;">
+                            <ion-img src="../assets/equip.png" style="width: 100%; height: auto;"></ion-img>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col size="3">
+                        <ion-row style="justify-content: flex-end;">
+                            <ion-img src="../assets/yellow.png" style="width: 50%; height: auto;"></ion-img>
+                        </ion-row>
+                        <ion-row style="justify-content: center;">
+                            <ion-img src="../assets/blue.png" style="width: 70%; height: auto;"></ion-img>
+                        </ion-row>
+                        <ion-row style="justify-content: flex-end;">
+                            <ion-img src="../assets/yellow.png" style="width: 50%; height: auto;"></ion-img>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" style="text-align: center;">
+                <h2
+                    style="font-weight: bold; background: linear-gradient(45deg, blue, red, gold); -webkit-background-clip: text; background-clip: text; color: transparent;">
+                    <ion-icon name="school" style="margin-right: 5px;color: blue;"></ion-icon>
+                    UNIVERSITY OF PRETORIA
+                </h2>
+                <ion-row>
+                    <ion-col>
+                        <ion-card>
+                            <iframe width="100%" height="auto"
+                                src="https://www.youtube.com/embed/zICWqLlrWuc?si=kjxQJDk9B1k32L5L"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                            <ion-card-content>
+                                <h4>University of Pretoria Virtual Campus tour!</h4>
+                                <p>
+                                    <a href="https://www.up.ac.za/">#ChooseUP</a>
+                                </p>
+                                <p>
+                                    Virtual Campus offers UP students the opportunity to explore various study fields
+                                    and GIBS courses anytime, anywhere, using 360-degree panoramas and videos. It
+                                    provides deans' messages, degree information, residences, and a panoramic tour of
+                                    campuses.
+                                </p>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-card>
+                            <iframe width="100%" height="200%"
+                                src="https://www.youtube.com/embed/poBynOv3u78?si=QwFwPEVfi3Ey25ev"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                            <ion-card-content>
+                                <h4>The Department of Library Services at the University of Pretoria</h4>
+                                <p>
+                                    <a href="www.library.up.ac.za/">#UPLibrary</a>
+                                </p>
+                                <p>
+                                    At the University of Pretoria, the Department of Library Services provides
+                                    comprehensive information services to support successful teaching and learning,
+                                    contributing to the university's vision of becoming Africa's leading
+                                    research-intensive university.
+                                </p>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>

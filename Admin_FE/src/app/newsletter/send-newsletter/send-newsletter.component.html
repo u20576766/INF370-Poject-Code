@@ -1,0 +1,63 @@
+<!-- TITLE OF PAGE BAR -->
+<div class="titlePage">
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/newsletter'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp;&nbsp;
+    <a [routerLink]="'/newsletter'" style="color: black;">NEWSLETTER</a>&nbsp;
+    <i class="fas fa-angle-right fa-lg"></i> SEND NEWSLETTER
+  </h4>
+</div>
+
+<div style="padding: 50px;">
+  <div class="row">
+    <div class="col-10 offset-1">
+      <form class="form-group" [formGroup]="formSendNewsletter">
+        <!-- SUBJECT TEXT BOX -->
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;"> Subject </label>
+          <input type="text" maxlength="50" class="form-control" name="subject" formControlName="subject">
+        </div>
+        <div *ngIf="formSendNewsletter.controls['subject']?.invalid" class="text-danger">
+          Subject is required.
+        </div>
+        <br>
+
+        <!-- DESCRIPTION TEXTBOX -->
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;"> Email Body </label>
+          <textarea rows="2" maxlength="255" class="form-control" name="description" formControlName="description"
+            style="white-space: normal; height: 150px;"></textarea>
+        </div>
+        <div *ngIf="formSendNewsletter.controls['description']?.invalid" class="text-danger">
+          Email body is required.
+        </div>
+        <br>
+
+
+        <!------------------------------------------------- NEWSLETTER FILE UPLOAD ------------------------------------------------------------------------------>
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;"> File </label>
+          <input class="upload" id='file' type="file" class="form-control" name="file" formControlName="file"
+            accept="*/*" (change)="handleVideoUpload($event)">
+        </div>
+        <div *ngIf="formSendNewsletter.controls['file']?.invalid" class="text-danger">
+          File is required.
+        </div>
+        <br>
+
+        <div>
+          <button type="button" class="btn normButton" style="margin-left:4px;width:fit-content;margin-top: 5px;"
+            (click)="ConfirmSendNewsletter()">
+            SEND NEWSLETTER
+          </button>
+          <button type="button" class="btn normCancel" style="margin-left:4px;width:fit-content;margin-top: 5px;"
+            (click)="AbortSendNewsletter()">
+            CANCEL
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

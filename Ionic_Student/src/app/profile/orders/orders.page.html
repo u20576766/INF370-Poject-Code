@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title style="display: flex; align-items: center;background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/profile" style="color: pink;"></ion-icon>
+      Your Orders
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div style="padding: 10px; margin: 10px; border-radius: 15px;text-align: center;">
+    <div class="row" style="margin: 10px;">
+      <div class="col" style="width: 100%;">
+        <ion-buttons routerLink="/placed">
+          <ion-button class="normButton">
+            <ion-icon name="location-sharp"></ion-icon>&nbsp;&nbsp;
+            Placed Orders 
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+    <div class="row" style="margin: 10px;">
+      <div class="col" style="width: 100%;">
+        <ion-buttons routerLink="/ready">
+          <ion-button class="normButton">
+            <ion-icon name="storefront-sharp"></ion-icon>&nbsp;&nbsp;
+            Ready For Collection
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+    <div class="row" style="margin: 10px;">
+      <div class="col" style="width: 100%;">
+        <ion-buttons routerLink="/collected">
+          <ion-button class="normButton">
+            <ion-icon name="cube-sharp"></ion-icon>&nbsp;&nbsp;
+            Collected Orders
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+  </div>
+</ion-content>

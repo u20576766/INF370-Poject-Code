@@ -1,0 +1,86 @@
+<div class="titlePage">
+    <h4></h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/order-ready'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp;&nbsp;
+        <a [routerLink]="'/order-ready'" style="color: black;">
+            ORDER READY FOR COLLETION
+        </a>
+        <i class="fas fa-angle-right fa-lg"></i> LOG COLLECTION
+    </h4>
+</div>
+
+
+<div class="container" style="padding: 50px;">
+    <div class="row">
+        <div class="card" style="width: 100%;">
+            <div class="card-header">
+                <div class="row" style="font-weight: bolder;">
+                    <div class="col" style="font-weight: bold;">
+                        <h5>ORDER #{{upOrder.order_Reference_Number}}</h5>
+                    </div>
+
+                    <div class="col" style="text-align: right;font-weight: bold;">
+                        <h5>{{upOrder.order_Total | currency:'R':'symbol':'2.2-2'}}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col" style="font-weight: bold;">
+                        <h6>CLIENT:</h6>
+                        <h6>DATE:</h6>
+                    </div>
+
+                    <div class="col" style="text-align: right;">
+                        <h6>{{ getStudentName() }}</h6>
+                        <h6>{{ upOrder.order_Date }}</h6>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="row" style="padding: 10px;">
+                    <h6 style="font-weight: bold;">ITEMS:</h6>
+                </div>
+                <div class="row"  *ngFor="let ol of getOrderLinesForOrder(upOrder.order_ID)">
+                    <div class="col-8" style="font-weight: bold;">
+                        <small >{{ol.itemName}}</small>
+                    </div>
+                    <div class="col-1" style="text-align: right;">
+                        <small>{{ol.quantity}}</small>
+                    </div>
+                    <div class="col-3" style="text-align: right;">
+                        <small>{{ol.price | currency:'R':'symbol':'2.2-2'}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row" style="padding: 20px;">
+        <div class="row">
+            <form class="form-group" [formGroup]="formUpdate">
+                <div>
+                    <label class="form-label" style="font-weight: bold;">Collector Name</label>
+                    <input type="text" class="form-control" placeholder="Themba Nkosi" name="coll"
+                        formControlName="coll">
+                </div>
+                <div *ngIf="formUpdate.controls['coll']?.invalid && formUpdate.controls['coll']?.touched"
+                    class="text-danger">
+                    Colletor Name is required.
+                </div>
+
+
+                <button type="button" class="btn normButton" style="margin-left:4px;width:fit-content;margin-top: 5px;"
+                    (click)="showUpdateConfirmation()" [disabled]="formUpdate.invalid">
+                    LOG COLLECTION
+                </button>
+                <button type="button" class="btn normCancel" (click)="showCancelConfirmation()"
+                    style="margin-left:4px;width:fit-content;margin-top: 5px;">CANCEL</button>
+            </form>
+        </div>
+    </div>
+</div>

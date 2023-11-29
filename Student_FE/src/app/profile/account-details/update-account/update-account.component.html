@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <h3 style="font-weight: bold;">
+      <i class="far fa-arrow-alt-circle-left fa-md" style="margin-right: 20px; cursor: pointer;" [routerLink]="'/Profile'"></i>
+      <span [routerLink]="'/Account-Info'" style="cursor: pointer;">
+        View Account Information
+      </span>
+    </h3>
+    <h3 style="font-weight: bold;">
+      <i class="fa fa-angle-right fa-md" style="margin-right: 10px;margin-left: 10px; cursor: pointer;" [routerLink]="'/Profile'"></i>
+      Update Account Information
+    </h3>
+    <hr style="width: 100%; color: grey; text-align: left;">
+  </div>
+
+  <div class="container" style="padding: 20px;">
+    <form (ngSubmit)="onSubmit()" [formGroup]="updateAccountForm" style="width: 60%;">
+      <div class="form-group">
+        <label style="font-size: large;">Name</label><br>
+        <input type="text" style="border-radius: 5px;" class="form-control" formControlName="firstName">
+        <div *ngIf="formErrors['firstName']" class="alert alert-danger">{{ formErrors['firstName'] }}</div>
+      </div>
+
+      <div class="form-group">
+        <label style="font-size: large;">Surname</label><br>
+        <input type="text" style="border-radius: 5px;" class="form-control" formControlName="lastName">
+        <div *ngIf="formErrors['lastName']" class="alert alert-danger">{{ formErrors['lastName'] }}</div>
+      </div>
+
+      <div class="form-group">
+        <label style="font-size: large;">Cell Number</label><br>
+        <input
+          type="tel"
+          style="border-radius: 5px;"
+          class="form-control"
+          formControlName="cell_Number"
+          (input)="onCellNumberInput($event)"
+          maxlength="10"
+          pattern="^0\d{9}$"
+        >
+        <div *ngIf="formErrors['cell_Number']" class="alert alert-danger">
+          {{ formErrors['cell_Number'] }}
+        </div>
+      </div>
+      
+      
+      
+
+      <div class="form-group">
+        <label style="font-size: large;">Email</label><br>
+        <input type="email" style="border-radius: 5px;" class="form-control" formControlName="email">
+        <div *ngIf="formErrors['email']" class="alert alert-danger">{{ formErrors['email'] }}</div>
+      </div>
+
+
+      <div class="form-group">
+        <label style="font-size: large;">Subscribed</label><br>
+        <input type="checkbox" style="border-radius: 5px;" class="form-control" formControlName="subscribed" [(ngModel)]="subscribed">
+      </div>
+      
+      <div class="row" style="padding: 20px; display: flex; justify-content: space-between;">
+        <button class="btn" style="padding: 20px; width:fit-content;text-align: center; color: white; background-color: #4F274A; margin-bottom: 10px;"
+                [disabled]="updateAccountForm.invalid" (click)="onSubmit()">
+          UPDATE ACCOUNT INFORMATION
+        </button>
+        <button type="button" class="btn" style="padding: 20px; width: fit-content; text-align: center; color: white; background-color: BLACK;" (click)="onCancel()">
+          CANCEL
+        </button>
+        
+        
+    </div>
+    
+    </form>
+  </div>
+</div>

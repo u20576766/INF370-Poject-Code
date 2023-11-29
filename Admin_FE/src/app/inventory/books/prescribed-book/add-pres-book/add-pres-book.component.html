@@ -1,0 +1,83 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/prescribed-book'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp;&nbsp;
+    <a [routerLink]="'/books'" style="color: black;">
+      BOOKS
+    </a>&nbsp;
+    <a [routerLink]="'/prescribed-book'" style="color: black;">
+      <i class="fas fa-angle-right fa-lg"></i>&nbsp; PRESCRIBED BOOKS
+    </a>&nbsp;
+    <i class="fas fa-angle-right fa-lg"></i> ADD PRESCRIBED BOOK
+  </h4>
+</div>
+
+<div style="padding: 50px;">
+  <div class="row">
+    <div class="col-6 offset-1">
+      <form class="form-group">
+
+        <!-- Add prescribed book form fields -->
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">ISBN</label>
+          <input type="text" class="form-control" placeholder="0000000000000" name="name"
+            [(ngModel)]="prescribedBook.isbn">
+        </div>
+
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Title</label>
+          <input type="text" class="form-control" placeholder="Book Title" name="title"
+            [(ngModel)]="prescribedBook.title">
+        </div>
+
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Publisher Name</label>
+          <input type="text" class="form-control" placeholder="Publisher Name" name="publisher"
+            [(ngModel)]="prescribedBook.publisherName">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Author Name</label>
+          <input type="text" class="form-control" placeholder="Author Name" name="author"
+            [(ngModel)]="prescribedBook.authorName">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Based Price</label>
+          <input type="number" class="form-control" placeholder="00.00" name="base-price"
+            [(ngModel)]="prescribedBook.basePrice" min="0" max="25" step=".01">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Edition</label>
+          <input type="number" class="form-control" placeholder="0" name="edition" [(ngModel)]="prescribedBook.edition">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Year</label>
+          <input type="text" class="form-control" placeholder="YYYY" name="year" [(ngModel)]="prescribedBook.year">
+        </div>
+
+
+        <!-- Module -->
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Module Codes</label>
+          <select class="select form-control" [(ngModel)]="prescribedBook.module_ID" name="module_ID">
+            <option value="" disabled selected>Choose a faculty</option>
+            <option *ngFor="let module of modules" [value]="module.module_ID">{{ module.module_Code }}</option>
+          </select>
+        </div>
+        
+        <button type="button" class="btn normButton" style="margin-left: 4px; margin-top: 5px;"
+          (click)="showConfirmationModal()">ADD PRESCRIBED BOOK</button>
+        <button type="button" class="btn normCancel" (click)="showCancelConfirmation()"
+        style="margin-left: 4px; margin-top: 5px;">CANCEL</button>
+
+      </form>
+    </div>
+  </div>
+</div>

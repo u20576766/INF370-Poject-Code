@@ -1,0 +1,74 @@
+<div style="padding: 50px;">
+    <h2 style="font-weight: bold;">Welcome, {{LoggedInName}}!
+    </h2>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-9 box" style="text-align: center;">
+            <div class="row" style="padding: 15px;color: black;text-align: center;padding: 10px;">
+                <div class="col" style="color: black;text-align: center;padding: 15px;">
+                    <h1 style="color: black;">{{ salesNo }}</h1>
+                    <small>SALES</small>
+                </div>
+                <div class="col" style="color: black;text-align: center;padding: 15px;">
+                    <h1 style="color: black;">{{ ordersNo }}</h1>
+                    <small>ORDERS</small>
+                </div>
+                <div class="col" style="color: black;text-align: center;padding: 15px;">
+                    <h1 style="color: black;">{{ studentsNo }}</h1>
+                    <small>STUDENTS</small>
+                </div>
+                <div class="col" style="color: black;text-align: center;padding: 15px;">
+                    <h1 style="color: black;">{{ resalesNo }}</h1>
+                    <small>RESALES</small>
+                </div>
+            </div><br>
+            <div class="row" style="padding: 15px; color: black; text-align: center;">
+                <div class="col" style="color: black; text-align: center; padding: 15px;">
+                    <canvas id="moneyChart" width="200" height="200"></canvas>
+                    <small>MONEY IN vs MONEY OUT</small>
+                </div>
+                <div class="col" style="color: black; text-align: center; padding: 15px;">
+                    <canvas id="transactionsChart" width="200" height="200"></canvas>
+                    <small>TRANSACTIONS SO FAR</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 box" style="padding: 10px;">
+            <h3>Quick Links</h3>
+            <ul style="list-style-type: none; font-size: large;margin: 0;padding: 0;">
+                <li><br></li>
+                <li>
+                    <a [routerLink]="'/sale'">
+                        <i class="fas fa-cash-register fa-lg"></i>&nbsp;&nbsp; Make A Sale
+                    </a>
+                </li>
+                <li><br></li>
+                <li>
+                    <a [routerLink]="'/students'">
+                        <i class="fas fa-search fa-lg"></i>&nbsp;&nbsp; Search for Student
+                    </a>
+                </li>
+                <li><br></li>
+                <li>
+                    <a [routerLink]="'/resale'">
+                        <i class="fas fa-book-open fa-lg"></i>&nbsp;&nbsp; Perform Resale
+                    </a>
+                </li>
+                <li><br></li>
+                <li>
+                    <a [routerLink]="'/orders'">
+                        <i class="fas fa-shopping-basket fa-lg"></i>&nbsp;&nbsp; Active Orders
+                    </a>
+                </li>
+                <li><br></li>
+                <li *ngIf="employeeID == 1">
+                    <a [routerLink]="'/cloud'">
+                        <i class="fas fa-cloud fa-lg"></i>&nbsp;&nbsp; Data Management
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

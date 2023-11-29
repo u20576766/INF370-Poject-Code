@@ -1,0 +1,114 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title size="large">
+      <ion-text
+        style="padding-top: 10px;background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+        STORE
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Store</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div>
+    <ion-row style="width:100%">
+      <ion-searchbar [(ngModel)]="searchText" placeholder="Search for books and equipment" (input)="search()"></ion-searchbar>
+    </ion-row>
+    <ion-row style="width:100%">
+      <ion-segment [(ngModel)]="selectedSegment" value="default">
+        <ion-segment-button value="default">
+          <ion-label>ALL</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="books">
+          <ion-label>BOOKS</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="equipment">
+          <ion-label>EQUIPMENT</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-row>
+
+    <div *ngIf="isLoading; else content" class="ion-text-center" style="padding: 100px;">
+      <!-- Show loading spinner while data is loading -->
+      <ion-spinner name="dots" size="large"></ion-spinner>
+    </div>
+    
+
+    <ng-template #content>
+      <div *ngIf="(selectedSegment === 'default' || selectedSegment === 'books')" [@slideAnimation]>
+        <ion-row class="ion-align-items-center" *ngFor="let b of bookList">
+          <ion-col class="ion-text-center">
+            <ion-card class="ion-padding cursor-pointer" style="text-align: center;" >
+              <ion-img src="{{b.imageBase64}}" alt="{{b.title}}" style="width: 30%; margin: 0 auto;" (click)="ViewBookItem(b.book_ID)"></ion-img>
+              <ion-card-content class="ion-text-wrap" (click)="ViewBookItem(b.book_ID)">
+                <ion-title>{{b.title}}</ion-title>
+                <ion-card-subtitle class="ion-text-uppercase">{{b.isbn}}</ion-card-subtitle><br>
+                <ion-text style="font-size: small;">{{b.authorName}}</ion-text><br>
+                <div *ngIf="b.quantity === 0">
+                    <ion-label color="danger">ITEM IS OUT OF STOCK</ion-label>
+                </div>
+              </ion-card-content>
+              <div *ngIf="b.quantity > 0">
+                <ion-grid>
+                  <ion-row class="ion-align-items-center">
+                    <ion-col style="text-align: left;">
+                      <ion-text style="font-size: large;font-weight: bold;" routerLink="/book-item">{{ b.price| currency: 'R':'symbol':'1.2-2'
+                        }}</ion-text>
+                    </ion-col>
+                    <ion-col class="ion-text-end" style="text-align: right;">
+                      <ion-button class="normButton" color="#4F2749" (click)="AddToBCart(b.book_ID)">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+  
+  
+      <div  *ngIf="(selectedSegment === 'default' || selectedSegment === 'equipment' && !removeBooksRow )"
+      [@slideAnimation] >
+        <ion-row class="ion-align-items-center" *ngFor="let e of equipList">
+          <ion-col class="ion-text-center">
+            <ion-card class="ion-padding cursor-pointer" style="text-align: center;">
+              <ion-img src="{{e.image}}" alt="{{e.name}}" style="width: 30%; margin: 0 auto;" (click)="ViewItem(e.equipment_ID)"></ion-img>
+              <ion-card-content class="ion-text-wrap" (click)="ViewItem(e.equipment_ID)">
+                <ion-title >{{e.name}}</ion-title>
+                <ion-card-subtitle class="ion-text-uppercase">{{e.equipmentType_Name}}</ion-card-subtitle><br>
+                <ion-text style="font-size: small;">{{e.description}}</ion-text><br>
+                <div *ngIf="e.quantity_On_Hand === 0">
+                  <ion-label color="danger">ITEM IS OUT OF STOCK</ion-label>
+                </div>
+              </ion-card-content>
+              <div *ngIf="e.quantity_On_Hand > 0">
+                <ion-grid>
+                  <ion-row class="ion-align-items-center">
+                    <ion-col style="text-align: left;">
+                      <ion-text style="font-size: large;font-weight: bold;" routerLink="/equip-item">{{ e.amountWithVAT| currency: 'R':'symbol':'1.2-2'
+                        }}</ion-text>
+                    </ion-col>
+                    <ion-col class="ion-text-end" style="text-align: right;">
+                      <ion-button class="normButton" color="#4F2749" (click)="AddToECart(e.equipment_ID)">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ng-template>
+  </div>
+</ion-content>

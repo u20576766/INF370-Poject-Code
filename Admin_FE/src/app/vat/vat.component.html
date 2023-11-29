@@ -1,0 +1,35 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/inventory'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>
+        &nbsp;
+        VAT
+    </h4>
+</div>
+  
+<div style="padding-left: 15px;padding-right: 15px;padding-top: 15px;">
+    <table class="table table-inverse">
+        <thead>
+            <tr>
+                <th>Name </th>
+                <th>Percentage</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: max-content;"  *ngFor="let c of VAT">
+                <td>
+                    VAT
+                </td>
+                <td>
+                    {{ c.percent}}
+                </td>
+                <td style="text-align: right;">
+                    <a class="btn update" [routerLink]="'/updateVAT/'" ><i class="fa fa-edit"></i>&nbsp;&nbsp;UPDATE</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title style="display: flex; align-items: center;background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+      <ion-icon name="arrow-back-circle" routerLink="/orders" style="color: pink;"></ion-icon>
+      Collected Orders
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <ion-row (input)="searchOrder()">
+        <ion-searchbar [(ngModel)]="searchInput" name="searchInput"  animated="true" style="width:100%" placeholder="Search by reference"></ion-searchbar>
+    </ion-row>
+  </div>
+
+  <div *ngIf="isLoading; else content" class="ion-text-center" style="padding: 100px;">
+    <!-- Show loading spinner while data is loading -->
+    <ion-spinner name="dots" size="large"></ion-spinner>
+  </div>
+
+  <ng-template #content>
+    <div style="padding: 10px; margin: 10px;">
+      <div clas="row" style="background-color: rgb(233, 233, 233);padding: 15px;border-radius: 5px;margin-bottom: 5px;" *ngFor="let o of orders3" >
+        <ion-text >ORDER: #{{o.order_Reference_Number}}</ion-text><br>
+        <ion-text>Order Date: {{o.order_Date}}</ion-text><br>
+        <ion-text>Collector's Name: {{o.collector_Name}}</ion-text><br>
+        <ion-text>Collection Date: {{o.date_Of_Collection}}</ion-text><br>
+        <ion-text style="font-size: small;">{{getOrderLineCount(o.order_ID)}} Item(s)</ion-text>
+        <div class="row">
+          <div class="col">
+            <ion-text style="font-weight: bold;font-size: large;">{{o.order_Total | currency: 'R':'symbol':'1.2-2'}}</ion-text>
+          </div>
+          <div class="col" style="display: flex; justify-content: flex-end;">
+            <ion-buttons>
+              <ion-button>
+                <ion-icon name="arrow-forward-circle" size="large" style="color: #4F2749;"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-content>

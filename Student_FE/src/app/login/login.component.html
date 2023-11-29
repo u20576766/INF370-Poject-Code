@@ -1,0 +1,81 @@
+<div class="container" style="padding-bottom: 50px; border-radius: 50px;">
+  <div>
+    <h2 style="color: #4F2749; text-align: center;">
+      <span style="font-weight: bold;">LOGIN </span
+      ><span style="color: black; margin-left: 60px; margin-right: 50px;"> | </span
+      ><span style="color: #967685; cursor: pointer;" [routerLink]="'/Register'">REGISTER</span>
+    </h2>
+    <div style="border: #4F274A 2px solid; border-radius: 15px; padding: 100px;">
+      <form class="form" (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label style="font-size: large;">Email</label><br />
+          <input
+            type="email"
+            [(ngModel)]="credentials.userName"
+            name="userName"
+            style="border-radius: 5px;"
+            class="form-control"
+            required (input)="validateEmail()"
+          />
+        </div>
+        <div class="form-group">
+          <label style="font-size: large;">Password</label><br />
+          <div style="position: relative;">
+            <input
+              [type]="hide ? 'password' : 'text'"
+              [(ngModel)]="credentials.password"
+              name="password"
+              style="border-radius: 5px;"
+              class="form-control"
+              required
+            />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="togglePassword($event)"
+              [attr.aria-label]="'Toggle password visibility'"
+              [attr.aria-pressed]="hide"
+              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 1;"
+            >
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Display email validation message using a Snackbar -->
+        <div *ngIf="formErrors.email">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="showSnackbar(formErrors.email)"
+          >
+            {{ formErrors.email }}
+          </button>
+        </div>
+        
+        <p style="text-align: center; font-weight: bold;"><a [routerLink]="'/Forgot-Password'">Forgot Password</a></p>
+        <p style="text-align: center;">Don't have an account? Register <a [routerLink]="'/Register'">here</a></p>
+        <div style="text-align: center;">
+          <button
+            class="btn"
+            style="background-color: #4F274A; color: white; width: 100px;margin-left: 10px;margin-top: 10px;  height: 50px; font-weight: bold;"
+            type="submit"
+          >
+            LOG IN
+          </button>
+          <button
+            class="btn"
+            style="background-color: black; color: white; margin-left: 10px; margin-top: 10px; width: 100px; height: 50px; font-weight: bold;"
+            type="button"
+            (click)="showSnackbar('Login canceled.')"
+          >
+            CANCEL
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<hr style="width: 40%; color: #4F2749;">

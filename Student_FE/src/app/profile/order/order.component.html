@@ -1,0 +1,156 @@
+<div class="container" style="padding: 15px;">
+    <div class="row">
+        <h2 style="font-weight: bold;">
+            <i class="far fa-arrow-alt-circle-left fa-md" style="margin-right: 20px; cursor: pointer;"
+                [routerLink]="'/Profile'"></i>
+            Orders
+        </h2>
+    </div>
+    <p style="font-weight: bold; padding-bottom: 20px;">Look through the different tab items for Orders with a status
+        you are looking for.</p>
+
+    <mat-tab-group>
+
+
+        <mat-tab label="Placed Orders">
+            <ng-template mat-tab-label>
+                <i class="fas fa-map-marker-alt" style="color: rgb(0, 132, 255);"></i>&nbsp; Placed Orders
+            </ng-template>
+            <div style="text-align: center;">
+
+                <div class="container" style="padding-bottom: 50px;padding-top: 20px;">
+                    <div class="row">
+                        <h4 style="font-weight: bold;">
+                            Placed Orders
+                        </h4>
+                    </div>
+
+                    <div class="container">
+                        <table class="table">
+                            <thead>
+                                <tr style="font-weight: bold;">
+                                    <td>Order Ref</td>
+                                    <td>Order Date</td>
+                                    <td>Order Items</td>
+                                    <td>Total Price</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let o of orders">
+                                    <td>#{{ o.order_Reference_Number }}</td>
+                                    <td>{{ o.order_Date }}</td>
+                                    <td style="text-align: left;">
+                                        <ul *ngFor="let ol of lines">
+                                            <li *ngIf="o.order_ID == ol.order_ID">
+                                                {{ ol.itemName }}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>{{ o.order_Total | currency: 'R':'symbol':'1.2-2' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+
+
+        <mat-tab label="Ready for Collection">
+            <ng-template mat-tab-label>
+                <i class="fa fa-spinner" style="color: rgb(0, 132, 255);"></i>&nbsp; Ready for Collection
+            </ng-template>
+            <div style="text-align: center;">
+
+                <div class="container" style="padding-bottom: 50px;padding-top: 20px;">
+                    <div class="row" style="text-align: center;">
+                        <div class="col" style="text-align: center;">
+                            <h4 style="font-weight: bold;text-align: center;">
+                                Ready For Collection
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <table class="table">
+                            <thead>
+                                <tr style="font-weight: bold;">
+                                    <td>Order Ref</td>
+                                    <td>Order Date</td>
+                                    <td>Order Items</td>
+                                    <td>Total Price</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let o of orders2">
+                                    <td>#{{ o.order_Reference_Number }}</td>
+                                    <td>{{ o.order_Date }}</td>
+                                    <td style="text-align: left;">
+                                        <ul *ngFor="let ol of lines">
+                                            <li *ngIf="o.order_ID == ol.order_ID">
+                                                {{ ol.itemName }}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>{{ o.order_Total | currency: 'R':'symbol':'1.2-2' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </mat-tab>
+
+
+        <mat-tab label="Collected Orders">
+            <ng-template mat-tab-label>
+                <i class="fa fa-check-circle" style="color: rgb(0, 132, 255);"></i>&nbsp; Collected Orders
+            </ng-template>
+            <div style="text-align: center;">
+
+                <div class="container" style="padding-bottom: 50px;padding-top: 20px;">
+                    <div class="row" style="text-align: right;">
+                        <div class="col" style="text-align: right;">
+                            <h4 style="font-weight: bold;text-align: right;">Collected Orders
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <table class="table">
+                            <thead>
+                                <tr style="font-weight: bold;">
+                                    <td>Order Ref</td>
+                                    <td>Order Items</td>
+                                    <td>Collector</td>
+                                    <td>Collection Date</td>
+                                    <td>Total Price</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let o of orders3">
+                                    <td>{{o.order_Reference_Number}}</td>
+                                    <td style="text-align: left;">
+                                        <ul *ngFor="let ol of lines">
+                                            <li *ngIf="o.order_ID == ol.order_ID">
+                                                {{ ol.itemName }}
+                                            </li>
+                                        </ul>
+                                    <td>{{o.collector_Name}}</td>
+                                    <td>{{o.date_Of_Collection}}</td>
+                                    <td>{{ o.order_Total | currency: 'R':'symbol':'1.2-2' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+
+
+    </mat-tab-group>
+</div>
+
+
+<hr style="width:40%; color: #4F2749;">

@@ -1,0 +1,55 @@
+.dropdown-item:hover {
+    background-color: #AE7595;
+}
+
+
+  .delete {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    width: fit-content;
+  }
+
+  .update {
+    background-color: #50294A;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    width: fit-content;
+  }
+
+  .normCancel {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    width: fit-content;
+  }
+
+  .card-buttons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+/* Purple button for "SCHEDULE EVALUATION" */
+.schedule-evaluation-button {
+  background-color: purple;
+  color: white;
+}
+
+/* Purple button for "VIEW RESALE" */
+.view-resale-button {
+  background-color: purple;
+  color: white;
+}
+
+/* Black button for "CANCEL" */
+.swal2-cancel-button {
+  background-color: black;
+  color: white;
+}
+

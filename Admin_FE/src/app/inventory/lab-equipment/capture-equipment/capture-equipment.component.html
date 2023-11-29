@@ -1,0 +1,90 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/lab_equipment'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp;&nbsp;
+        <a [routerLink]="'/lab_equipment'" style="color: black;">
+            LAB EQUIPMENT
+        </a>
+        <i class="fas fa-angle-right fa-lg"></i> CAPTURE ORDER
+    </h4>
+</div>
+
+<div style="padding: 50px;">
+  <div class="row">
+      <div class="col-6 offset-1">
+        <form [formGroup]="equipmentForm" class="form-group" enctype="multipart/form-data">
+              <div class="mb-3">
+                  <label class="form-label" style="font-weight: bold;">Date Of Order</label>
+                  <input type="date" class="form-control" placeholder="2023/06/01" name="date" formControlName="date" [required]="true">
+                  <div *ngIf="equipmentForm.get('date')?.hasError('required')" class="text-danger">
+                    Date is required.
+                  </div>
+
+              </div>
+              <br>
+
+              <div class="mb-3">
+                  <label class="form-label" style="font-weight: bold;">Notes Of Order</label>
+                  <textarea type="text" class="form-control" placeholder="Enter notes details here" name="description"
+                      formControlName="description" [required]="true"></textarea>
+                      <div *ngIf="equipmentForm.get('description')?.hasError('required')" class="text-danger">
+                       Notes of order  is required.
+                      </div>
+              </div>
+              <br>
+              <div class="mb-3">
+                <label class="form-label" style="font-weight: bold;">Receipt</label>
+                <input type="file" class="form-control" placeholder="receipt.pdf" name="receipt" (change)="onFileChange($event)">
+                <div *ngIf="equipmentForm.get('receipt')?.hasError('required') && !ConvertedFile" class="text-danger">
+                  Receipt is required.
+                </div>
+              </div>
+               <br>
+
+
+              <div class="mb-3">
+                <label class="form-label" style="font-weight: bold;">Supplier</label>
+                  <select class="select form-control" formControlName="selectedSupplier" [required]="true" placeholder="Please select supplier">
+                    <option value="">Select supplier</option>
+                    <option *ngFor="let s of supp" [value]="s.supplier_ID">{{ s.supplier_Name }}</option>
+                  </select>
+                  <div *ngIf="equipmentForm.get('selectedSupplier')?.hasError('required')" class="text-danger">
+                    Supplier selection is required.
+                  </div>
+                </div>
+
+              <br>
+
+              <div class="mb-3">
+                <label class="form-label" style="font-weight: bold;">Equipment</label>
+                <select class="select form-control" formControlName="selectedEquipment" [required]="true">
+                  <option value="">Select Equipment</option>
+                  <option *ngFor="let equip of equipment" [value]="equip.equipment_ID">{{ equip.name }}</option>
+                </select>
+                <div *ngIf="equipmentForm.get('selectedEquipment')?.hasError('required')" class="text-danger">
+                  Equipment selection  is required.
+                 </div>
+              </div>
+              <br>
+
+
+            <div class="mb-3">
+                <label class="form-label" style="font-weight: bold;">Quantity</label>
+                <input type="number" class="form-control" placeholder="0" name="quantity" min="1" max="100"
+                    formControlName="quantity"  [required]="true">
+                    <div *ngIf="equipmentForm.get('quantity')?.hasError('required')" class="text-danger">
+                      Quantity input  is required.
+                     </div>
+            </div>
+            <br>
+
+
+              <!--The buttons-->
+              <button type="submit" class="btn normButton" style="margin-left:4px;width:fit-content;margin-top: 5px;" (click)="Capture()">CAPTURE ORDER</button>
+              <button type="button" class="btn normCancel" style="margin-left:4px;width:fit-content;margin-top: 5px;" (click)="cancelCapEquip()">CANCEL</button>
+          </form>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="container" style="padding-bottom: 50px; border-radius: 50px;">
+  <div>
+    <h2 style="text-align: center;">
+      <span style="color:#967685; cursor: pointer;" [routerLink]="'/Login'">LOGIN</span>
+      <span style="color:black; margin-left: 60px; margin-right: 50px;"> | </span>
+      <span style="color:#4F2749; font-weight: bold;">REGISTER</span>
+    </h2>
+    <div style="border: #4F274A 2px solid; border-radius: 15px; padding: 100px;">
+      <form class="form" (ngSubmit)="registerUser()">
+        <div class="form-group">
+          <label style="font-size: large;">First Name</label><br>
+          <input type="text" style="border-radius: 5px;" class="form-control" name="firstName" [(ngModel)]="userData.firstName">
+        </div>
+
+        <!-- Display validation message for first name -->
+        <div *ngIf="formErrors.firstName" class="alert alert-danger">
+          {{ formErrors.firstName }}
+        </div>
+
+        <div class="form-group">
+          <label style="font-size: large;">Last Name</label><br>
+          <input type="text" style="border-radius: 5px;" class="form-control" name="lastName" [(ngModel)]="userData.lastName">
+        </div>
+
+        <!-- Display validation message for last name -->
+        <div *ngIf="formErrors.lastName" class="alert alert-danger">
+          {{ formErrors.lastName }}
+        </div>
+
+        <div class="form-group">
+          <label style="font-size: large;">Phone Number</label><br>
+          <input type="tel" style="border-radius: 5px;" class="form-control" name="cell_Number" [(ngModel)]="userData.cell_Number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required (input)="validateCellNumber()">
+          <!-- Display validation message for cell number -->
+          <div *ngIf="formErrors.cell_Number" class="alert alert-danger">
+            {{ formErrors.cell_Number }}
+          </div>
+        </div>
+        
+        
+        <div class="form-group">
+          <label style="font-size: large;">Email</label><br>
+          <input type="email" style="border-radius: 5px;" class="form-control" name="email" [(ngModel)]="userData.email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required (input)="validateEmail()">
+          <!-- Display validation message for email -->
+          <div *ngIf="formErrors.email" class="alert alert-danger">
+            {{ formErrors.email }}
+          </div>
+        </div>
+               
+
+        <div class="form-group" style="position: relative;">
+          <label style="font-size: large;">Password</label><br>
+          <div style="position: relative;">
+            <input [type]="hide ? 'password' : 'text'" name="password" class="form-control" [(ngModel)]="userData.password" (input)="validatePassword()">
+            <button type="button" mat-icon-button matSuffix (click)="togglePassword()" [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="hide" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 1;">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+        
+        
+        
+        
+        <!-- Display password validation feedback -->
+        <div *ngIf="passwordValidationMessage" class="alert alert-danger">
+          {{ passwordValidationMessage }}
+        </div>
+        
+
+        <!-- Display validation message for password -->
+        <div *ngIf="formErrors.password" class="alert alert-danger">
+          {{ formErrors.password }}
+        </div>
+
+        <div class="form-group">
+          <label style="font-size: large;">Subscribe to Newsletter</label><br>
+          <input type="checkbox" name="subscribed" [(ngModel)]="userData.subscribed">
+        </div>
+
+        <div style="text-align: center;">
+          <button class="btn" style="background-color: #4F274A; color: white;margin-left: 10px;margin-top: 10px; width: 150px; height: 50px; font-weight: bolder; text-align: center;" (click)="registerUser()">REGISTER</button>
+          <button type="button" class="btn" style="background-color: black; color: white; margin-left: 10px; margin-top: 10px; width: 100px; height: 50px; font-weight: bolder;" (click)="onCancelClick()">CANCEL</button>
+
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<hr style="width: 40%; color: #4F2749;">

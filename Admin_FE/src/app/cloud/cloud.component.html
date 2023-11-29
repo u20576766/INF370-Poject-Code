@@ -1,0 +1,60 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;"> &nbsp;&nbsp;DATA MANAGEMENT</h4>
+</div>
+
+<div style="padding-left: 40px;padding-bottom: 40px;padding-right: 40px;padding-top: 15px; text-align: center;">
+  <div class="row">
+      <div class="col" style="padding: 40px; border-radius: 7px; background-color: #e93acf41; margin-top: 10px;margin-left: 5px; text-align: center;">
+          <h4 style="font-weight: bold;">BACK-UP DATA</h4><br>
+          <div style="padding: 10px;">
+              <img src="../assets/backup.png" style="width: 30%; height: 70%;">
+          </div><br>
+          <p>Please select an interval and enter the amount of time you wish for the backup to occur.</p>
+          <div class="form-group" style="width: 100%;">
+            <input type="number" class="form-control" [(ngModel)]="intervalValue" style="display: inline-block; width: 40%; margin: 5px;">
+            <select class="form-control" [(ngModel)]="selectedTimeUnit" style="display: inline-block; width: 40%; margin: 5px;">
+             <!--<option value="Seconds">Seconds</option>--> 
+              <option value="Minutes">Minutes</option>
+              <option value="Hours">Hours</option>
+              <option value="Days">Days</option>
+              <option value="Weeks">Weeks</option>
+              <option value="Months">Months</option>
+            </select>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <button class="normButton btn" style="padding: 10px;" (click)="setBackupInterval()" (click)="BackupData()">
+                      <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;
+                      BACK-UP DATA
+                  </button>
+              </div>
+          </div>
+      </div>
+
+      <div class="col" style="padding: 40px; border-radius: 7px; background-color: #50294a41; margin-top: 10px;margin-left: 5px; text-align: center;">
+          <h4 style="font-weight: bold;">RESTORE DATA</h4><br>
+          <div style="padding: 10px;">
+              <img src="../assets/data-recovery.png" style="width: 30%; height: 70%;">
+          </div><br>
+          <p></p>
+          <div class="form-group" style="width: 100%;">
+              <input type="number" class="form-control" style="display: inline-block; width: 40%; margin: 5px;" disabled>
+              <select class="form-control" style="display: inline-block; width: 40%; margin: 5px;" disabled >
+                  <option>Seconds</option>
+                  <option>Minutes</option>
+                  <option>Hours</option>
+                  <option>Days</option>
+              </select>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <button class="normButton btn" style="padding: 10px;" (click)="RestoreData()">
+                      <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;
+                      RESTORE DATA
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

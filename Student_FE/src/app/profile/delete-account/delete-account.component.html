@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+        <h3 style="font-weight: bold;">
+            <i class="far fa-arrow-alt-circle-left fa-md" style="margin-right: 20px; cursor: pointer;"
+                [routerLink]="'/Profile'"></i>
+            Delete Account
+        </h3>
+    </div>
+
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <div class="row" style="padding: 10px;">
+            <i class="fa fa-user-times fa-6x" aria-hidden="true" style="color: red;"></i>
+        </div>
+        <div class="row" style="padding: 10px; text-align: center;">
+            <h6>
+                We will permanently delete all personal information as well as your profile, after you have confirmed your request.
+            </h6>
+        </div>
+        <div class="row" style="padding: 10px;">
+            <form>
+                <div class="form-group">
+                    <label>Type “Delete” then press Confirm Deletion</label>
+                    <input type="text" style="border-radius: 5px;" class="form-control">
+                </div>
+                <div class="row" style="padding: 20px; display: flex; justify-content: space-between;font-weight: bold;">
+                    <button class="btn" style="padding: 20px; width:fit-content;text-align: center; color: white; background-color: #4F274A;margin-left: 10px;margin-top: 10px;" (click)="deleteAccount()">
+                        DELETE ACCOUNT
+                    </button>
+                    <button class="btn" style="padding: 20px; width:fit-content;text-align: center; color: white; background-color: BLACK;margin-left: 10px;margin-top: 10px;"
+                        [routerLink]="'/Profile'">
+                        CANCEL
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>    
+</div>

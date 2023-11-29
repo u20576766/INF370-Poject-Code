@@ -1,0 +1,33 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/vat'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp;&nbsp;
+    <a [routerLink]="'/vat'" style="color: black;">
+      VAT
+    </a>
+    <i class="fas fa-angle-right fa-lg"></i> UPDATE VAT
+  </h4>
+</div>
+
+<div style="padding: 50px;">
+  <div class="row">
+    <div class="col-6 offset-1">
+      <form class="form-group" [formGroup]="formUpdate" >
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Percentage</label>
+          <input type="number" class="form-control" placeholder="89.00" name="percent" formControlName="percent" min="1"
+            max="99" step=".10">
+        </div>
+
+        <button type="submit" class="btn normButton" style="width: fit-content;margin-top: 5px;margin-left: 4px;"
+          (click)="showUpdateConfirmation()">UPDATE
+          VAT</button>
+        <button type="button" class="btn normCancel" style="width: fit-content;margin-top: 5px;margin-left: 4px;"
+          (click)="showCancelConfirmation()">CANCEL</button>
+      </form>
+    </div>
+  </div>
+</div>

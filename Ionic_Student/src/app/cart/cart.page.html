@@ -1,0 +1,117 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title size="large">
+      <ion-text
+        style="text-transform: uppercase;background: linear-gradient(45deg, pink, purple);-webkit-background-clip: text; background-clip: text; color: transparent;">
+        {{name}}'S CART
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Your Shopping Cart</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding" *ngIf="(data.shoppingCart$ | async) as items">
+
+    <ion-row class="ion-justify-content-center" *ngIf="items.count == 0">
+      <ion-col class="ion-text-center">
+        <img src="../assets/empty-cart.png">
+        <h4 style="font-weight: bold;">You have no items in your cart.</h4>
+      </ion-col>
+    </ion-row>
+
+    <div *ngIf="items.count > 0">
+      <ion-card *ngFor="let spb of cartItemsBook" class="ion-margin-bottom">
+        <ion-card-content>
+          <ion-card-title>{{spb.title}}</ion-card-title>
+          <ion-item>
+            <ion-label>Price</ion-label>
+            <ion-text>{{spb.price | currency: 'R':'symbol':'1.2-2'}} <small>per item</small></ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-button fill="clear" (click)="AddUpBook(spb.book_ID)">
+              <ion-icon name="add-circle"></ion-icon>
+            </ion-button>
+            <ion-label>{{spb.quantity}}</ion-label>
+            <ion-button fill="clear" (click)="SubDownBook(spb.book_ID)">
+              <ion-icon name="remove-circle"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-label>Amount</ion-label>
+            <ion-text>{{ calculateItemTotal(spb, spb) | currency: 'R':'symbol':'1.2-2'}}</ion-text>
+          </ion-item>
+        </ion-card-content>
+        <ion-item>
+          <ion-button fill="clear" color="danger" expand="full" (click)="DeleteBookItem(spb.book_ID)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card>
+  
+      <ion-card *ngFor="let spbe of cartItemsEquipment">
+        <ion-card-content>
+          <ion-card-title>{{spbe.name}}</ion-card-title>
+          <ion-item>
+            <ion-label>Price</ion-label>
+            <ion-text>{{spbe.price | currency: 'R':'symbol':'1.2-2'}} <small>per item</small></ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-button fill="clear" (click)="AddUpEquip(spbe.equipment_ID)">
+              <ion-icon name="add-circle"></ion-icon>
+            </ion-button>
+            <ion-label>{{spbe.quantity}}</ion-label>
+            <ion-button fill="clear" (click)="SubDownEquip(spbe.equipment_ID)">
+              <ion-icon name="remove-circle"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-label>Amount</ion-label>
+            <ion-text>{{ calculateItemTotal(spbe, spbe) | currency: 'R':'symbol':'1.2-2'}}</ion-text>
+          </ion-item>
+        </ion-card-content>
+        <ion-item>
+          <ion-button fill="clear" color="danger" expand="full" (click)="DeleteEquipItem(spbe.equipment_ID)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card>
+      <ion-row style="width:100%;background-color:#4F2749;color:white;border-radius: 5px;margin: 10px;padding: 15px;">
+        <ion-col style="width: 100%;font-weight: bold;">
+          <ion-text>SUBTOTAL</ion-text>
+        </ion-col>
+        <ion-col style="width: 100%;text-align: right;font-weight: bold;">
+          {{ items.subTotal | currency: 'R':'symbol':'1.2-2' }}
+        </ion-col>
+      </ion-row>
+      <ion-row style="width:100%;">
+        <ion-buttons style="width: 100%;">
+          <ion-button class="normButton" routerLink="/checkout-cart">
+            CHECKOUT CART
+          </ion-button>
+        </ion-buttons>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-padding-top">
+        <ion-col size="auto">
+          <ion-buttons style="width: 100%;">
+            <ion-button class="btn normAlt" (click)="ClearCart()">
+              CLEAR CART
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-buttons style="width: 100%;">
+            <ion-button class="btn normGet" (click)="generateInvoicePDF()">
+              GENERATE QUOTE
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

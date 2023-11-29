@@ -1,0 +1,80 @@
+ async testPayment() {
+    this.data.shoppingCart$.subscribe(async (items) => {
+      const totalAmount = items.totalAmount;
+
+      const axios = require("axios");
+
+      const firstName = localStorage.getItem('firstName') || '';
+      const lastName = localStorage.getItem('lastName') || '';
+      const studentId = localStorage.getItem('studentId') || '';
+
+      const student = firstName + ' ' + lastName + ' #' + studentId;
+      const studentEmail = localStorage.getItem('email') || '';
+      const studentCell = localStorage.getItem('cell_Number') || '';
+
+      const myData = {
+        "merchant_id": "10030337",
+        "merchant_key": "fa6rp5do9dpdi",
+        "amount": totalAmount,
+        "item_name": student,
+        "email_address": studentEmail,
+        "cell_number": studentCell,
+        "signature": ""
+      };
+
+      const passPhrase = 'HelloWorldHello';
+
+      const dataToString = (dataArray: any) => {
+        // Convert your data array to a string
+        let pfParamString = "";
+        for (let key in dataArray) {
+          if (dataArray.hasOwnProperty(key)) { pfParamString += `${key}=${encodeURIComponent(dataArray[key].trim()).replace(/%20/g, "+")}&`; }
+        }
+        // Remove last ampersand
+        return pfParamString.slice(0, -1);
+      };
+
+      const generatePaymentIdentifier = async (pfParamString: any) => {
+        const result = await axios.post(`https://sandbox.payfast.co.za/onsite/​process`, pfParamString)
+          .then((res: any) => {
+            return res.data.uuid || null;
+          })
+          .catch((error: any) => {
+            console.error(error)
+          });
+        console.log("res.data", result);
+        return result;
+      };
+
+      const crypto = require("crypto");
+
+      const generateSignature = (data: any, passPhrase:any) => {
+        // Create parameter string
+        let pfOutput = "";
+        for (let key in data) {
+          if (data.hasOwnProperty(key)) {
+            if (data[key] !== "") {
+              pfOutput += `${key}=${encodeURIComponent(data[key].trim()).replace(/%20/g, "+")}&`
+            }
+          }
+        }
+
+        // Remove last ampersand
+        let getString = pfOutput.slice(0, -1);
+        if (passPhrase !== null) {
+          getString += `&passphrase=${encodeURIComponent(passPhrase.trim()).replace(/%20/g, "+")}`;
+        }
+
+        return crypto.createHash("md5").update(getString).digest("hex");
+      };
+
+      // Generate signature (see Custom Integration -> Step 2)
+      myData["signature"] = generateSignature(myData, passPhrase);
+
+      // Convert the data array to a string
+      const pfParamString = dataToString(myData);
+
+      // Generate payment identifier
+      const identifier = await generatePaymentIdentifier(pfParamString);
+    });
+  }

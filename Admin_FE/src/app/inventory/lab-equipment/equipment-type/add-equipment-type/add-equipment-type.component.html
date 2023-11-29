@@ -1,0 +1,47 @@
+<div class="titlePage">
+  <h4> </h4>
+  <h4 style="font-weight: bold; padding-top: 5px;">
+    <a [routerLink]="'/equipment_type'" style="text-decoration: black;">
+      <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+    </a>&nbsp;&nbsp;
+    <a [routerLink]="'/lab_equipment'" style="color: black;">
+      LAB EQUIPMENT
+    </a>
+    <a [routerLink]="'/equipment_type'" style="color: black;">
+      <i class="fas fa-angle-right fa-lg"></i> EQUIPMENT TYPES
+    </a>
+    <i class="fas fa-angle-right fa-lg"></i> ADD TYPE
+  </h4>
+</div>
+
+<div style="padding: 50px;">
+  <div class="row">
+    <div class="col-6 offset-1">
+      <form class="form-group" [formGroup]="formAdd">
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Name</label>
+          <input type="email" class="form-control" placeholder="Test Tube" name="name" formControlName="name">
+        </div>
+        <div *ngIf="formAdd.controls['name']?.invalid && formAdd.controls['name']?.touched" class="text-danger">
+          Name is required.
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold;">Description</label>
+          <textarea type="text" class="form-control" placeholder="Type in description of new equipment type"
+            formControlName="description" name="description"></textarea>
+        </div>
+        <div *ngIf="formAdd.controls['description']?.invalid && formAdd.controls['description']?.touched"
+          class="text-danger">
+          Description is required.
+        </div>
+
+        <button type="button" class="btn normButton" style="margin-top: 5px;margin-left: 4px;width: fit-content;"
+          (click)="showAddConfirmation()" [disabled]="formAdd.invalid">ADD TYPE</button>
+        <button type="button" class="btn normCancel" style="margin-top: 5px;margin-left: 4px;width: fit-content;"
+          (click)="showCancelConfirmation()">CANCEL</button>
+      </form>
+    </div>
+  </div>
+</div>

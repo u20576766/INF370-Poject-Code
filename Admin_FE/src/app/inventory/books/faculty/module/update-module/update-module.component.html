@@ -1,0 +1,68 @@
+<div class="titlePage">
+    <h4> </h4>
+    <h4 style="font-weight: bold; padding-top: 5px;">
+        <a [routerLink]="'/faculty'" style="text-decoration: black;">
+            <i class="far fa-arrow-alt-circle-left fa-lg" style="color: black;"></i>
+        </a>&nbsp;&nbsp;
+        <a [routerLink]="'/books'" style="color: black;">
+            BOOKS
+        </a>
+        <a [routerLink]="'faculty'" style="color: black;">
+            <i class="fas fa-angle-right fa-lg"></i>
+            FACULTY
+        </a>
+        <a [routerLink]="'/department'" style="color: black;">
+            <i class="fas fa-angle-right fa-lg"></i>
+            MODULE
+        </a>
+        <i class="fas fa-angle-right fa-lg"></i> UPDATE MODULE
+    </h4>
+</div>
+
+<div style="padding: 50px;">
+    <div class="row">
+        <div class="col-6 offset-1">
+            <form class="form-group" [formGroup]="formUpdate" (ngSubmit)="UpdateModule()">
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Name</label>
+                    <input type="email" class="form-control" placeholder="Information Science" name="name"
+                        formControlName="name">
+                </div>
+                <div *ngIf="formUpdate.controls['name']?.invalid && formUpdate.controls['name']?.touched"
+                    class="text-danger">
+                    Name is required.
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Description</label>
+                    <textarea type="textarea" class="form-control" placeholder="Type in Module Description"
+                        name="description" formControlName="description"></textarea>
+                </div>
+                <div *ngIf="formUpdate.controls['description']?.invalid && formUpdate.controls['description']?.touched"
+                    class="text-danger">
+                    Description is required.
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: bold;">Faculty</label>
+                    <select class="select form-control" (change)="onOptionChange($event.target)"
+                        placeholder="Choose a Faculty" formControlName="depID" name="depID">
+                        <option *ngFor="let dep of dep" value="{{dep.department_ID}}">{{dep.department_Name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="formUpdate.controls['depID']?.invalid && formUpdate.controls['depID']?.touched"
+                    class="text-danger">
+                    Department is required.
+                </div>
+
+                <button type="button" class="btn normButton"
+                    style="width: fit-content;margin-top: 5px;margin-left: 4px;" [disabled]="formUpdate.invalid"
+                    (click)="showUpdateConfirmation()">UPDATE MODULE</button>
+                <button type="button" class="btn normCancel"
+                    style="width: fit-content;margin-top: 5px;margin-left: 4px;"
+                    (click)="showCancelConfirmation()">CANCEL</button>
+            </form>
+        </div>
+    </div>
+</div>
